@@ -1,12 +1,12 @@
-Status: Working ON DAL Functions
+
 -DAL Implemented
-getNotificationsForID 	 --will return table(notifications)
-getStories 		 --will return table(postedDate, Content)
-getApplicationsForUni 	 --will return table(AppID, stdID, stdfName, stdlName, Majors)
-getApplicationsForStd 	 --will return table(AppID,uniName,Majors)
-getPromotedUniversities  --will return table(UniversityNames)
-getReviewsByUniID	 --will return table(ReviewText)
-getProgramsForUniversity --will return table(MajorName)
+getNotificationsForID 	 --will return list(notifications)
+getStories 		 --will return list(postedDate, Content)
+getApplicationsForUni 	 --will return list(AppID, stdID, stdfName, stdlName, Majors)
+getApplicationsForStd 	 --will return list(AppID,uniName,Majors)
+getPromotedUniversities  --will return list(UniversityNames)
+getReviewsByUniID	 --will return list(ReviewText)
+getProgramsForUniversity --will return list(MajorName)
 getName			 --will return Name for accID
 deleteApplication	
 acceptApplication
