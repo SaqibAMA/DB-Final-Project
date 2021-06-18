@@ -252,6 +252,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="header-footer-master.aspx" />
     <Content Include="index.aspx" />
+    <Content Include="jamya.sql" />
     <Content Include="login.aspx" />
     <Content Include="profile.aspx" />
     <Content Include="search.aspx" />

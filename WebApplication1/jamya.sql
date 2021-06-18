@@ -30,17 +30,13 @@ CREATE TABLE University(
 SELECT * FROM University
 DROP TABLE [Application]
 CREATE TABLE [Application](
-	ApplicationID	INT PRIMARY KEY,	
+	ApplicationID	INT PRIMARY KEY IDENTITY(1,1),	
 	StudentID		INT CONSTRAINT std_id FOREIGN KEY REFERENCES Student(StudentID) , 
 	UniversityID	INT CONSTRAINT uni_id FOREIGN KEY REFERENCES University(UniversityID) ,
+		MajID		INT NOT NULL CONSTRAINT maj_id FOREIGN KEY REFERENCES Major(MajorID) ,
 	DateApplied		DATE NOT NULL CONSTRAINT DATE_CONS CHECK (DateApplied<=GETDATE()),
 	[Status]		VARCHAR(10) NOT NULL check([Status] in ('Accepted', 'Rejected', 'Incomplete','Withdrawn')),
 	)
-
-ALTER TABLE [Application] ADD MajID INT CONSTRAINT maj_id FOREIGN KEY REFERENCES Major(MajorID) 
-
-
-
 CREATE TABLE Promotions(
 pID INT Primary KEY IDENTITY(1,1),
 UniversityID INT CONSTRAINT unii_id FOREIGN KEY REFERENCES University(UniversityID),
@@ -54,6 +50,7 @@ CREATE TABLE Review(
 	StudentID		INT NOT NULL CONSTRAINT review_by_which_std FOREIGN KEY REFERENCES Student(StudentID) ,
 	ReviewText		VARCHAR(800),
 )
+DROP TABLE Application
 SELECT * FROM Review
 CREATE TABLE Stories
 (
@@ -226,16 +223,51 @@ declare @datetime date
 set @datetime=getDate()
 INSERT INTO dbo.Messages VALUES(@accountID,@datetime,@message)
 END
-
---loadMessages
-CREATE VIEW loadMessages
+--sajawal applied for fast
+CREATE TRIGGER applyNews
+ON [Application]
+AFTER INSERT 
 AS
-SELECT Account.Username, Messages.MessageText,Messages.SentTime from Account JOIN Messages ON Account.AccountID=Messages.MessageID
+declare @fname varchar(20);
+declare @lname varchar(20);
+declare @uniName varchar(200);
+declare @stdID int;
+
+SELECT @stdID = [Application].StudentID, @fname = fName, @lname=lName, @uniName = University.Name
+FROM [Application]
+JOIN Student ON Student.StudentID=[Application].StudentID 
+JOIN University ON University.UniversityID = [Application].UniversityID
+
+DECLARE @msg VARCHAR(200);
+
+SET @msg = @fname + ' ' + @lname + ' applied to ' + @uniName;
+
+INSERT INTO Stories
+VALUES (@stdID,GETDATE(),@msg)
+
+--prev trigger ended
 
 
+INSERT INTO Account
+VALUES ('ShmoonAly','Shmoon@ggl.com','shmoonisgoodfella')
+INSERT INTO Student
+VALUES	(18,'Shmoon','Ali','2001-01-01',NULL,NULL,NULL,NULL)
+INSERT INTO Major VALUES(1,'CS')
+INSERT INTO Major VALUES(2,'AI')
+INSERT INTO Major VALUES(3,'BBA')
+INSERT INTO Programmes Values(13,1)
+INSERT INTO Programmes Values(13,2)
+INSERT INTO Programmes Values(13,3)
+INSERT INTO Programmes Values(14,1)
+INSERT INTO Application VALUES(12,13,1,getDate(),'Incomplete')
+INSERT INTO Application VALUES(12,13,2,getDate(),'Incomplete')
+INSERT INTO Application VALUES(17,14,3,getDate(),'Incomplete')
+INSERT INTO Application VALUES(17,14,1,getDate(),'Incomplete')
 Select * from Messages
 Select * from Account
 delete from Account
+Select * from Programmes
 Select * from Student
-delete from Student
+Select * from Stories
 Select * from University
+SELECT * FROM Application
