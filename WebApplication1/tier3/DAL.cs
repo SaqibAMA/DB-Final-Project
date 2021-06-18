@@ -244,6 +244,207 @@ namespace WebApplication1.tier3
                 sqlCon.Close();
             }
         }
+
+        //
+        //returns list of Programs University offers
+        public static List<string> getProgramsForUniversity(int uniID)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.getProgramsForUniversity";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@uniID", uniID);
+                sqlCMD.ExecuteScalar();
+                SqlDataAdapter da = new SqlDataAdapter(sqlCMD);
+                da.Fill(dt);
+                List<string> majors = new List<string>();
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    string temp;
+                    temp = Convert.ToString(dt.Rows[i]["MajorName"]);
+                    majors.Add(temp);
+                }
+                sqlCon.Close();
+                return majors;
+            }
+        }
+        //returns list of ReviewsAbtUniversity
+        public static List<string> getReviewsByUniID(int uniID)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.getReviewsByUniID";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@uID", uniID);
+                sqlCMD.ExecuteScalar();
+                SqlDataAdapter da = new SqlDataAdapter(sqlCMD);
+                da.Fill(dt);
+                List<string> reviews = new List<string>();
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    string temp;
+                    temp = Convert.ToString(dt.Rows[i]["ReviewText"]);
+                    reviews.Add(temp);
+                }
+                sqlCon.Close();
+                return reviews;
+            }
+        }
+        //returns list of PromotedUniversities
+        public static List<string> getPromotedUniversities()
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.getPromotedUniversities";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.ExecuteScalar();
+                SqlDataAdapter da = new SqlDataAdapter(sqlCMD);
+                da.Fill(dt);
+                List<string> pmtlist = new List<string>();
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    string temp;
+                    temp = Convert.ToString(dt.Rows[i]["Name"]);
+                    pmtlist.Add(temp);
+                }
+                sqlCon.Close();
+                return pmtlist;
+            }
+        }
+        //Student Applied Application list
+        public class stdAppstype
+        {
+            public int appID { get; set; }
+            public string uniName { get; set; }
+            public string Major { get; set; }
+        }
+        public static List<stdAppstype> loadAppsForStdID(int stdID)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.getApplicationsForStd";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@accID", stdID);
+                sqlCMD.ExecuteScalar();
+                SqlDataAdapter da = new SqlDataAdapter(sqlCMD);
+                da.Fill(dt);
+                List<stdAppstype> applist = new List<stdAppstype>();
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    stdAppstype temp = new stdAppstype();
+                    temp.appID = Convert.ToInt32(dt.Rows[i]["ApplicationID"]);
+                    temp.uniName = Convert.ToString(dt.Rows[i]["Name"]);
+                    temp.Major = Convert.ToString(dt.Rows[i]["MajorName"]);
+                    applist.Add(temp);
+                }
+                sqlCon.Close();
+                return applist;
+            }
+        }
+        //returns list of Applications FOR UniID
+        public class UniAppstype
+        {
+            public int appID { get; set; }
+            public int stdID { get; set; }
+            public string fName { get; set; }
+            public string lName { get; set; }
+            public string Major { get; set; }
+        }
+        public static List<UniAppstype> loadAppsForUniID(int uniID)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.getApplicationsForUni";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@accID", uniID);
+                sqlCMD.ExecuteScalar();
+                SqlDataAdapter da = new SqlDataAdapter(sqlCMD);
+                da.Fill(dt);
+                List<UniAppstype> applist = new List<UniAppstype>();
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    UniAppstype temp = new UniAppstype();
+                    temp.appID = Convert.ToInt32(dt.Rows[i]["ApplicationID"]);
+                    temp.stdID = Convert.ToInt32(dt.Rows[i]["StudentID"]);
+                    temp.fName= Convert.ToString(dt.Rows[i]["fName"]);
+                    temp.lName= Convert.ToString(dt.Rows[i]["lName"]);
+                    temp.Major = Convert.ToString(dt.Rows[i]["MajorName"]);
+                    applist.Add(temp);
+                }
+                sqlCon.Close();
+                return applist;
+            }
+        }
+        //returns list of Stories
+        public class storytype
+        {
+            public string date { get; set; }
+            public string content { get; set; }
+        }
+        public static List<storytype> loadStories()
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.getStories";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter(sqlCMD);
+                da.Fill(dt);
+                List<storytype> storylist = new List<storytype>();
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    storytype temp = new storytype();
+                    temp.date = Convert.ToString(dt.Rows[i]["PostedDate"]);
+                    temp.content = Convert.ToString(dt.Rows[i]["Content"]);
+                    storylist.Add(temp);
+                }
+                sqlCon.Close();
+                return storylist;
+            }
+        }
+        //returns list of notifications
+        public static List<string> loadNotifications(int accID)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.getNotificationsForID";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@accID", accID);
+                sqlCMD.ExecuteScalar();
+                SqlDataAdapter da = new SqlDataAdapter(sqlCMD);
+                da.Fill(dt);
+                List<string> notiflist = new List<string>();
+                for (int i = 0; i < dt.Rows.Count; i++)
+                {
+                    string temp;
+                    temp = Convert.ToString(dt.Rows[i]["textContent"]);
+                    notiflist.Add(temp);
+                }
+                sqlCon.Close();
+                return notiflist;
+            }
+        }
         //for messages creating another datatype
         public class msg_data{
             public string username { get; set; }
@@ -257,8 +458,8 @@ namespace WebApplication1.tier3
             {
                 sqlCon.Open();
                 SqlCommand sqlCMD = sqlCon.CreateCommand();
-                sqlCMD.CommandType = CommandType.Text;
-                sqlCMD.CommandText = "SELECT Account.Username, Messages.MessageText,Messages.SentTime from Account JOIN Messages ON Account.AccountID=Messages.MessageID";
+                sqlCMD.CommandText = "dbo.loadMessages";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
                 sqlCMD.ExecuteNonQuery();
                 SqlDataAdapter da = new SqlDataAdapter(sqlCMD);
                 da.Fill(dt);
@@ -272,10 +473,6 @@ namespace WebApplication1.tier3
                     msglist.Add(temp);
                 }
                 sqlCon.Close();
-                foreach( msg_data i in msglist )
-                {
-                    Console.Write(i.message);
-                }
                     return msglist;
             }
         }
