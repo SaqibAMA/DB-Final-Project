@@ -1,0 +1,17 @@
+getName
+getPromotedUniversities
+getReviewsByID
+getProgramsForUniversity
+getNotificationsForID
+getStories
+getApplicationsForStd
+
+getApplicationsForUni
+deleteApplication
+acceptApplication
+rejectApplication
+updateInter
+updateMatric
+updateUG
+updateG
+updateDOB
