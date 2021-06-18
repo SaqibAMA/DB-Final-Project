@@ -161,6 +161,37 @@ AS
 BEGIN
 set @count=(SELECT COUNT(*) FROM dbo.University where UniversityID=@accID)
 END
+--getNameByID
+CREATE PROCEDURE getName
+@accId INT,
+@fullname VARCHAR(50) OUTPUT
+AS
+BEGIN
+declare @isStd INT;
+declare @isUni INT;
+EXEC isStudent
+@accID = @accId,
+@isStd = @count;
+EXEC isUniversity
+@accID = @accId,
+@isUni= @count;
+declare @fname varchar(20);
+declare @lname varchar(20);
+
+if(@isStd > 0)
+begin
+SELECT @fname = Student.fName, @lname = Student.lName FROM Student WHERE Student.StudentID = @accId 
+set @fullname = @fname + ' '+@lname 
+end
+
+if(@isUni > 0)
+begin
+SELECT @fname=University.Name FROM University WHERE University.UniversityID= @accId 
+set @fullname = @fname
+end
+END
+
+
 --StdDetails
 DROP PROCEDURE stdDetails
 CREATE PROCEDURE stdDetails
