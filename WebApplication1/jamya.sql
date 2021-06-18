@@ -144,7 +144,6 @@ BEGIN
 select @username=Username FROM Account where @accID=Account.AccountID
 END
 
-
 --isStudent
 DROP PROCEDURE isStudent
 CREATE PROCEDURE isStudent
@@ -225,6 +224,82 @@ set @id=(SELECT top 1 AccountID FROM dbo.Account WHERE username=@username)
 INSERT INTO dbo.Student VALUES(@id,@fName,@lName,@defaultdate,NULL,NULL,NULL,NULL)
 END
 
+--deleteApplicationByApplicationID
+CREATE PROCEDURE deleteApplication
+@applicationID INT
+AS 
+BEGIN
+DELETE FROM [Application] WHERE ApplicationID = @applicationID
+END
+--acceptApplication
+CREATE PROCEDURE acceptApplication
+@applicationID INT
+AS
+BEGIN
+UPDATE [Application] SET [Application].Status = 'Accepted'
+END
+--rejectApplication
+CREATE PROCEDURE acceptApplication
+@applicationID INT
+AS
+BEGIN
+UPDATE [Application] SET [Application].Status = 'Rejected'
+END
+--updateInterMarks
+CREATE PROCEDURE updateInterMarks
+@stdID INT,
+@marks INT
+AS
+BEGIN
+if(@marks < 1100)
+begin
+UPDATE Student SET Student.Intermediate=@marks where @stdID = Student.StudentID
+end
+END
+--updateMatricMarks
+CREATE PROCEDURE updateMatricMarks
+@stdID INT,
+@marks INT
+AS
+BEGIN
+if(@marks < 1100)
+begin
+UPDATE Student SET Student.Matric=@marks where @stdID = Student.StudentID
+end
+END
+--updateUnderGradMarks
+CREATE PROCEDURE updateUnderGradMarks
+@stdID INT,
+@cgpa INT
+AS
+BEGIN
+if(@cgpa < 4.0)
+begin
+UPDATE Student SET Student.Undergraduate=@cgpa where @stdID = Student.StudentID
+end
+END
+--updateGradMarks
+CREATE PROCEDURE updateGradMarks
+@stdID INT,
+@cgpa INT
+AS
+BEGIN
+if(@cgpa < 4.0)
+begin
+UPDATE Student SET Student.Graduate=@cgpa where @stdID = Student.StudentID
+end
+END
+--updateDateOfBirth
+CREATE PROCEDURE updateDOB
+@stdID INT,
+@dob date
+AS
+BEGIN
+if(@dob < getDate())
+begin
+UPDATE Student SET Student.DOB=@dob where @stdID = Student.StudentID
+end
+END
 --putMessageIntoDatabase
 CREATE PROCEDURE insertMessage
 @accountID int,
