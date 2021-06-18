@@ -1,0 +1,91 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  background: #a8ff78;
+  background: -webkit-gradient(linear, left top, right top, from(#78ffd6), to(#a8ff78));
+  background: linear-gradient(to right, #78ffd6, #a8ff78);
+  height: 100vh;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.loginForm {
+  background-color: white;
+  padding: 5rem 3rem !important;
+  max-width: 500px;
+  border-radius: 1rem;
+}
+
+.loginForm .loginFormTopLogoContainer {
+  width: 100%;
+  padding: 0 0 1rem 0;
+}
+
+.loginForm .loginFormTopLogo {
+  height: 8rem;
+  width: auto;
+}
+
+.loginForm input {
+  font-family: "Poppins", sans-serif;
+  border: solid 2px lightgray !important;
+  text-indent: 1rem;
+  border-radius: 2rem !important;
+  margin: 0 0 2rem 0 !important;
+}
+
+.loginButton {
+  width: 100%;
+  padding: 1rem 0;
+  background-color: #1abc9c;
+  color: white;
+}
+
+.loginButton:focus {
+  outline: none;
+}
+
+.loginDetails {
+  background-color: white;
+}
+/*# sourceMappingURL=login.css.map */

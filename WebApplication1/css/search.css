@@ -1,0 +1,74 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    font-family: "Open Sans", "Poppins", sans-serif;
+}
+
+.top-part {
+    min-height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background:
+    linear-gradient(to right, #78ffd6, #a8ff78);
+}
+
+.top-part h3 {
+    padding: 5rem;
+    max-width: 45rem;
+}
+
+.top-part .input-field {
+    width: 60% !important;
+    max-width: 40rem;
+}
+
+.top-part .input-field .material-icons {
+    padding: 0 1rem;
+    color: black !important;
+}
+
+.top-part .input-field input {
+    border: solid 1px lightgray;
+    box-shadow: 0px 0px 15px -5px rgba(0, 0, 0, 0.3);
+    text-indent: 1rem;
+    border-radius: 0.25rem;
+    background: white;
+    width: 90%;
+}
+
+.top-part .input-field input:focus {
+    border: solid 1px lightgray !important;
+    box-shadow: 0px 0px 15px -5px rgba(0, 0, 0, 0.3) !important;
+    outline: none !important;
+}
+
+.top-part .input-field label {
+    margin-left: 1rem;
+    color: black;
+}
+
+.top-part .input-field label.active {
+    transform: translateY(-25px);
+}
+
+.search-results {
+    margin-top: 5rem;
+}
+
+.search-img {
+    width: 5rem;
+    height: 5rem;
+}
+
+.btn input {
+    border: none !important;
+    box-shadow: none !important;
+    color: white;
+}
+
+.search-results .row:nth-child(2n+1){
+    background-color: #f0f0f0;
+    border-radius: 1rem !important;
+}

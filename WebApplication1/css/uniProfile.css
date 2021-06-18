@@ -1,0 +1,149 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  background-color: #f7f7f7;
+  position: relative;
+}
+
+.no-margin {
+  margin: 0 !important;
+}
+
+.no-padding {
+  padding: 0 !important;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif;
+  font-weight: 600 !important;
+}
+
+.level-2 {
+  color: gray;
+}
+
+.userDetails {
+  padding: 1rem 1rem;
+  position: relative;
+}
+
+.userDetails .userBg {
+  height: 8rem;
+  width: auto;
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+
+.userDetails p {
+  padding: 0.5rem 0;
+}
+
+.userLinks * {
+  font-family: "Poppins", sans-serif;
+}
+
+#content .coverPhoto {
+  width: 100%;
+  height: 20rem;
+  overflow: hidden;
+}
+
+#content .coverPhoto img {
+  width: inherit;
+  height: auto;
+}
+
+#content header {
+  padding-left: 100px;
+  padding-right: 100px;
+}
+
+#content #feedCardSection {
+  margin: 4rem 0 0 0;
+  padding-left: 100px;
+  padding-right: 100px;
+  position: relative;
+}
+
+#content .feedTitle {
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  border-bottom: solid 0.5rem #2ecc71;
+}
+
+#content .feedCardType {
+  font-size: 0.8rem;
+}
+
+#content .feedCard {
+  padding: 2rem;
+  display: block;
+}
+
+#content .feedCardTitle h6 {
+  line-height: 1.7;
+}
+
+#content .feedCardImageContainer {
+  width: 8rem;
+  height: 8rem;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+#content .feedCardImageContainer img {
+  width: auto;
+  height: 10rem;
+}
+
+#content {
+  padding-left: 300px;
+}
+
+@media only screen and (max-width: 992px) {
+  #content {
+    padding-left: 0;
+  }
+  #floatingProfileButton {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .feedCardImageContainer {
+    min-width: 100%;
+    min-height: 20rem;
+  }
+  .feedCardImageContainer img {
+    min-height: 100%;
+    width: auto;
+  }
+}
+/*# sourceMappingURL=uniProfile.css.map */

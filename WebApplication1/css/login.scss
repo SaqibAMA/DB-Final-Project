@@ -1,0 +1,58 @@
+@import 'global';
+
+body {
+  background: #a8ff78;
+  background: -webkit-linear-gradient(to right, #78ffd6, #a8ff78);
+  background: linear-gradient(to right, #78ffd6, #a8ff78);
+
+
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.loginForm {
+  background-color: white;
+  padding: 5rem 3rem !important;
+  max-width: 500px;
+  border-radius: 1rem;
+
+  .loginFormTopLogoContainer {
+    width: 100%;
+    padding: 0 0 1rem 0;
+  }
+
+  .loginFormTopLogo {
+    height: 8rem;
+    width: auto;
+  }
+
+
+  input {
+    font-family: "Poppins", sans-serif;
+    border: solid 2px lightgray !important;
+    text-indent: 1rem;
+    border-radius: 2rem !important;
+    margin: 0 0 2rem 0 !important;
+  }
+
+}
+
+.loginButton {
+  width: 100%;
+  padding: 1rem 0;
+  background-color: $accent;
+  color: white;
+
+  &:focus {
+    outline: none;
+  }
+}
+
+
+.loginDetails {
+  background-color: white;
+}

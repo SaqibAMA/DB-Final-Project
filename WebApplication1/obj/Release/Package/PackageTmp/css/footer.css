@@ -1,0 +1,37 @@
+footer {
+  background-color: #2c3e50;
+  color: white;
+  min-height: 30vh;
+  padding: 5rem 0;
+}
+
+footer a {
+  color: inherit;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+footer .col {
+  padding: 2rem !important;
+}
+
+footer .footerLogo {
+  width: 10rem;
+  height: auto;
+}
+
+footer .material-icons {
+  margin: 0.5rem;
+  cursor: pointer;
+}
+
+footer .colTitle {
+  margin: 0 0 2rem 0;
+}
+
+footer ul {
+  line-height: 2;
+}
+/*# sourceMappingURL=footer.css.map */

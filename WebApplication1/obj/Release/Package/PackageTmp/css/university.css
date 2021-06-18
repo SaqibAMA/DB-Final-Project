@@ -1,0 +1,206 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  font-weight: lighter;
+}
+
+.primary-font {
+  font-family: "Poppins", sans-serif !important;
+  font-weight: lighter;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif;
+}
+
+.level-2 {
+  color: gray !important;
+}
+
+.allcap {
+  font-weight: bolder !important;
+}
+
+body {
+  background-color: #ededed;
+}
+
+main {
+  color: black;
+}
+
+.profileSection {
+  padding-top: 2rem !important;
+  background-color: #f2f2f2;
+  color: black;
+  min-height: 100vh !important;
+}
+
+.profileSection .profileImageBorder {
+  background-image: url("../assets/bg.jpg");
+  padding: 2rem 2rem;
+  border: solid 1px lightgray;
+  border-radius: 0.5rem;
+  max-width: 24rem;
+  max-height: 24rem;
+  margin: 0 auto;
+}
+
+.profileSection .profileImageContainer {
+  width: 100%;
+  max-width: 20rem;
+  max-height: 20rem;
+  text-align: center;
+  overflow: hidden;
+  margin: 0 auto;
+  border-radius: 0.5rem;
+}
+
+.profileSection .profileImageContainer .profileImage {
+  width: 100%;
+  height: 100%;
+}
+
+.profileSection .profileName {
+  font-weight: bolder;
+}
+
+.profileSection .profileTags {
+  padding: 1rem 0;
+  width: 60%;
+}
+
+.profileSection .profileTags .chip {
+  font-family: "Poppins", sans-serif;
+  background-color: #d9d9d9;
+  color: black;
+}
+
+.profileSection .collection {
+  border: none;
+  margin: 0 !important;
+}
+
+.profileSection .collection-item {
+  margin: 1rem 0;
+  border-radius: 1rem;
+  background-color: white;
+  color: black;
+  border: none;
+}
+
+.profileSection .collection-item .title {
+  font-family: "Poppins", sans-serif;
+  font-weight: bolder;
+}
+
+.profileDetails {
+  padding-top: 2rem !important;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.profileDetails .searchBarContainer {
+  margin: 2rem 0 4rem 0;
+}
+
+.profileDetails .searchBar {
+  border: solid 1px transparent !important;
+  outline: none !important;
+  text-indent: 1rem;
+  border-radius: 0.4rem !important;
+  background-color: white !important;
+  -webkit-box-shadow: 2px 2px 15px -5px rgba(0, 0, 0, 0.4) !important;
+          box-shadow: 2px 2px 15px -5px rgba(0, 0, 0, 0.4) !important;
+}
+
+.profileDetails .searchBar:focus {
+  -webkit-box-shadow: 4px 4px 15px 0px rgba(0, 0, 0, 0.3) !important;
+          box-shadow: 4px 4px 15px 0px rgba(0, 0, 0, 0.3) !important;
+}
+
+.profileDetails h6 {
+  font-weight: bolder;
+}
+
+.profileDetails .sub-heading {
+  margin-top: 5rem;
+}
+
+.profileDetails .row {
+  margin-bottom: 0 !important;
+}
+
+.profileDetails .chip {
+  font-weight: bolder;
+  background-color: #1abc9c;
+  color: black;
+}
+
+.profileDetails .infoCard {
+  font-family: "Poppins", sans-serif !important;
+  font-size: 0.8rem;
+  margin: 0.5rem;
+  margin-left: 0;
+  cursor: pointer;
+  padding: 2rem 0;
+  background-color: white;
+  border-radius: 1rem;
+}
+
+.profileDetails .infoCard:hover {
+  -webkit-box-shadow: 4px 4px 15px -5px rgba(0, 0, 0, 0.3);
+          box-shadow: 4px 4px 15px -5px rgba(0, 0, 0, 0.3);
+}
+
+.profileDetails .infoCard .cardTitle {
+  padding: 0 1rem 1rem 1rem;
+  font-weight: bolder;
+}
+
+.profileDetails .infoCard .cardDesc {
+  padding: 0 1rem;
+}
+
+.profileDetails .infoCard .cardDesc .navigation-icon {
+  width: 40px;
+  height: auto;
+}
+
+.profileDetails .infoCard--extend {
+  max-width: 100% !important;
+}
+
+@media screen and (min-width: 660px) {
+  .profileDetails {
+    max-height: 100vh !important;
+    overflow: scroll;
+  }
+  .profileSection {
+    max-height: 100vh !important;
+    overflow: scroll !important;
+  }
+}
+/*# sourceMappingURL=university.css.map */

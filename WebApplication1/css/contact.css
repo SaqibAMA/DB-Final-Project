@@ -1,0 +1,75 @@
+﻿body {
+    background-color: #2c3e50;
+    color: white;
+}
+
+.top-logo {
+    max-width: 5rem;
+}
+
+.nav-link {
+    color: white !important;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    color: lightgray;
+}
+
+.left-panel, .right-panel {
+    color: white;
+    padding: 5rem !important;
+}
+
+.left-panel h4, .right-panel h4 {
+    font-family: "Poppins", sans-serif;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.left-panel p {
+    line-height: 1.5rem;
+    color: #f0f0f0;
+}
+
+.left-panel ul {
+    line-height: 4;
+}
+
+
+.left-panel ul li .material-icons {
+    margin-right: 2rem;
+    color: #2ecc71 !important;
+    cursor: pointer;
+}
+
+.left-panel ul li {
+    font-weight: bolder;
+    color: lightgray;
+    cursor: pointer;
+}
+
+
+.txt-field {
+    border: solid 0.1px lightgray !important;
+    border-radius: 0.5rem !important;
+    text-indent: 1rem;
+}
+
+.txt-field:hover {
+    box-shadow: 2px 2px 15px -5px rgba(0, 0, 0, 0.3) !important;
+}
+
+.materialize-textarea {
+    text-indent: 0;
+    padding: 1rem !important;
+    min-height: 10rem !important;
+}
+
+.right-panel {
+    padding: 5rem 8vw !important;
+}
+
+.contactForm {
+    background-color: white;
+    padding: 2rem 1rem;
+    border-radius: 1rem;
+}

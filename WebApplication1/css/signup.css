@@ -1,0 +1,151 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: "Open Sans", sans-serif;
+}
+
+::-webkit-scrollbar {
+  width: 0;
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Poppins", sans-serif;
+}
+
+footer {
+  background-color: #2c3e50;
+  color: white;
+  min-height: 30vh;
+  padding: 5rem 0;
+}
+
+footer a {
+  color: inherit;
+}
+
+footer a:hover {
+  text-decoration: underline;
+}
+
+footer .col {
+  padding: 2rem !important;
+}
+
+footer .footerLogo {
+  width: 10rem;
+  height: auto;
+}
+
+footer .material-icons {
+  margin: 0.5rem;
+  cursor: pointer;
+}
+
+footer .colTitle {
+  margin: 0 0 2rem 0;
+}
+
+footer ul {
+  line-height: 2;
+}
+
+body {
+  background-image: url("../assets/bg.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+main {
+  padding: 10rem 0;
+}
+
+label {
+  margin-left: 1rem !important;
+}
+
+input {
+  font-family: "Poppins", sans-serif;
+  border: solid 2px lightgray !important;
+  text-indent: 1rem;
+  border-radius: 2rem !important;
+  background-color: white !important;
+  margin: 1rem 0 !important;
+}
+
+.panels {
+  margin: 0 !important;
+}
+
+.leftPanel, .rightPanel {
+  min-height: 100vh;
+  height: -webkit-fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  padding: 2rem 0rem !important;
+  margin-bottom: 0 !important;
+}
+
+.leftPanel {
+    height:1000px;
+  /*height: 100vh;*/
+  background-color: #1abc9c;
+  color: white;
+  padding: 8rem 0 !important;
+}
+
+.leftPanel h3 {
+  font-weight: bolder;
+}
+
+.leftPanel h6 {
+  line-height: 2;
+}
+
+.leftPanel .leftPanelLogo {
+  width: 100%;
+  height: auto;
+}
+
+.rightPanel .container {
+  padding: 5rem 2rem;
+  border-radius: 2rem;
+  max-width: 450px;
+}
+
+.rightPanel .container .formTopLogo {
+  height: 10rem;
+  width: auto;
+  padding: 1rem;
+}
+
+.rightPanel .loginButton {
+  width: 100%;
+  padding: 1rem;
+  background-color: #1abc9c !important;
+  border: transparent !important;
+  color: white;
+  cursor: pointer;
+}
+
+.rightPanel .loginButton:focus {
+  outline: none;
+}
+/*# sourceMappingURL=signup.css.map */
