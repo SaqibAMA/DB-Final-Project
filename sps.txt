@@ -1,13 +1,14 @@
-getPromotedUniversities
-getReviewsByID
-getProgramsForUniversity
-getNotificationsForID
-getStories
-getApplicationsForStd
-getApplicationsForUni
+getNotificationsForID --kinda confused abt it
+
 -Implemented
-getName
-deleteApplication
+getStories 		 --will return table(postedDate, Content)
+getApplicationsForUni 	 --will return table(AppID, stdID, stdfName, stdlName, Majors)
+getApplicationsForStd 	 --will return table(AppID,uniName,Majors)
+getPromotedUniversities  --will return table(UniversityNames)
+getReviewsByUniID	 --will return table(ReviewText)
+getProgramsForUniversity --will return table(MajorName)
+getName			 --will return Name for accID
+deleteApplication	
 acceptApplication
 rejectApplication
 updateInterMarks

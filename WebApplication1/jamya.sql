@@ -42,6 +42,14 @@ pID INT Primary KEY IDENTITY(1,1),
 UniversityID INT CONSTRAINT unii_id FOREIGN KEY REFERENCES University(UniversityID),
 endDate DATE NOT NULL
 )
+--Notification (Id, sender, receiver, Text)
+CREATE TABLE Notification(
+	nID INT PRIMARY KEY IDENTITY(1,1),
+	senderID INT CONSTRAINT sender_ID FOREIGN KEY REFERENCES Account(AccountID),
+	receiverID INT CONSTRAINT reciever_ID FOREIGN KEY REFERENCES Account(AccountID),
+	textContent VARCHAR(200)
+)
+
 SELECT * FROM [Application]
 DROP TABLE Review
 CREATE TABLE Review(
@@ -204,7 +212,7 @@ set @fName=(SELECT fName FROM dbo.Student where StudentID=@accID)
 set @lName=(SELECT lName FROM dbo.Student where StudentID=@accID)
 END
 
-
+--returns uniName for uniID
 DROP PROCEDURE uniName
 CREATE PROCEDURE uniName
 @accID int,
@@ -256,7 +264,102 @@ INSERT INTO dbo.Account VALUES(@username,@email,@password)
 set @id=(SELECT top 1 AccountID FROM dbo.Account WHERE username=@username)
 INSERT INTO dbo.Student VALUES(@id,@fName,@lName,@defaultdate,NULL,NULL,NULL,NULL)
 END
-
+--get those Universities that are open for admissions
+--will return list of universities
+CREATE PROCEDURE getPromotedUniversities 
+AS 
+SELECT University.Name 
+FROM 
+	Promotions JOIN University 
+ON 
+	Promotions.UniversityID = University.UniversityID 
+WHERE 
+	endDate > GETDATE()
+--getReviewsByUniID
+CREATE PROCEDURE getReviewsByUniID
+@uID INT
+AS
+BEGIN
+SELECT ReviewText from Review 
+JOIN
+	University
+ON
+	Review.UniversityID = University.UniversityID
+WHERE 
+	University.UniversityID = @uID
+END
+--getApplicationsForStd
+CREATE PROCEDURE getApplicationsForStd
+@accID INT
+AS
+BEGIN
+SELECT [Application].ApplicationID,University.Name,Major.MajorName FROM [Application]
+JOIN
+	Student
+ON
+	Student.StudentID = [Application].StudentID
+JOIN 
+	Major
+ON
+	Major.MajorID=[Application].MajID
+JOIN 
+	University
+ON 
+	University.UniversityID = [Application].UniversityID
+WHERE 
+	[Application].StudentID = @accID
+END
+--get Applications FOr University
+CREATE PROCEDURE getApplicationsForUni
+@accID INT
+AS
+BEGIN
+SELECT [Application].ApplicationID,Student.StudentID,Student.fName,Student.lName,Major.MajorName FROM [Application]
+JOIN
+	Student
+ON
+	Student.StudentID = [Application].StudentID
+JOIN 
+	Major
+ON
+	Major.MajorID=[Application].MajID
+JOIN 
+	University
+ON 
+	University.UniversityID = [Application].UniversityID
+WHERE 
+	[Application].UniversityID = @accID
+END
+----get Notifications for AccountID
+--CREATE PROCEDURE getNotificationsForID
+--@accID INT
+--AS
+--BEGIN
+--SELECT * FROM Notification
+--END
+--getStories will return all the stories Content
+CREATE PROCEDURE getStories
+AS
+BEGIN
+SELECT PostedDate,Content FROM Stories
+END
+--get Programmes that university offers
+CREATE PROCEDURE getProgramsForUniversity
+@uniID INT
+AS
+BEGIN
+Select MajorName FROM Programmes 
+JOIN 
+	University 
+ON
+	University.UniversityID = Programmes.UniversityID
+JOIN 
+	Major 
+ON 
+	Major.MajorID = Programmes.MajorID
+WHERE 
+	Programmes.UniversityID = @uniID
+END
 --deleteApplicationByApplicationID
 CREATE PROCEDURE deleteApplication
 @applicationID INT
@@ -401,6 +504,7 @@ Select * from Account
 Select * from Programmes
 Select * from Stories
 Select * from Student
+Select * from Promotions
 Select * from University
 SELECT * FROM Review
 SELECT * FROM Application
