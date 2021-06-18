@@ -7,7 +7,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Login | Jamya | Find your ideal university</title>
+  <title>Login | Jamya </title>
 
   <!--Google Fonts-->
   <link rel="preconnect" href="https://fonts.gstatic.com">
