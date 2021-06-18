@@ -6,7 +6,7 @@ getNotificationsForID
 getStories
 getApplicationsForStd
 getApplicationsForUni
-
+-Implemented
 deleteApplication
 acceptApplication
 rejectApplication
