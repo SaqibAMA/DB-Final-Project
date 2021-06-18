@@ -144,7 +144,6 @@ BEGIN
 select @username=Username FROM Account where @accID=Account.AccountID
 END
 
-
 --isStudent
 DROP PROCEDURE isStudent
 CREATE PROCEDURE isStudent
@@ -261,9 +260,15 @@ VALUES (@stdID,GETDATE(),@msg)
 
 
 INSERT INTO Account
-VALUES ('ShmoonAly','Shmoon@ggl.com','shmoonisgoodfella')
+VALUES
+('FAST','fast@ggl.com','shmoonisgoodfella'),
+('LUMS','lums@ggl.com','shmoonisgoodfella'),
+('FarhanAli', 'larhan@ggl.com', 'shmoonisgoodfella'),
+('SaqibAli', 'saqib@ggl.com', 'shmoonisgoodfella'),
+('SajawalAli', 'sajawal@ggl.com', 'shmoonisgoodfella')
+
 INSERT INTO Student
-VALUES	(18,'Shmoon','Ali','2001-01-01',NULL,NULL,NULL,NULL)
+VALUES	(1,'Shmoon','Ali','2001-01-01',NULL,NULL,NULL,NULL)
 INSERT INTO Major VALUES(1,'CS')
 INSERT INTO Major VALUES(2,'AI')
 INSERT INTO Major VALUES(3,'BBA')
@@ -277,12 +282,16 @@ INSERT INTO Application VALUES(17,14,3,getDate(),'Incomplete')
 INSERT INTO Application VALUES(17,14,1,getDate(),'Incomplete')
 INSERT INTO Review VALUES(13,18,'Fast was brilliant')
 INSERT INTO Review VALUES(14,18,'NUST was not brilliant')
+INSERT INTO University
+VALUES
+(4, 'FAST', 'Lahore', '030123456'),
+(5, 'LUMS', 'Islamabad', '030123456')
 Select * from Messages
 Select * from Account
-delete from Account
 Select * from Programmes
 Select * from Stories
 Select * from Student
 Select * from University
 SELECT * FROM Review
 SELECT * FROM Application
+SELECT * FROM Major

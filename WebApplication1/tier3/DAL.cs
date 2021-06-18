@@ -69,6 +69,32 @@ namespace WebApplication1.tier3
             }
             return username_;
         }
+
+
+        public string getName(int accID)
+        {
+
+            string name = "";
+            
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.getAccountName";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@accID", accID);
+                sqlCMD.Parameters.Add("@name", SqlDbType.NVarChar);
+                sqlCMD.Parameters["@name"].Direction = ParameterDirection.Output;
+                sqlCMD.ExecuteScalar();
+                name = sqlCMD.Parameters["@name"].Value.ToString();
+                sqlCon.Close();
+            }
+
+            return name;
+        
+        }
+
+
         public int isStudent(int accID)
         {
             int count = 0;
