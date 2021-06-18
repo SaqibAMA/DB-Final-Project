@@ -36,6 +36,16 @@ CREATE TABLE [Application](
 	DateApplied		DATE NOT NULL CONSTRAINT DATE_CONS CHECK (DateApplied<=GETDATE()),
 	[Status]		VARCHAR(10) NOT NULL check([Status] in ('Accepted', 'Rejected', 'Incomplete','Withdrawn')),
 	)
+
+ALTER TABLE [Application] ADD MajID INT CONSTRAINT std_id FOREIGN KEY REFERENCES Major(MajorID) 
+
+
+
+CREATE TABLE Promotions(
+pID INT Primary KEY IDENTITY(1,1),
+UniversityID INT CONSTRAINT unii_id FOREIGN KEY REFERENCES University(UniversityID),
+endDate DATE NOT NULL
+)
 SELECT * FROM [Application]
 DROP TABLE Review
 CREATE TABLE Review(
@@ -45,6 +55,12 @@ CREATE TABLE Review(
 	ReviewText		VARCHAR(800),
 )
 SELECT * FROM Review
+CREATE TABLE Stories
+(
+accID	INT PRIMARY KEY CONSTRAINT fk_unii_acc_id FOREIGN KEY REFERENCES Account(AccountID) ON UPDATE CASCADE ON DELETE CASCADE,
+PostedDate DATE NOT NULL,
+Content VARCHAR(200) NOT NULL,
+)
 DROP TABLE [Messages]
 CREATE TABLE [Messages](
 	MessageID		INT PRIMARY KEY NOT NULL,
