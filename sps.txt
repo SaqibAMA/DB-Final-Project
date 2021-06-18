@@ -1,6 +1,7 @@
-getNotificationsForID --kinda confused abt it
+Status: Working ON DAL Functions
 
 -Implemented
+getNotificationsForID 	 --will return table(notifications)
 getStories 		 --will return table(postedDate, Content)
 getApplicationsForUni 	 --will return table(AppID, stdID, stdfName, stdlName, Majors)
 getApplicationsForStd 	 --will return table(AppID,uniName,Majors)
@@ -16,3 +17,4 @@ updateMatricMarks
 updateUnderGradMarks
 updateGradMarks
 updateDOB
+loadMessages		--will return table(Username,Msg,SentTime)

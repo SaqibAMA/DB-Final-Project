@@ -331,12 +331,12 @@ WHERE
 	[Application].UniversityID = @accID
 END
 ----get Notifications for AccountID
---CREATE PROCEDURE getNotificationsForID
---@accID INT
---AS
---BEGIN
---SELECT * FROM Notification
---END
+CREATE PROCEDURE getNotificationsForID
+@accID INT
+AS
+BEGIN
+SELECT textContent FROM [Notification] WHERE [Notification].receiverID = @accID
+END
 --getStories will return all the stories Content
 CREATE PROCEDURE getStories
 AS
@@ -444,6 +444,13 @@ AS BEGIN
 declare @datetime date
 set @datetime=getDate()
 INSERT INTO dbo.Messages VALUES(@accountID,@datetime,@message)
+END
+--loadmessages
+DROP VIEW loadMessages
+CREATE PROCEDURE loadMessages
+AS
+BEGIN
+SELECT Account.Username, Messages.MessageText,Messages.SentTime from Account JOIN Messages ON Account.AccountID=Messages.AccountID
 END
 --notification/stories trigger
 --sajawal applied for fast
