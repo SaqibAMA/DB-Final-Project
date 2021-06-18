@@ -37,7 +37,7 @@ CREATE TABLE [Application](
 	[Status]		VARCHAR(10) NOT NULL check([Status] in ('Accepted', 'Rejected', 'Incomplete','Withdrawn')),
 	)
 
-ALTER TABLE [Application] ADD MajID INT CONSTRAINT std_id FOREIGN KEY REFERENCES Major(MajorID) 
+ALTER TABLE [Application] ADD MajID INT CONSTRAINT maj_id FOREIGN KEY REFERENCES Major(MajorID) 
 
 
 
