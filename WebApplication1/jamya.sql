@@ -61,7 +61,7 @@ Content VARCHAR(200) NOT NULL,
 )
 DROP TABLE [Messages]
 CREATE TABLE [Messages](
-	MessageID		INT PRIMARY KEY NOT NULL,
+	MessageID		INT PRIMARY KEY NOT NULL IDENTITY (1,1),
 	StudentID		INT NOT NULL CONSTRAINT msg_by_which_std FOREIGN KEY REFERENCES Student(StudentID) ,
 	SentTime		DATE,
 	MessageText		VARCHAR(1000),	
@@ -172,6 +172,8 @@ BEGIN
 set @fName=(SELECT fName FROM dbo.Student where StudentID=@accID)
 set @lName=(SELECT lName FROM dbo.Student where StudentID=@accID)
 END
+
+
 DROP PROCEDURE uniName
 CREATE PROCEDURE uniName
 @accID int,
@@ -239,7 +241,7 @@ BEGIN
 UPDATE [Application] SET [Application].Status = 'Accepted'
 END
 --rejectApplication
-CREATE PROCEDURE acceptApplication
+CREATE PROCEDURE rejectApplication
 @applicationID INT
 AS
 BEGIN
@@ -348,10 +350,11 @@ VALUES	(1,'Shmoon','Ali','2001-01-01',NULL,NULL,NULL,NULL)
 INSERT INTO Major VALUES(1,'CS')
 INSERT INTO Major VALUES(2,'AI')
 INSERT INTO Major VALUES(3,'BBA')
-INSERT INTO Programmes Values(13,1)
-INSERT INTO Programmes Values(13,2)
-INSERT INTO Programmes Values(13,3)
-INSERT INTO Programmes Values(14,1)
+INSERT INTO Programmes Values(4,1)
+INSERT INTO Programmes Values(4,2)
+INSERT INTO Programmes Values(4,3)
+INSERT INTO Programmes Values(5,1)
+INSERT INTO Programmes Values(5,3)
 INSERT INTO Application VALUES(12,13,1,getDate(),'Incomplete')
 INSERT INTO Application VALUES(12,13,2,getDate(),'Incomplete')
 INSERT INTO Application VALUES(17,14,3,getDate(),'Incomplete')
@@ -371,3 +374,4 @@ Select * from University
 SELECT * FROM Review
 SELECT * FROM Application
 SELECT * FROM Major
+SELECT * FROM Messages

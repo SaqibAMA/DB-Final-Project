@@ -10,7 +10,8 @@ namespace WebApplication1.tier3
 {
     public class DAL
     {
-        static string connection_str = @"Server=tcp:jamyadbserver.database.windows.net,1433;Initial Catalog=Jamya_db;Persist Security Info=False;User ID=MughalGandu;Password=AraainPenchod123();MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        static string connection_str = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=Jamya;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        //static string connection_str = @"Server=tcp:jamyadbserver.database.windows.net,1433;Initial Catalog=Jamya_db;Persist Security Info=False;User ID=MughalGandu;Password=AraainPenchod123();MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
 
         //LOGIN SECTION
         public string isUserExists(string uname, string pass)

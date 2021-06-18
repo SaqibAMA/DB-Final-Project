@@ -26,5 +26,22 @@ namespace WebApplication1
             string msg = messagebox.Text.Trim();
             obj.putMessage(accID,msg);
         }
+
+        [System.Web.Services.WebMethod]
+        public static int send_message(String msg)
+        {
+
+            
+            var dal = new DAL();
+
+            int accId = Convert.ToInt32(
+                HttpContext.Current.Session["accID"]);
+
+            dal.putMessage(accId, msg);
+
+            return accId;
+
+        }
+
     }
 }

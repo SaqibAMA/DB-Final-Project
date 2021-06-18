@@ -169,6 +169,19 @@
                   `;
 
 
+                    var request = $.ajax({
+                        type: "POST",
+                        url: "chat.aspx/send_message",
+                        data: '{ "msg" : "' + $('#messagebox').val() + '", "sender" : "'
+                            + $('.username').html() +'"}',
+                        contentType: "application/json; charset=utf-8",
+                        dataType: "json",
+                        success: (response) => {
+                            console.log(response);
+                        },
+                        failure: () => console.log('failed')
+                    });
+
                   $('.messages').append(msg);
                   $('#messagebox').val('');
                   $('.messages').animate({ scrollTop: 9999 }, 'slow');
