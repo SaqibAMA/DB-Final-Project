@@ -1,17 +1,5 @@
 Status: Working ON DAL Functions
--DAL IMPLEMENTED
-loadNotifications(stdID) --will return list(notifications)
-loadStories 		 --will return list(postedDate, Content)
-loadMessages 		 -will return list(Username,Msg,SentTime)
-loadAppsForUniID(int uniID)	--will return list(AppID, stdID, stdfName, stdlName, Majors)
-getApplicationsForStd 	 --will return list(AppID,uniName,Majors)
-getPromotedUniversities  --will return list(UniversityNames)
-getPromotedUniversities  --will return list(UniversityNames)
-getReviewsByUniID	 --will return list(ReviewText)
-getProgramsForUniversity --will return list(MajorName)
-getName			 --will return Name for accID
-
--Implemented
+-DAL Implemented
 getNotificationsForID 	 --will return table(notifications)
 getStories 		 --will return table(postedDate, Content)
 getApplicationsForUni 	 --will return table(AppID, stdID, stdfName, stdlName, Majors)

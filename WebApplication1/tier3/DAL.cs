@@ -229,6 +229,118 @@ namespace WebApplication1.tier3
                 sqlCon.Close();
             }
         }
+        //for appliation management
+        public void acceptApplication(int applicationID)
+        {
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.acceptApplication";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@applicationID", applicationID);
+                sqlCMD.ExecuteScalar();
+                sqlCon.Close();
+            }
+        }
+        public void deleteApplication(int applicationID)
+        {
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.deleteApplication";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@applicationID", applicationID);
+                sqlCMD.ExecuteScalar();
+                sqlCon.Close();
+            }
+        }
+        public void rejectApplication(int applicationID)
+        {
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.rejectApplication";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@applicationID", applicationID);
+                sqlCMD.ExecuteScalar();
+                sqlCon.Close();
+            }
+        }
+        //update marks sheet of student
+        public void updateInterMarks(int stdID, int marks)
+        {
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.updateInterMarks";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@stdID", stdID);
+                sqlCMD.Parameters.AddWithValue("@marks", marks);
+                sqlCMD.ExecuteScalar();
+                sqlCon.Close();
+            }
+        }
+        public void updateMatricMarks(int stdID, int marks)
+        {
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.updateMatricMarks";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@stdID", stdID);
+                sqlCMD.Parameters.AddWithValue("@marks", marks);
+                sqlCMD.ExecuteScalar();
+                sqlCon.Close();
+            }
+        }
+        public void updateUnderGradMarks(int stdID, int cgpa)
+        {
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.updateUnderGradMarks";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@stdID", stdID);
+                sqlCMD.Parameters.AddWithValue("@cgpa", cgpa);
+                sqlCMD.ExecuteScalar();
+                sqlCon.Close();
+            }
+        }
+        public void updateGradMarks(int stdID, int cgpa)
+        {
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.updateGradMarks";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@stdID", stdID);
+                sqlCMD.Parameters.AddWithValue("@cgpa", cgpa);
+                sqlCMD.ExecuteScalar();
+                sqlCon.Close();
+            }
+        }
+        //update Student's date of birth
+        public void updateDOB(int stdID, string dob)
+        {
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.updateDOB";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@stdID", stdID);
+                sqlCMD.Parameters.AddWithValue("@dob", dob);
+                sqlCMD.ExecuteScalar();
+                sqlCon.Close();
+            }
+        }
         //for chat data
         public void putMessage(int accID,string message)
         {
@@ -327,7 +439,7 @@ namespace WebApplication1.tier3
             public string uniName { get; set; }
             public string Major { get; set; }
         }
-        public static List<stdAppstype> loadAppsForStdID(int stdID)
+        public static List<stdAppstype> getApplicationsForStd(int stdID)
         {
             DataTable dt = new DataTable();
             using (SqlConnection sqlCon = new SqlConnection(connection_str))
@@ -362,7 +474,7 @@ namespace WebApplication1.tier3
             public string lName { get; set; }
             public string Major { get; set; }
         }
-        public static List<UniAppstype> loadAppsForUniID(int uniID)
+        public static List<UniAppstype> getApplicationsForUni(int uniID)
         {
             DataTable dt = new DataTable();
             using (SqlConnection sqlCon = new SqlConnection(connection_str))
@@ -396,7 +508,7 @@ namespace WebApplication1.tier3
             public string date { get; set; }
             public string content { get; set; }
         }
-        public static List<storytype> loadStories()
+        public static List<storytype> getStories()
         {
             DataTable dt = new DataTable();
             using (SqlConnection sqlCon = new SqlConnection(connection_str))
@@ -421,7 +533,7 @@ namespace WebApplication1.tier3
             }
         }
         //returns list of notifications
-        public static List<string> loadNotifications(int accID)
+        public static List<string> getNotificationsForID(int accID)
         {
             DataTable dt = new DataTable();
             using (SqlConnection sqlCon = new SqlConnection(connection_str))
