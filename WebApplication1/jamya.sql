@@ -45,10 +45,11 @@ endDate DATE NOT NULL
 SELECT * FROM [Application]
 DROP TABLE Review
 CREATE TABLE Review(
-	ReviewID		INT	PRIMARY KEY NOT NULL,
+	ReviewID		INT	NOT NULL IDENTITY(1,1),
 	UniversityID	INT NOT NULL CONSTRAINT review_for_which_uni FOREIGN KEY REFERENCES University(UniversityID) ,
 	StudentID		INT NOT NULL CONSTRAINT review_by_which_std FOREIGN KEY REFERENCES Student(StudentID) ,
 	ReviewText		VARCHAR(800),
+	PRIMARY KEY(UniversityID,StudentID)
 )
 DROP TABLE Application
 SELECT * FROM Review
@@ -134,6 +135,16 @@ AS
 BEGIN
 set @accID=(SELECT AccountID FROM dbo.Account where Email=@eml)
 END
+--getUserName
+CREATE PROCEDURE getUserName
+@accID INT,
+@username nvarchar(50) output
+AS
+BEGIN
+select @username=Username FROM Account where @accID=Account.AccountID
+END
+
+
 --isStudent
 DROP PROCEDURE isStudent
 CREATE PROCEDURE isStudent
@@ -223,6 +234,7 @@ declare @datetime date
 set @datetime=getDate()
 INSERT INTO dbo.Messages VALUES(@accountID,@datetime,@message)
 END
+--notification/stories trigger
 --sajawal applied for fast
 CREATE TRIGGER applyNews
 ON [Application]
@@ -263,11 +275,14 @@ INSERT INTO Application VALUES(12,13,1,getDate(),'Incomplete')
 INSERT INTO Application VALUES(12,13,2,getDate(),'Incomplete')
 INSERT INTO Application VALUES(17,14,3,getDate(),'Incomplete')
 INSERT INTO Application VALUES(17,14,1,getDate(),'Incomplete')
+INSERT INTO Review VALUES(13,18,'Fast was brilliant')
+INSERT INTO Review VALUES(14,18,'NUST was not brilliant')
 Select * from Messages
 Select * from Account
 delete from Account
 Select * from Programmes
-Select * from Student
 Select * from Stories
+Select * from Student
 Select * from University
+SELECT * FROM Review
 SELECT * FROM Application
