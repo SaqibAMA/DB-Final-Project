@@ -22,6 +22,8 @@ namespace WebApplication1
             // Loading Stories
             loadStories();
 
+            loadNotifs();
+
             // Loading data
             DAL dal = new DAL();
 
@@ -44,6 +46,19 @@ namespace WebApplication1
             DataTable dt = dal.getStories();
             stories.DataSource = dt;
             stories.DataBind();
+
+
+        }
+
+        public void loadNotifs()
+        {
+
+            DAL dal = new DAL();
+
+            DataTable dt = dal.getNotifs( Convert.ToInt32( Session["accID"] ) );
+
+            notifs.DataSource = dt;
+            notifs.DataBind();
 
 
         }

@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#"
     AutoEventWireup="true" 
-    CodeFile="dashboard.aspx.cs" 
+    CodeBehind="dashboard.aspx.cs" 
     Inherits="WebApplication1.dashboard" %>
 
 <!DOCTYPE html>
@@ -158,16 +158,22 @@
                 <h4 class="col s12">Notifications</h4>
 
                 <ul class="collection">
+
+                    <asp:Repeater runat="server" ID="notifs">
+
+
+                        <ItemTemplate>
+                            
+                            <li class="collection-item bg-dark-1">
+                                <span class="title grey-text">Notification #<%# Container.ItemIndex + 1 %></span>                        
+                                <p><%#Eval("textContent") %></p>
+                            </li>
+
+                        </ItemTemplate>
+
+
+                    </asp:Repeater>
                 
-                    <li class="collection-item bg-dark-1">
-                        <span class="title grey-text">FAST-NUCES</span>                        
-                        <p>Admission deadline has been extended to 1st July.</p>
-                    </li>
-                    
-                    <li class="collection-item bg-dark-1">
-                        <span class="title grey-text">FAST-NUCES</span>                        
-                        <p>Admission deadline has been extended to 1st July.</p>
-                    </li>
                 
                 </ul>
 

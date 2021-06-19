@@ -548,6 +548,30 @@ namespace WebApplication1.tier3
                 return notiflist;
             }
         }
+
+
+        // Getting notifications
+        public DataTable getNotifs(int accID)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.getNotifications";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@accID", accID);
+                sqlCMD.ExecuteScalar();
+                sqlCon.Close();
+                SqlDataAdapter da = new SqlDataAdapter(sqlCMD);
+                da.Fill(dt);
+
+                return dt;
+            }
+
+        }
+
+        
         //for messages creating another datatype
 
         public DataTable loadMessages()

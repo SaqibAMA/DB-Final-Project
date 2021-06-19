@@ -45,10 +45,11 @@ endDate DATE NOT NULL
 --Notification (Id, sender, receiver, Text)
 CREATE TABLE Notification(
 	nID INT PRIMARY KEY IDENTITY(1,1),
-	senderID INT CONSTRAINT sender_ID FOREIGN KEY REFERENCES Account(AccountID),
-	receiverID INT CONSTRAINT reciever_ID FOREIGN KEY REFERENCES Account(AccountID),
+	senderID INT,
+	receiverID INT,
 	textContent VARCHAR(200)
 )
+
 
 SELECT * FROM [Application]
 DROP TABLE Review
@@ -460,6 +461,19 @@ JOIN
 	ON 
 	Account.AccountID = Messages.StudentID
 END
+
+-- load notifications
+CREATE PROCEDURE getNotifications
+@accID INT
+AS
+BEGIN
+
+	SELECT *
+	FROM Notification
+	WHERE receiverID = @accID OR receiverID = -1
+
+END
+
 --notification/stories trigger
 --sajawal applied for fast
 CREATE TRIGGER applyNews
@@ -530,6 +544,12 @@ SELECT * FROM Review
 SELECT * FROM Application
 SELECT * FROM Major
 SELECT * FROM Messages
+SELECT * FROM Notification
+
+INSERT INTO Notification
+VALUES
+(-1, -1, 'FAST-NUCES has started admissions for Fall 2021'),
+(-1, 1, 'Congratulations! You have been accepted to LUMS!')
 
 INSERT INTO Stories
 VALUES
