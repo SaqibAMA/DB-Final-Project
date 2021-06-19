@@ -49,7 +49,7 @@ namespace WebApplication1
                     Session["lName"] = lName;
                     Session["email"] = eml;
                     Session["type"] = type_;
-                    Response.Redirect("studentProfile.aspx");
+                    Response.Redirect("dashboard.aspx");
                 }
                 else if(eml.Length > 1 && uni_found == 1)
                 {
@@ -62,7 +62,7 @@ namespace WebApplication1
                 Session["uName"] = uniName;
                 Session["email"] = eml;
                 Session["type"] = type_;
-                Response.Redirect("uniProfile.aspx");
+                Response.Redirect("dashboard.aspx");
                 }
                 else {
                     lblErrorMessage.Visible = true;

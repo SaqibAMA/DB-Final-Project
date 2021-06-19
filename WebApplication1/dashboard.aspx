@@ -67,12 +67,20 @@
                             alt="DP" />
                     </a>
                     <a href="#">
-                        <span class="white-text name">
-                            Saqib Ali
-                        </span>
-                        <span class="white-text email">
-                            saqib@gmail.com
-                        </span>
+                        <asp:Label CssClass="white-text name" 
+                            runat="server"
+                            Text="Username"
+                            ID="username">
+                        </asp:Label>
+
+                        
+                        <asp:Label CssClass="white-text email" 
+                            runat="server"
+                            Text="user@email.com"
+                            ID="useremail">
+                        </asp:Label>
+
+                    
                     </a>
                 </div>
             </li>
@@ -105,6 +113,12 @@
                 <a href="contact.aspx" class="white-text">
                     <i class="material-icons white-text">help</i>
                     HELP
+                 </a>
+            </li>
+            <li>
+                <a href="logout.aspx" class="white-text">
+                    <i class="material-icons white-text">logout</i>
+                    LOGOUT
                  </a>
             </li>
 

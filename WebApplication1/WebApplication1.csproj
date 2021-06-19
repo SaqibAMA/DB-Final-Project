@@ -254,6 +254,7 @@
     <Content Include="index.aspx" />
     <Content Include="jamya.sql" />
     <Content Include="login.aspx" />
+    <Content Include="logout.aspx" />
     <Content Include="profile.aspx" />
     <Content Include="search.aspx" />
     <Content Include="signup.aspx" />
@@ -495,6 +496,13 @@
     </Compile>
     <Compile Include="login.aspx.designer.cs">
       <DependentUpon>login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="logout.aspx.cs">
+      <DependentUpon>logout.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="logout.aspx.designer.cs">
+      <DependentUpon>logout.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="profile.aspx.cs">

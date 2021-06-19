@@ -22,6 +22,18 @@ namespace WebApplication1
             // Loading Stories
             loadStories();
 
+            // Loading data
+            DAL dal = new DAL();
+
+            String uname = dal.getUsername( Convert.ToInt32( Session["accID"] ) );
+            String uemail = Session["email"].ToString();
+
+            Label unamelabel = (Label)FindControl("username");
+            Label uemaillabel = (Label)FindControl("useremail");
+
+            unamelabel.Text = "@" + uname;
+            uemaillabel.Text = uemail;
+
         }
 
         public void loadStories()
