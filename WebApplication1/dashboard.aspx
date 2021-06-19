@@ -1,4 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="dashboard.aspx.cs" Inherits="WebApplication1.dashboard" %>
+﻿<%@ Page Language="C#"
+    AutoEventWireup="true" 
+    CodeFile="dashboard.aspx.cs" 
+    Inherits="WebApplication1.dashboard" %>
 
 <!DOCTYPE html>
 
@@ -120,33 +123,20 @@
                 <div class="col m12 hide-on-small-only">
                       <div class="carousel">
 
-                          <div class="carousel-item orange">
-                              Saqib Ali just applied to NUST!
-                          </div>
-                          <div class="carousel-item amber">
-                              Sajawal Ali left a review on LUMS!
-                          </div>
-                          <div class="carousel-item purple">
-                              Shmoon Lodhi left a review on LUMS!
-                          </div>
-                        <div class="carousel-item red">
-                              Saqib Ali just applied to LUMS!
-                          </div>
-                          <div class="carousel-item yellow">
-                              Ahmed left a review on FAST!
-                          </div>
-                          <div class="carousel-item orange">
-                              Sajawal Ali left a review on FAST!
-                          </div>
-                        <div class="carousel-item red">
-                              Saqib Ali just applied to FAST!
-                          </div>
-                          <div class="carousel-item yellow">
-                              Farhan Ali just applied to FAST!
-                          </div>
-                          <div class="carousel-item orange">
-                              Saqib Ali just left a review on LUMS!
-                          </div>
+                          <asp:Repeater runat="server" ID="stories">
+
+
+                              <ItemTemplate>
+  
+                                <div class="carousel-item green">
+                                    <%#Eval("Content") %>
+                                </div>
+
+                              </ItemTemplate>
+
+
+                          </asp:Repeater>
+
 
                       </div>
                 </div>

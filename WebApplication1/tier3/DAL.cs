@@ -502,17 +502,14 @@ namespace WebApplication1.tier3
                 return applist;
             }
         }
-        //returns list of Stories
-        public class storytype
-        {
-            public string date { get; set; }
-            public string content { get; set; }
-        }
-        public static List<storytype> getStories()
+        
+
+        public DataTable getStories()
         {
             DataTable dt = new DataTable();
             using (SqlConnection sqlCon = new SqlConnection(connection_str))
             {
+
                 sqlCon.Open();
                 SqlCommand sqlCMD = sqlCon.CreateCommand();
                 sqlCMD.CommandText = "dbo.getStories";
@@ -520,16 +517,10 @@ namespace WebApplication1.tier3
                 sqlCMD.ExecuteNonQuery();
                 SqlDataAdapter da = new SqlDataAdapter(sqlCMD);
                 da.Fill(dt);
-                List<storytype> storylist = new List<storytype>();
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    storytype temp = new storytype();
-                    temp.date = Convert.ToString(dt.Rows[i]["PostedDate"]);
-                    temp.content = Convert.ToString(dt.Rows[i]["Content"]);
-                    storylist.Add(temp);
-                }
                 sqlCon.Close();
-                return storylist;
+
+                return dt;
+
             }
         }
         //returns list of notifications

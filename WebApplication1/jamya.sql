@@ -63,7 +63,7 @@ DROP TABLE Application
 SELECT * FROM Review
 CREATE TABLE Stories
 (
-accID	INT PRIMARY KEY CONSTRAINT fk_unii_acc_id FOREIGN KEY REFERENCES Account(AccountID) ON UPDATE CASCADE ON DELETE CASCADE,
+accID	INT CONSTRAINT fk_unii_acc_id FOREIGN KEY REFERENCES Account(AccountID) ON UPDATE CASCADE ON DELETE CASCADE,
 PostedDate DATE NOT NULL,
 Content VARCHAR(200) NOT NULL,
 )
@@ -531,6 +531,7 @@ SELECT * FROM Application
 SELECT * FROM Major
 SELECT * FROM Messages
 
-INSERT INTO Messages
+INSERT INTO Stories
 VALUES
-(6, GETDATE(), 'This is a dummy message');
+(1, GETDATE(), 'FAST University has extended its deadline!'),
+(1, GETDATE(), 'NUST University has started their admissions!')
