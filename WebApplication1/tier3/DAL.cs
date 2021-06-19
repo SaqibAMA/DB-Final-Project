@@ -622,6 +622,21 @@ namespace WebApplication1.tier3
             }
         }
 
+        public void addStory(int accID, string story)
+        {
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.addStory";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@accID", accID);
+                sqlCMD.Parameters.AddWithValue("@story", story);
+                sqlCMD.ExecuteScalar();
+                sqlCon.Close();
+            }
+        }
+
 
         // All universities for search
         public DataTable getUnis()

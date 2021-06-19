@@ -89,5 +89,21 @@ namespace WebApplication1
 
             loadPosts();
         }
+
+        protected void addStory_Click(object sender, EventArgs e)
+        {
+
+            DAL dal = new DAL();
+
+            string sText = storyText.Text.Trim();
+
+            dal.addStory(
+                Convert.ToInt32(Session["accID"]),
+                sText
+            );
+
+            loadStories();
+
+        }
     }
 }

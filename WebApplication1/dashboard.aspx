@@ -225,10 +225,22 @@
 
 
                 <div class="fixed-action-btn">
-                  <a class="btn-floating btn-large green modal-trigger" 
-                      data-target="postAddModal">
-                    <i class="large material-icons">mode_edit</i>
+                  <a class="btn-floating btn-large green">
+                    <i class="large material-icons">add</i>
                   </a>
+                    <ul>
+                        <li>
+                            <a class="btn-floating green modal-trigger" data-target="postAddModal">
+                                <i class="material-icons">edit</i>
+                            </a>
+                        </li>
+                        <li>
+                            <a class="btn-floating green modal-trigger" data-target="storyModal">
+                                <i class="material-icons">history_toggle_off</i>
+                            </a>
+                        </li>
+                    </ul>
+
                 </div>
 
                 <h4 class="col s12">Recent Posts</h4>
@@ -266,17 +278,16 @@
         </div>
 
         <!--Modals-->
-        <div id="uniReviewModal" class="modal bg-dark">
+        <div id="storyModal" class="modal bg-dark">
         <div class="modal-content">
-            <h4>Add University Review</h4>
-            <p>Want to let people know your experience with a university?</p>
-            <p>Share your feedback and let other people know.</p>
+            <h4>Have something quick to share?</h4>
+            <p>Stories are a way for you to share your ideas with everyone!</p>
 
         <asp:TextBox
             runat="server"
-            ID="uniReview"
+            ID="storyText"
             TextMode="MultiLine"
-            placeholder="Your review..."
+            placeholder="Write away..."
             Rows="10"
             class="materialize-textarea txt-field white-text"
             maxlength="200"
@@ -285,8 +296,8 @@
         </div>
         <div class="modal-footer bg-dark">
             <asp:LinkButton runat="server"
-                ID="postUniReview"
-                OnClick="postUniReview_Click"
+                ID="addStory"
+                OnClick="addStory_Click"
                 class="modal-close btn waves-effect white waves-green black-text">
                 POST <i class="material-icons left">send</i>
             </asp:LinkButton>
@@ -335,21 +346,6 @@
 
     </script>
 
-<script runat="server">
-
-    public void postUniReview_Click(object sender, EventArgs e)
-    {
-        String review = (String) uniReview.Text;
-        Response.Write(review);
-    }
-
-    public void postAdd_Click(object sender, EventArgs e)
-    {
-        String post = (String) postText.Text;
-        Response.Write(post);
-    }
-
-</script>
 
 </body>
 </html>

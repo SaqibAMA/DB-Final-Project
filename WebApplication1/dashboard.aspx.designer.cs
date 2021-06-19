@@ -69,22 +69,22 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Repeater posts;
 
         /// <summary>
-        /// uniReview control.
+        /// storyText control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox uniReview;
+        protected global::System.Web.UI.WebControls.TextBox storyText;
 
         /// <summary>
-        /// postUniReview control.
+        /// addStory control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton postUniReview;
+        protected global::System.Web.UI.WebControls.LinkButton addStory;
 
         /// <summary>
         /// postText control.

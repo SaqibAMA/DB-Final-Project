@@ -568,6 +568,16 @@ SET @msg = @fname + ' ' + @lname + ' applied to ' + @uniName;
 INSERT INTO Stories
 VALUES (@stdID,GETDATE(),@msg)
 
+CREATE PROCEDURE addStory
+@accID INT,
+@story VARCHAR(200)
+AS
+BEGIN
+	INSERT INTO Stories
+	VALUES
+	(@accID, GETDATE(), @story)
+END
+
 --prev trigger ended
 
 
