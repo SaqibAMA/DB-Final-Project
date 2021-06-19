@@ -84,10 +84,10 @@ namespace WebApplication1.tier3
                 sqlCMD.CommandText = "dbo.getName";
                 sqlCMD.CommandType = CommandType.StoredProcedure;
                 sqlCMD.Parameters.AddWithValue("@accID", accID);
-                sqlCMD.Parameters.Add("@name", SqlDbType.NVarChar, 50);
-                sqlCMD.Parameters["@name"].Direction = ParameterDirection.Output;
+                sqlCMD.Parameters.Add("@fullname", SqlDbType.NVarChar, 50);
+                sqlCMD.Parameters["@fullname"].Direction = ParameterDirection.Output;
                 sqlCMD.ExecuteScalar();
-                name = sqlCMD.Parameters["@name"].Value.ToString();
+                name = sqlCMD.Parameters["@fullname"].Value.ToString();
                 sqlCon.Close();
             }
 
@@ -667,6 +667,28 @@ namespace WebApplication1.tier3
                 sqlCMD.CommandText = "dbo.getUnisLike";
                 sqlCMD.CommandType = CommandType.StoredProcedure;
                 sqlCMD.Parameters.AddWithValue("@query", squery);
+                sqlCMD.ExecuteScalar();
+                sqlCon.Close();
+                SqlDataAdapter da = new SqlDataAdapter(sqlCMD);
+                da.Fill(dt);
+
+                return dt;
+            }
+
+        }
+
+        // Getting Applications
+        public DataTable getAppsForStd(int accID)
+        {
+
+            DataTable dt = new DataTable();
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.getApplicationsForStd";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@accID", accID);
                 sqlCMD.ExecuteScalar();
                 sqlCon.Close();
                 SqlDataAdapter da = new SqlDataAdapter(sqlCMD);

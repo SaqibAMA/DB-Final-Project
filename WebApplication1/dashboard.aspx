@@ -84,7 +84,12 @@
                     </a>
                 </div>
             </li>
-
+            <li>
+                <a href="profile.aspx?id=<%=Session["accID"]%>" class="white-text stdOption">
+                    <i class="material-icons white-text">person</i>
+                    PROFILE
+                 </a>
+            </li>
             <li>
                 <a href="search.aspx" class="white-text stdOption">
                     <i class="material-icons white-text">search</i>
@@ -282,6 +287,7 @@
         <div class="modal-content">
             <h4>Have something quick to share?</h4>
             <p>Stories are a way for you to share your ideas with everyone!</p>
+            <p class="red-text">Caution: You cannot delete stories!</p>
 
         <asp:TextBox
             runat="server"

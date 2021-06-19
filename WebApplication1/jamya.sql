@@ -188,10 +188,10 @@ declare @isStd INT;
 declare @isUni INT;
 EXEC isStudent
 @accID = @accId,
-@isStd = @count;
+@count = @isStd;
 EXEC isUniversity
 @accID = @accId,
-@isUni= @count;
+@count = @isUni;
 declare @fname varchar(20);
 declare @lname varchar(20);
 
@@ -318,6 +318,11 @@ ON
 WHERE 
 	[Application].StudentID = @accID
 END
+
+
+
+EXEC getApplicationsForStd @accID = 6
+
 --get Applications FOr University
 CREATE PROCEDURE getApplicationsForUni
 @accID INT
@@ -350,7 +355,9 @@ END
 CREATE PROCEDURE getStories
 AS
 BEGIN
-SELECT PostedDate,Content FROM Stories
+	SELECT PostedDate,Content 
+	FROM Stories
+	WHERE DAY(PostedDate) = DAY(GETDATE())
 END
 --get Programmes that university offers
 CREATE PROCEDURE getProgramsForUniversity

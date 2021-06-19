@@ -23,9 +23,9 @@ namespace WebApplication1
             else
             {
                 if (Convert.ToString(Session["uName"]).Length > 1)
-                    Response.Redirect("uniProfile.aspx");
+                    Response.Redirect("dashboard.aspx");
                 else
-                    Response.Redirect("studentProfile.aspx");
+                    Response.Redirect("dashboard.aspx");
             }
       
         }

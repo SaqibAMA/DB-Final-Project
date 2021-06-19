@@ -50,7 +50,7 @@
             <div class="row valign-wrapper center">
 
                 <div class="col s12 m2 center">
-                    <a href="index.aspc">
+                    <a href="dashboard.aspx">
                     <img src="assets/simple_cyan_jamya_logo.png"
                         alt="Logo" class="circle "
                         style="width: 100%; max-width: 5rem" />
@@ -102,8 +102,10 @@
                             </asp:Label>
                         </h4>
                         <p class="join-date grey-text">
-                            <span class="chip green z-depth-2">Student</span> 
-                            <span class="chip green z-depth-2">New</span> 
+                            <span class="chip green z-depth-2"><%=Session["type"] %></span> 
+                            <span class="chip green z-depth-2"> 
+                                <asp:Label Text="0" ID="postCount" runat="server" /> posts 
+                            </span> 
                         </p>
 
                     </div>
@@ -116,14 +118,27 @@
                         <li class="collection-header">
                             <h5>Posts</h5>
                         </li>
-                        <li class="collection-item">
-                            <p>Feeling really stressed right now to be honest!</p>
-                            <p class="grey-text">Saqib Ali - 12/01/2021</p>
-                        </li>
-                        <li class="collection-item">
-                            <p>My first post!</p>
-                            <p class="grey-text">Saqib Ali - 12/01/2021</p>
-                        </li>
+
+
+                        <asp:Repeater
+                            runat="server"
+                            ID="posts">
+
+                            <ItemTemplate>
+
+                                <li class="collection-item">
+                                    <p> <%#Eval("PostContent") %></p>
+                                    <p class="grey-text">@<%#Eval("Username") %></p>
+                                </li>
+
+                            </ItemTemplate>
+
+                        </asp:Repeater>
+
+
+                        
+
+
                     </ul>
 
                 </div>
@@ -135,35 +150,28 @@
 
                 <ul class="collection with-header bg-dark no-margin">
                     <li class="collection-header">
-                        <h5>Recent</h5>
-                    </li>  
+                        <h5>Recent Applications</h5>
+                    </li> 
                     
-                    <li class="collection-item avatar">
+
+                    <asp:Repeater runat="server"
+                        ID="recentApps">
+
+                        <ItemTemplate>
+
+                            <li class="collection-item avatar">
                         
-                        <img src="assets/simple_cyan_jamya_logo.png"
-                            class="circle"/>
-                        <span class="title">FAST-NUCES</span>
-                        <p class="grey-text">Applied 2 Days Ago</p>
+                                <img src="assets/simple_cyan_jamya_logo.png"
+                                    class="circle"/>
+                                <span class="title"> <%#Eval("Name") %></span>
+                                <p class="grey-text"> Applied for <%#Eval("MajorName") %> </p>
 
-                    </li>
+                            </li>
 
-                    <li class="collection-item avatar">
-                        
-                        <img src="assets/simple_cyan_jamya_logo.png"
-                            class="circle"/>
-                        <span class="title">NUST</span>
-                        <p class="grey-text">Applied 1 Day Ago</p>
+                        </ItemTemplate>
 
-                    </li>
+                    </asp:Repeater>
 
-                   <li class="collection-item avatar">
-                        
-                        <img src="assets/simple_cyan_jamya_logo.png"
-                            class="circle"/>
-                        <span class="title">NUST</span>
-                        <p class="grey-text">Applied 1 Day Ago</p>
-
-                    </li>
 
 
                 </ul>
