@@ -608,6 +608,20 @@ namespace WebApplication1.tier3
             }
         }
 
+        public void deletePost(int ID)
+        {
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.deletePost";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@ID", ID);
+                sqlCMD.ExecuteScalar();
+                sqlCon.Close();
+            }
+        }
+
 
         // All universities for search
         public DataTable getUnis()

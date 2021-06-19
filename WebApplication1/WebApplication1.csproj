@@ -245,6 +245,7 @@
     <Content Include="css\uniProfile.css" />
     <Content Include="css\university.css" />
     <Content Include="dashboard.aspx" />
+    <Content Include="delete_post.aspx" />
     <Content Include="edit_application.aspx" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -465,6 +466,13 @@
     </Compile>
     <Compile Include="Default.aspx.designer.cs">
       <DependentUpon>Default.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="delete_post.aspx.cs">
+      <DependentUpon>delete_post.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="delete_post.aspx.designer.cs">
+      <DependentUpon>delete_post.aspx</DependentUpon>
     </Compile>
     <Compile Include="edit_application.aspx.cs">
       <DependentUpon>edit_application.aspx</DependentUpon>

@@ -518,7 +518,7 @@ BEGIN
 
 END
 
-ALTER PROCEDURE addPost
+CREATE PROCEDURE addPost
 @accID INT,
 @post VARCHAR(200)
 AS
@@ -531,6 +531,16 @@ END
 
 
 SELECT * FROM Posts
+
+CREATE PROCEDURE deletePost
+@ID INT
+AS
+BEGIN
+	
+	DELETE FROM Posts
+	WHERE PostID = @ID
+
+END
 
 
 EXEC getPostsByID @accID = 1

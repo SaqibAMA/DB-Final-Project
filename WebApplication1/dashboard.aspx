@@ -116,6 +116,12 @@
                  </a>
             </li>
             <li>
+                <a href="promote.aspx" class="white-text uniOption">
+                    <i class="material-icons white-text">military_tech</i>
+                    PROMOTE
+                 </a>
+            </li>
+            <li>
                 <a href="contact.aspx" class="white-text">
                     <i class="material-icons white-text">help</i>
                     HELP
@@ -239,6 +245,10 @@
                                     <%#Eval("PostContent") %>
                                 </p>
                                 <span class="title grey-text"> @<%#Eval("Username") %> </span>
+                                <a href="delete_post.aspx?post_id=<%#Eval("PostID")%> " target="_blank">
+                                    <i class="material-icons right">delete</i>
+                                </a>
+
                             </li>
 
                         </ItemTemplate>

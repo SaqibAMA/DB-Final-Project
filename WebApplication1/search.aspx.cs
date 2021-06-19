@@ -15,6 +15,12 @@ namespace WebApplication1
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            if (Convert.ToString(Session["email"]).Length < 1)
+            {
+                Response.Redirect("index.aspx");
+            }
+
+
             loadUnis();
 
         }
@@ -27,13 +33,6 @@ namespace WebApplication1
             DataTable dt = dal.getUnis();
             searchResults.DataSource = dt;
             searchResults.DataBind();
-
-        }
-
-        public void search_universities()
-        {
-
-
 
         }
 
