@@ -54,6 +54,16 @@ namespace WebApplication1
                 recentApps.DataBind();
 
             }
+            else
+            {
+
+                dt = dal.getAppsForUni(ID);
+
+                recentApps.DataSource = dt;
+                recentApps.DataBind();
+
+
+            }
 
         }
 

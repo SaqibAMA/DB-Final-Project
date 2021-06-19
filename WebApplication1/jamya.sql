@@ -324,26 +324,33 @@ END
 EXEC getApplicationsForStd @accID = 6
 
 --get Applications FOr University
-CREATE PROCEDURE getApplicationsForUni
+ALTER PROCEDURE getApplicationsForUni
 @accID INT
 AS
 BEGIN
-SELECT [Application].ApplicationID,Student.StudentID,Student.fName,Student.lName,Major.MajorName FROM [Application]
-JOIN
-	Student
-ON
-	Student.StudentID = [Application].StudentID
-JOIN 
-	Major
-ON
-	Major.MajorID=[Application].MajID
-JOIN 
-	University
-ON 
-	University.UniversityID = [Application].UniversityID
-WHERE 
-	[Application].UniversityID = @accID
+	SELECT [Application].ApplicationID,
+	Student.StudentID,
+	(Student.fName + ' ' + Student.lName) as [Name],
+	Major.MajorName 
+	FROM [Application]
+	JOIN
+		Student
+	ON
+		Student.StudentID = [Application].StudentID
+	JOIN 
+		Major
+	ON
+		Major.MajorID=[Application].MajID
+	JOIN 
+		University
+	ON 
+		University.UniversityID = [Application].UniversityID
+	WHERE 
+		[Application].UniversityID = @accID
 END
+
+EXEC getApplicationsForUni @accID = 4
+
 ----get Notifications for AccountID
 CREATE PROCEDURE getNotificationsForID
 @accID INT
