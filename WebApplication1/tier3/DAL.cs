@@ -351,7 +351,7 @@ namespace WebApplication1.tier3
                 sqlCMD.CommandText = "dbo.insertMessage";
                 sqlCMD.CommandType = CommandType.StoredProcedure;
                 sqlCMD.Parameters.AddWithValue("@AccountID", accID);
-                sqlCMD.Parameters.AddWithValue("@MessageText", message);
+                sqlCMD.Parameters.AddWithValue("@message", message);
                 sqlCMD.ExecuteScalar();
                 sqlCon.Close();
             }
@@ -563,7 +563,7 @@ namespace WebApplication1.tier3
             public string message { get; set; }
             public string time { get; set; }
         }
-        public static List<msg_data> loadMessages()
+        public List<msg_data> loadMessages()
         {
             DataTable dt=new DataTable();
             using (SqlConnection sqlCon = new SqlConnection(connection_str))

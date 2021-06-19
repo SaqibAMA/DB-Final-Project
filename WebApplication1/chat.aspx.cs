@@ -5,43 +5,32 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using WebApplication1.tier3;
+using System.Web.Services;
 
 namespace WebApplication1
 {
     public partial class chat : System.Web.UI.Page
     {
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (Convert.ToString(Session["email"]).Length < 1)
             {
                 Response.Redirect("index.aspx");
             }
-            
+
         }
 
-        protected void sendbtn_Click(object sender, EventArgs e)
+        public void sendbtn_Click(object sender, EventArgs e)
         {
             DAL obj = new DAL();
             int accID = Convert.ToInt32(Session["accID"]);
             string msg = messagebox.Text.Trim();
+            messagebox.Text = "";
             obj.putMessage(accID,msg);
         }
 
-        [System.Web.Services.WebMethod]
-        public static int send_message(String msg)
-        {
 
-            
-            var dal = new DAL();
-
-            int accId = Convert.ToInt32(
-                HttpContext.Current.Session["accID"]);
-
-            dal.putMessage(accId, msg);
-
-            return accId;
-
-        }
 
     }
 }

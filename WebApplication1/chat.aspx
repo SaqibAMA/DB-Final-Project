@@ -144,49 +144,43 @@
 
             <div class="col s2">
               
-              <asp:Button CssClass="btn" ID="sendbtn" OnClientClick="sendMessage()" Text="SEND" runat="server" OnClick="sendbtn_Click"></asp:Button>
+              <asp:Button 
+                  CssClass="btn" 
+                  ID="sendbtn" 
+                  Text="SEND" 
+                  runat="server" 
+                  OnClick="sendbtn_Click"></asp:Button>
 
 
               <script type="text/javascript">
 
                 $('.messages').animate({ scrollTop: 9999 }, 'slow');
 
-                const sendMessage = () => {
 
-                  var msg = 
-                  `
-                  <div class="row">
+                  const sendMessage = () => {
 
-                    <div class="col s10 message sent">
+                      var msg =
+                          `
+                          <div class="row">
 
-                      <p class="text">${$('#messagebox').val()}</p>
-                      <p class="author">by ${$('.username').html()}</p>
+                            <div class="col s10 message sent">
 
-                    </div>
+                              <p class="text">${$('#messagebox').val()}</p>
+                              <p class="author">by ${$('.username').html()}</p>
+
+                            </div>
                   
-                  </div>
+                          </div>
 
-                  `;
+                          `;
 
+                      $('.messages').append(msg);
+                      $('#messagebox').val('');
+                      $('.messages').animate({ scrollTop: 9999 }, 'slow');
 
-                    var request = $.ajax({
-                        type: "POST",
-                        url: "chat.aspx/send_message",
-                        data: '{ "msg" : "' + $('#messagebox').val() + '", "sender" : "'
-                            + $('.username').html() +'"}',
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: (response) => {
-                            console.log(response);
-                        },
-                        failure: () => console.log('failed')
-                    });
+                  };
 
-                  $('.messages').append(msg);
-                  $('#messagebox').val('');
-                  $('.messages').animate({ scrollTop: 9999 }, 'slow');
-                }
-
+                  $('#sendbtn').on('click', sendMessage);
       
               </script>
 
