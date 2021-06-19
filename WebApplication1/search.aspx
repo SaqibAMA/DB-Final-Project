@@ -73,9 +73,6 @@
                     <i class="material-icons">search</i>
                 </asp:LinkButton>
 
-                <%--<i class="material-icons right btn-flat" 
-                    onclick="searchUniversity()">search</i>--%>
-
                 
 
             </div>
@@ -137,7 +134,13 @@
 
                 </div>
 
+            <a href="dashboard.aspx" class="center btn-flat">
+                <i class="material-icons left">west</i> BACK TO DASHBOARD
+            </a>
+
+
             </div>
+
 
 
         </section>
@@ -151,96 +154,6 @@
             for (var i = 0; i < $('.uni-title').length; i++)
                 uniNames[$('.uni-title')[i].innerHTML.trim().toString()] = 'assets/simple_cyan_jamya_logo.png';
 
-            console.log(uniNames);
-
-            const searchUniversity = () => {
-
-
-                var request = $.ajax({
-                    type: "POST",
-                    url: "search.aspx/searching_function",
-                    data: '{"query":"' + $('#searchQuery').val() + '"}',
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: (response) => {
-                        console.log(response);
-                        showSearchResults(response.d)
-                    },
-                    failure: () => console.log('failed')
-                });
-
-
-
-            }
-
-
-            const applyToUniversity = (id) => {
-
-                var request = $.ajax({
-                    type: "POST",
-                    url: "search.aspx/applying_function",
-                    data: '{"id":"' + id + '"}',
-                    contentType: "application/json; charset=utf-8",
-                    dataType: "json",
-                    success: (response) => {
-                        console.log(response.d);
-                        M.toast({ html: 'Applied!' });
-                        $("#uni-btn-" + id).addClass('disabled');
-                    },
-                    failure: () => M.toast({ html: 'Could not apply...' })
-                });
-
-
-            }
-
-
-            const showSearchResults = (res) => {
-
-                $('#search_results').html('');
-
-                for (var i = 0; i < res.length; i++) {
-
-                    var row = res[i];
-
-                    var result =
-                        `
-
-                    <div class="row valign-wrapper">
-                        <div class="col s2">
-                            <img
-                                src="assets/simple_cyan_jamya_logo.png"
-                                alt="University Logo"
-                                class="search-img"
-                                draggable="false"
-                             />
-                        </div>
-                        <div class="col s8">
-                            <a href="profile.aspx?id=${row['ID']}"
-                                class="black-text" target="_blank">
-                                ${row['name']}
-                            </a>
-                        </div>
-                        <div class="col s2 center-align">
-                            
-                            <a href="apply.aspx?id=${row['ID']}" target="_blank"
-                            class = "btn waves-effect waves-light green"
-                            onclick="applyToUniversity( ${row['ID']} );"
-                            id="uni-btn-${row['ID']}"
-                            >APPLY</a>
-
-                        </div>
-                    </div>
-
-                    `;
-
-                    $('#search_results').append(result);
-
-
-                }
-
-
-            }
-
 
             $(document).ready(function () {
                 $('input.autocomplete').autocomplete({
@@ -250,6 +163,7 @@
 
 
         </script>
+
 
 
     </form>
