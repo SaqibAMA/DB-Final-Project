@@ -470,6 +470,27 @@ JOIN
 	Account.AccountID = Messages.StudentID
 END
 
+-- get universities
+CREATE PROCEDURE getUnis
+AS
+BEGIN
+
+	SELECT *
+	FROM University
+
+END
+
+CREATE PROCEDURE getUnisLike
+@query VARCHAR(100)
+AS
+BEGIN
+
+	SELECT *
+	FROM University
+	WHERE University.Name LIKE '%' + @query + '%';
+	
+END
+
 -- load notifications
 CREATE PROCEDURE getNotifications
 @accID INT

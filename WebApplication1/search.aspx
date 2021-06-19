@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="search.aspx.cs" Inherits="WebApplication1.search" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="search.aspx.cs" Inherits="WebApplication1.search" %>
 
 <!DOCTYPE html>
 
@@ -52,10 +52,11 @@
 
             <div class="input-field container valign-wrapper">
                 
-                <input
-                    type="text"
+                <asp:TextBox
+                    runat="server"
+                    ID="searchQuery"
                     class="validate autocomplete"
-                    id="searchQuery" />
+                    ></asp:TextBox>
 
                 <label for="searchQuery">
                     Search university...
@@ -63,8 +64,17 @@
             
 
                 <!--This is the search button-->
-                <i class="material-icons right btn-flat" 
-                    onclick="searchUniversity()">search</i>
+
+                <asp:LinkButton
+                    runat="server"
+                    CssClass="right btn-flat"
+                    ID="searchBtn"
+                    OnClick="searchBtn_Click">
+                    <i class="material-icons">search</i>
+                </asp:LinkButton>
+
+                <%--<i class="material-icons right btn-flat" 
+                    onclick="searchUniversity()">search</i>--%>
 
                 
 
@@ -92,6 +102,39 @@
 
                 <div id="search_results">
 
+                    <asp:Repeater runat="server" ID="searchResults">
+
+                        <ItemTemplate>
+
+                             <div class="row valign-wrapper">
+                                    <div class="col s2">
+                                        <img
+                                            src="assets/simple_cyan_jamya_logo.png"
+                                            alt="University Logo"
+                                            class="search-img"
+                                            draggable="false"
+                                         />
+                                    </div>
+                                    <div class="col s8">
+                                        <a class="uni-title" href="profile.aspx?id=<%#Eval("UniversityID")%>  "
+                                            class="black-text" target="_blank">
+                                            <%#Eval("Name")%>  
+                                        </a>
+                                    </div>
+                                    <div class="col s2 center-align">
+                            
+                                        <a href="apply.aspx?id=<%#Eval("UniversityID")%>  " target="_blank"
+                                        class = "btn waves-effect waves-light green"
+                                        id="uni-btn-<%#Eval("UniversityID")%>  "
+                                        >APPLY</a>
+
+                                    </div>
+                                </div>
+
+                        </ItemTemplate>
+
+                    </asp:Repeater>
+
                 </div>
 
             </div>
@@ -102,6 +145,13 @@
 
         <!--This is for the autocomplete part-->
         <script type="text/javascript">
+
+            var uniNames = {};
+
+            for (var i = 0; i < $('.uni-title').length; i++)
+                uniNames[$('.uni-title')[i].innerHTML.trim().toString()] = 'assets/simple_cyan_jamya_logo.png';
+
+            console.log(uniNames);
 
             const searchUniversity = () => {
 
@@ -194,12 +244,7 @@
 
             $(document).ready(function () {
                 $('input.autocomplete').autocomplete({
-                    data: {
-                        "FAST-NUCES": 'assets/nuces-logo.png',
-                        "NUST": 'assets/nust-logo.png',
-                        "LUMS": 'assets/lums-logo.png',
-                        "Harvard University": 'assets/harvard-logo.png'
-                    },
+                    data: uniNames,
                 });
             });
 

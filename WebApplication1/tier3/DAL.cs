@@ -609,6 +609,45 @@ namespace WebApplication1.tier3
         }
 
 
+        // All universities for search
+        public DataTable getUnis()
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.getUnis";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter(sqlCMD);
+                da.Fill(dt);
+                sqlCon.Close();
+                return dt;
+            }
+        }
+
+        public DataTable getUnisLike(String squery)
+        {
+
+            DataTable dt = new DataTable();
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.getUnisLike";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@query", squery);
+                sqlCMD.ExecuteScalar();
+                sqlCon.Close();
+                SqlDataAdapter da = new SqlDataAdapter(sqlCMD);
+                da.Fill(dt);
+
+                return dt;
+            }
+
+        }
+
         //for messages creating another datatype
 
         public DataTable loadMessages()

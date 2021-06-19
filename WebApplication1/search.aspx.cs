@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using WebApplication1.tier3;
+using System.Data;
 
 namespace WebApplication1
 {
@@ -13,46 +15,38 @@ namespace WebApplication1
         protected void Page_Load(object sender, EventArgs e)
         {
 
-        }
-
-        public class search_result
-        {
-            public int ID { get; set; }
-            public String name { get; set; }
+            loadUnis();
 
         }
 
-
-        // This function searches for the universities
-
-        [System.Web.Services.WebMethod]
-        public static List<search_result> searching_function(String query)
+        public void loadUnis()
         {
 
-            // Get ALL universities from DB here
+            DAL dal = new DAL();
 
-            var results = new List<search_result>()
-            {
-                new search_result { ID = 1, name = "FAST-NUCES" },
-                new search_result { ID = 2, name = "NUST" }
-            };
-
-
-            return results;
+            DataTable dt = dal.getUnis();
+            searchResults.DataSource = dt;
+            searchResults.DataBind();
 
         }
 
-
-        // This function applies to a certain university
-        [System.Web.Services.WebMethod]
-        public static int applying_function(String id)
+        public void search_universities()
         {
 
-            return id.Length;
+
 
         }
 
+        protected void searchBtn_Click(object sender, EventArgs e)
+        {
+            DAL dal = new DAL();
 
+            string squery = searchQuery.Text.Trim();
+
+            DataTable dt = dal.getUnisLike(squery);
+            searchResults.DataSource = dt;
+            searchResults.DataBind();
+        }
     }
 
 }
