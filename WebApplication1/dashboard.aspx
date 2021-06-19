@@ -87,7 +87,7 @@
                  </a>
             </li>
             <li>
-                <a href="#" class="white-text">
+                <a href="chat.aspx" class="white-text">
                     <i class="material-icons white-text">chat</i>
                     CHAT
                  </a>

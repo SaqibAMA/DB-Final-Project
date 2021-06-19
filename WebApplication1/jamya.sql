@@ -450,7 +450,15 @@ DROP VIEW loadMessages
 CREATE PROCEDURE loadMessages
 AS
 BEGIN
-SELECT Account.Username, Messages.MessageText,Messages.SentTime from Account JOIN Messages ON Account.AccountID=Messages.AccountID
+SELECT	Account.AccountID,
+		Account.Username, 
+		Messages.MessageText,
+		Messages.SentTime 
+from Account 
+JOIN 
+	Messages 
+	ON 
+	Account.AccountID = Messages.StudentID
 END
 --notification/stories trigger
 --sajawal applied for fast
@@ -486,6 +494,11 @@ VALUES
 ('SaqibAli', 'saqib@ggl.com', 'shmoonisgoodfella'),
 ('SajawalAli', 'sajawal@ggl.com', 'shmoonisgoodfella')
 
+INSERT INTO
+Student
+VALUES
+(6, 'Farhan', 'Ali', '2001-01-01', NULL, NULL, NULL, NULL)
+
 INSERT INTO Student
 VALUES	(1,'Shmoon','Ali','2001-01-01',NULL,NULL,NULL,NULL)
 INSERT INTO Major VALUES(1,'CS')
@@ -517,3 +530,7 @@ SELECT * FROM Review
 SELECT * FROM Application
 SELECT * FROM Major
 SELECT * FROM Messages
+
+INSERT INTO Messages
+VALUES
+(6, GETDATE(), 'This is a dummy message');

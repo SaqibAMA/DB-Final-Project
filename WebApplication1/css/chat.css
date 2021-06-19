@@ -44,7 +44,7 @@ h6 {
 }
 
 body {
-  background-color: #f0f0f0;
+    background-color: #2c3e50;
 }
 
 main {
@@ -55,22 +55,18 @@ main {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
-  max-width: 1220px;
   margin: 0 auto;
 }
 
 .sidepanel {
-  min-height: 100vh;
-  width: 30%;
-  padding: 1rem;
-  background-color: #f0f0f0;
-  background-image: url("../assets/girl-5709471_1280.png");
-  background-size: 100% auto;
-  background-position: bottom;
-  background-repeat: no-repeat;
-  position: relative;
-  border-right: solid 0.5px lightgray;
-  border-left: solid 0.5px lightgray;
+    min-height: 100vh;
+    width: 30%;
+    padding: 1rem;
+    background-color: #2c3e50;
+    background-size: 100% auto;
+    background-position: bottom;
+    background-repeat: no-repeat;
+    position: relative;
 }
 
 .sidepanel .info-card {
@@ -85,23 +81,23 @@ main {
 }
 
 .sidepanel .info-card .username {
-  font-family: "Poppins", serif;
-  font-weight: bolder;
-  font-size: 2rem;
+    color: #2ecc71;
+    font-family: "Poppins", serif;
+    font-weight: bolder;
+    font-size: 2rem;
 }
 
 .sidepanel .question-statement {
-  color: #630e63;
+  color: white;
   opacity: 0.9;
   font-weight: bolder;
   padding: 0 0.5rem;
 }
 
 .chat-section {
-  width: 70%;
-  position: relative;
-  border-right: 0.5px solid lightgray;
-  background-color: white;
+    background-color: #34495e;
+    width: 70%;
+    position: relative;
 }
 
 .chat-section h5 {
@@ -128,13 +124,13 @@ main {
 
 .chat-section .chat-body .messages {
   padding: 0.8rem;
-  max-height: 45rem;
+  max-height: 100vh;
   overflow: scroll;
 }
 
 .chat-section .chat-body .messages .message {
   padding: 0.5rem;
-  color: white;
+  color: black;
   border-radius: 0.2rem;
 }
 
@@ -146,17 +142,13 @@ main {
 }
 
 .chat-section .chat-body .messages .sent {
-  background-color: #630e63;
-  background: -webkit-gradient(linear, left top, right top, from(rgba(99, 14, 99, 0.7)), to(rgba(99, 14, 99, 0.9)));
-  background: linear-gradient(to right, rgba(99, 14, 99, 0.7), rgba(99, 14, 99, 0.9));
-  float: right;
+    background-color: #2ecc71;
+    float: right;
 }
 
 .chat-section .chat-body .messages .received {
-  background-color: black;
-  background: -webkit-gradient(linear, left top, right top, from(rgba(0, 0, 0, 0.7)), to(rgba(0, 0, 0, 0.9)));
-  background: linear-gradient(to right, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9));
-  float: left;
+    background-color: #ecf0f1;
+    float: left;
 }
 
 .chat-section .chat-body input {
@@ -165,6 +157,7 @@ main {
           box-shadow: none !important;
   text-indent: 1rem;
   margin: 0;
+  background-color: white;
 }
 
 .chat-section .chat-body label {
@@ -176,7 +169,7 @@ main {
           transform: translateY(-20px) scale(0.7);
   -webkit-transform-origin: 0 0;
           transform-origin: 0 0;
-  color: #630e63 !important;
+  color: white !important;
 }
 
 .chat-section .chat-body .btn {

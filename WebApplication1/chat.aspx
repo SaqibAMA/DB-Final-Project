@@ -1,4 +1,7 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="chat.aspx.cs" Inherits="WebApplication1.chat" %>
+﻿<%@ Page Language="C#" 
+    AutoEventWireup="true" 
+    CodeFile="chat.aspx.cs" 
+    Inherits="WebApplication1.chat" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -43,8 +46,9 @@
 
 
       <div class="info-card">
-          <div class="username">Saqib Ali</div>
-          <div class="user-category">Student</div>
+          
+          <asp:Label Text="User" runat="server" ID="topUsername" CssClass="username"/>
+
       </div>
 
       <div class="row question-statement">
@@ -54,6 +58,16 @@
 
       </div>
 
+        <div class="row">
+
+
+            <a class="btn btn-flat white-text" href="dashboard.aspx">
+                <i class="material-icons left">west</i> 
+                BACK TO DASHBOARD
+            </a>
+
+        </div>
+
 
 
     </aside>
@@ -62,65 +76,35 @@
     <section class="chat-section">
 
 
-
-
-      <header>
-        
-        <h5>Questions & Answers</h5>
-        <p class="level-2">Available</p>
-
-      </header>
-
-
       <section class="chat-body">
 
         
         <section class="messages container">
 
 
+            <asp:Repeater ID="messages" runat="server">
 
-          <!--This is a single message-->
+                <ItemTemplate>
 
-
-          <!--
-
-            MESSAGE       hello
-            MESSAGE ID    1
-            SENDER ID     saqibali
-
-
-            Sesiion user  saqibali
-
-            SELECT * FROM MESSAGES
-
-          -->
-
-          <div class="row">
+                  <div class="row">
           
-            <div class="col s10 message received">
+                    <div class="col s10 message
+                         <%# (Convert.ToInt32(Session["accID"]) == Convert.ToInt32(Eval("AccountID"))) ? 
+                            "sent" : 
+                            "received" %>">
 
-              <p class="text">Hello, I am looking for some help regarding admissions at LUMS.</p>
-              <p class="author">by Sajawal Ali</p>
+                      <p class="text">
+                         <%#Eval("MessageText")%>  
+                      </p>
+                      <p class="author">by @<%#Eval("Username")%> -  <%#Eval("SentTime")%>  </p>
 
-            </div>
+                    </div>
 
-          </div>
+                  </div>
+                
+                </ItemTemplate>
 
-          <!--This is a single message-->
-<!-- 
-          <div class="row">
-          
-            <div class="col s10 message sent">
-
-              <p class="text">Hey Sajawal, how can I help you?</p>
-              <p class="author">by Saqib Ali</p>
-
-            </div>
-
-          </div> -->
-
-
-
+            </asp:Repeater>
 
 
 
@@ -136,7 +120,7 @@
               
               <div class="input-field">
 
-                <asp:TextBox ID="messagebox" name="messagebox" required="true"  class="form-control" runat="server"></asp:TextBox> 
+                <asp:TextBox ID="messagebox" name="messagebox" class="form-control" runat="server"></asp:TextBox> 
                 <label for="messagebox">What's on your mind?</label>
               </div>
             
@@ -144,18 +128,19 @@
 
             <div class="col s2">
               
-              <asp:Button 
+              <asp:LinkButton 
                   CssClass="btn" 
                   ID="sendbtn" 
-                  Text="SEND" 
                   runat="server" 
-                  OnClick="sendbtn_Click"></asp:Button>
+                  OnClick="sendbtn_Click"
+                  OnClientClick="sendMessage()">
+                  <i class="material-icons left">send</i>
+              </asp:LinkButton>
 
 
               <script type="text/javascript">
 
                 $('.messages').animate({ scrollTop: 9999 }, 'slow');
-
 
                   const sendMessage = () => {
 
@@ -175,13 +160,11 @@
                           `;
 
                       $('.messages').append(msg);
-                      $('#messagebox').val('');
                       $('.messages').animate({ scrollTop: 9999 }, 'slow');
 
                   };
 
-                  $('#sendbtn').on('click', sendMessage);
-      
+
               </script>
 
 

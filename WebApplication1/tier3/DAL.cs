@@ -62,7 +62,7 @@ namespace WebApplication1.tier3
                 sqlCMD.CommandText = "dbo.getUserName";
                 sqlCMD.CommandType = CommandType.StoredProcedure;
                 sqlCMD.Parameters.AddWithValue("@accID", accID);
-                sqlCMD.Parameters.Add("@username", SqlDbType.NVarChar);
+                sqlCMD.Parameters.Add("@username", SqlDbType.NVarChar, 50);
                 sqlCMD.Parameters["@username"].Direction = ParameterDirection.Output;
                 sqlCMD.ExecuteScalar();
                 username_ = sqlCMD.Parameters["@username"].Value.ToString();
@@ -75,16 +75,16 @@ namespace WebApplication1.tier3
         public string getName(int accID)
         {
 
-            string name = "";
+            string name = "User";
             
             using (SqlConnection sqlCon = new SqlConnection(connection_str))
             {
                 sqlCon.Open();
                 SqlCommand sqlCMD = sqlCon.CreateCommand();
-                sqlCMD.CommandText = "dbo.getAccountName";
+                sqlCMD.CommandText = "dbo.getName";
                 sqlCMD.CommandType = CommandType.StoredProcedure;
                 sqlCMD.Parameters.AddWithValue("@accID", accID);
-                sqlCMD.Parameters.Add("@name", SqlDbType.NVarChar);
+                sqlCMD.Parameters.Add("@name", SqlDbType.NVarChar, 50);
                 sqlCMD.Parameters["@name"].Direction = ParameterDirection.Output;
                 sqlCMD.ExecuteScalar();
                 name = sqlCMD.Parameters["@name"].Value.ToString();
@@ -558,14 +558,10 @@ namespace WebApplication1.tier3
             }
         }
         //for messages creating another datatype
-        public class msg_data{
-            public string username { get; set; }
-            public string message { get; set; }
-            public string time { get; set; }
-        }
-        public List<msg_data> loadMessages()
+
+        public DataTable loadMessages()
         {
-            DataTable dt=new DataTable();
+            DataTable dt = new DataTable();
             using (SqlConnection sqlCon = new SqlConnection(connection_str))
             {
                 sqlCon.Open();
@@ -575,17 +571,8 @@ namespace WebApplication1.tier3
                 sqlCMD.ExecuteNonQuery();
                 SqlDataAdapter da = new SqlDataAdapter(sqlCMD);
                 da.Fill(dt);
-                List<msg_data> msglist = new List<msg_data>();
-                for(int i=0;i<dt.Rows.Count;i++)
-                {
-                    msg_data temp = new msg_data();
-                    temp.username = Convert.ToString(dt.Rows[i]["Username"]);
-                    temp.message= Convert.ToString(dt.Rows[i]["MessageText"]);
-                    temp.time=Convert.ToString(dt.Rows[i]["SentTime"]);
-                    msglist.Add(temp);
-                }
                 sqlCon.Close();
-                    return msglist;
+                return dt;
             }
         }
     }
