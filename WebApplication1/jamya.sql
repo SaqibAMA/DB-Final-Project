@@ -586,6 +586,7 @@ SELECT * FROM Major
 SELECT * FROM Messages
 SELECT * FROM Notification
 
+
 INSERT INTO Notification
 VALUES
 (-1, -1, 'FAST-NUCES has started admissions for Fall 2021'),

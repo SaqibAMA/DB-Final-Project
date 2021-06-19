@@ -86,15 +86,15 @@
             </li>
 
             <li>
-                <a href="search.aspx" class="white-text">
+                <a href="search.aspx" class="white-text stdOption">
                     <i class="material-icons white-text">search</i>
                     SEARCH UNIVERSITIES
                  </a>
             </li>
             <li>
-                <a href="#" class="white-text">
+                <a href="#" class="white-text uniOption">
                     <i class="material-icons white-text">notifications</i>
-                    NOTIFICATIONS
+                    SEND NOTIFICATION
                  </a>
             </li>
             <li>
@@ -104,9 +104,15 @@
                  </a>
             </li>
            <li>
-                <a href="applications.aspx" class="white-text">
+                <a href="applications.aspx" class="white-text stdOption">
                     <i class="material-icons white-text">linear_scale</i>
                     APPLICATIONS
+                 </a>
+            </li>
+            <li>
+                <a href="applications.aspx" class="white-text uniOption">
+                    <i class="material-icons white-text">linear_scale</i>
+                    REVIEW APPLICATIONS
                  </a>
             </li>
             <li>
@@ -121,6 +127,39 @@
                     LOGOUT
                  </a>
             </li>
+
+
+
+            <script type="text/javascript">
+
+
+
+                $(document).ready(() => {
+
+                    const Student = 1;
+                    const University = 0;
+
+                    var isStudent = <%=Session["type"]%>;
+
+
+                    if (isStudent) {
+
+                        $('.uniOption').addClass('hide');
+
+                    }
+                    else {
+
+                        $('.stdOption').addClass('hide');
+
+                    }
+
+
+                });
+
+
+
+            </script>
+
 
         </ul>
 
@@ -180,17 +219,10 @@
 
 
                 <div class="fixed-action-btn">
-                  <a class="btn-floating btn-large green">
+                  <a class="btn-floating btn-large green modal-trigger" 
+                      data-target="postAddModal">
                     <i class="large material-icons">mode_edit</i>
                   </a>
-                  <ul>
-                    <li>
-                        <a class="btn-floating green darken-2 modal-trigger"
-                            data-target="postAddModal">
-                            <i class="material-icons">post_add</i>
-                        </a>
-                    </li>
-                  </ul>
                 </div>
 
                 <h4 class="col s12">Recent Posts</h4>
@@ -270,7 +302,7 @@
             
 
             <asp:Button Text="SEND"
-                class="btn waves-effect white waves-green black-text"
+                class="modal-close btn waves-effect white waves-green black-text"
                 runat="server"
                 ID="addPost"
                 onclick="addPost_Click"/>
