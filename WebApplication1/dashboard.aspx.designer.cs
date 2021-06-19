@@ -60,6 +60,15 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Repeater notifs;
 
         /// <summary>
+        /// posts control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater posts;
+
+        /// <summary>
         /// uniReview control.
         /// </summary>
         /// <remarks>
@@ -87,12 +96,12 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.TextBox postText;
 
         /// <summary>
-        /// postAdd control.
+        /// addPost control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton postAdd;
+        protected global::System.Web.UI.WebControls.Button addPost;
     }
 }

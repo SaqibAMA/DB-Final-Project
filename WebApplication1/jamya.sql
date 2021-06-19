@@ -81,6 +81,14 @@ CREATE TABLE Major(
 	MajorID		INT	PRIMARY KEY,
 	MajorName	VARCHAR(50) UNIQUE NOT NULL,
 )
+
+CREATE TABLE Posts (
+	PostID		INT PRIMARY KEY IDENTITY(1,1),
+	PosterID	INT NOT NULL CONSTRAINT poster_constraint 
+				FOREIGN KEY REFERENCES Account(AccountID),
+	PostContent	VARCHAR(200) NOT NULL
+)
+
 DROP TABLE Programmes
 CREATE TABLE Programmes(
 	UniversityID	INT	CONSTRAINT FK_unis_id FOREIGN KEY REFERENCES University(UniversityID) ,
@@ -473,6 +481,38 @@ BEGIN
 	WHERE receiverID = @accID OR receiverID = -1
 
 END
+
+-- get posts by id
+CREATE PROCEDURE getPostsByID
+@accID INT
+AS 
+BEGIN
+	
+	SELECT * 
+	FROM Posts
+	JOIN Account
+	ON Account.AccountID = Posts.PosterID
+	WHERE Posts.PosterID = @accID
+	
+
+END
+
+ALTER PROCEDURE addPost
+@accID INT,
+@post VARCHAR(200)
+AS
+BEGIN
+
+	INSERT INTO dbo.Posts (PosterID, PostContent)
+	VALUES (@accID, @post)
+
+END
+
+
+SELECT * FROM Posts
+
+
+EXEC getPostsByID @accID = 1
 
 --notification/stories trigger
 --sajawal applied for fast

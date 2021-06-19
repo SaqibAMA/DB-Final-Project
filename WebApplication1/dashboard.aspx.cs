@@ -24,6 +24,8 @@ namespace WebApplication1
 
             loadNotifs();
 
+            loadPosts();
+
             // Loading data
             DAL dal = new DAL();
 
@@ -63,5 +65,29 @@ namespace WebApplication1
 
         }
 
+        public void loadPosts()
+        {
+            DAL dal = new DAL();
+
+            DataTable dt = dal.getPostsByID(Convert.ToInt32(Session["accID"]));
+
+            posts.DataSource = dt;
+            posts.DataBind();
+
+        }
+
+        protected void addPost_Click(object sender, EventArgs e)
+        {
+            DAL dal = new DAL();
+
+            string pText = postText.Text.Trim();
+
+            dal.addPost(
+                Convert.ToInt32(Session["accID"]),
+                pText
+            );
+
+            loadPosts();
+        }
     }
 }

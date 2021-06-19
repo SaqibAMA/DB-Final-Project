@@ -571,7 +571,44 @@ namespace WebApplication1.tier3
 
         }
 
-        
+        // Getting POSTS by ID
+
+        public DataTable getPostsByID(int accID)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.getPostsByID";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@accID", accID);
+                sqlCMD.ExecuteScalar();
+                sqlCon.Close();
+                SqlDataAdapter da = new SqlDataAdapter(sqlCMD);
+                da.Fill(dt);
+
+                return dt;
+            }
+
+        }
+
+        public void addPost(int accID, string post)
+        {
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.addPost";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@accID", accID);
+                sqlCMD.Parameters.AddWithValue("@post", post);
+                sqlCMD.ExecuteScalar();
+                sqlCon.Close();
+            }
+        }
+
+
         //for messages creating another datatype
 
         public DataTable loadMessages()

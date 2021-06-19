@@ -46,7 +46,7 @@
 </head>
 <body class="bg-dark white-text">
 
-    <form id="dashboardForm" runat="server" method="get">
+    <form id="dashboardForm" runat="server" method="post">
         
 
         <ul id="slide-out" class="sidenav sidenav-fixed bg-dark">
@@ -164,7 +164,8 @@
 
                         <ItemTemplate>
                             
-                            <li class="collection-item bg-dark-1">
+                            <li class="collection-item notification bg-dark-1"
+                                onclick="addClass('hide');">
                                 <span class="title grey-text">Notification #<%# Container.ItemIndex + 1 %></span>                        
                                 <p><%#Eval("textContent") %></p>
                             </li>
@@ -185,12 +186,6 @@
                   <ul>
                     <li>
                         <a class="btn-floating green darken-2 modal-trigger"
-                            data-target="uniReviewModal">
-                            <i class="material-icons">school</i>
-                        </a>
-                    </li>
-                    <li>
-                        <a class="btn-floating green darken-2 modal-trigger"
                             data-target="postAddModal">
                             <i class="material-icons">post_add</i>
                         </a>
@@ -202,19 +197,22 @@
 
                 <ul class="collection">
 
-                    <li class="collection-item bg-dark-1">
-                        <p>Hey, does anyone know if FAST is starting
-                            admissions for Robotics program?
-                        </p>
-                        <span class="title grey-text">Saqib Ali</span>
-                    </li>
 
-                    <li class="collection-item bg-dark-1">
-                        <p>Hey, does anyone know if FAST is starting
-                            admissions for Robotics program?
-                        </p>
-                        <span class="title grey-text">Saqib Ali</span>
-                    </li>
+                    <asp:Repeater runat="server" ID="posts">
+
+                        <ItemTemplate>
+
+                            <li class="collection-item bg-dark-1">
+                                <p>
+                                    <%#Eval("PostContent") %>
+                                </p>
+                                <span class="title grey-text"> @<%#Eval("Username") %> </span>
+                            </li>
+
+                        </ItemTemplate>
+
+                    </asp:Repeater>
+
 
                 </ul>
 
@@ -269,12 +267,13 @@
 
         </div>
         <div class="modal-footer bg-dark">
-            <asp:LinkButton runat="server"
-                ID="postAdd"
-                OnClick="postAdd_Click"
-                class="modal-close btn waves-effect white waves-green black-text">
-                POST <i class="material-icons left">send</i>
-            </asp:LinkButton>
+            
+
+            <asp:Button Text="SEND"
+                class="btn waves-effect white waves-green black-text"
+                runat="server"
+                ID="addPost"
+                onclick="addPost_Click"/>
         </div>
         </div>
 
