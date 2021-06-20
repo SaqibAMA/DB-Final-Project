@@ -698,6 +698,39 @@ BEGIN
 	
 END
 
+-- story review trigger
+
+CREATE TRIGGER leftReview
+ON Review
+AFTER INSERT
+AS
+
+	DECLARE @fullname VARCHAR(100)
+	DECLARE @uniname VARCHAR(100)
+	DECLARE @stdID INT
+
+	DECLARE @rID INT
+
+	
+	SELECT @rID = ReviewID
+	FROM inserted
+
+	SELECT @fullname = (Student.fName + ' ' + Student.lName),
+	@uniname = University.Name,
+	@stdID = Student.StudentID
+	FROM Review
+	JOIN Student
+	ON Student.StudentID = Review.StudentID
+	JOIN University
+	ON University.UniversityID = Review.UniversityID
+	WHERE Review.ReviewID = @rID
+
+
+	INSERT INTO Stories
+	VALUES
+	(@stdID, GETDATE(), @fullname + ' just left a review on ' + @uniname)
+
+
 -- load notifications
 CREATE PROCEDURE getNotifications
 @accID INT
