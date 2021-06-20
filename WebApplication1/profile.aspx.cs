@@ -15,12 +15,6 @@ namespace WebApplication1
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            if (Convert.ToString(Session["email"]).Length < 1)
-            {
-                Response.Redirect("index.aspx");
-            }
-
-
             updateInfo();
 
         }
@@ -45,13 +39,18 @@ namespace WebApplication1
             posts.DataBind();
 
 
-            if ( Session["type"].ToString() == "Student" )
+            int isStudent = dal.isStudent(ID);
+
+
+            if ( isStudent > 0 )
             {
 
                 dt = dal.getAppsForStd(ID);
 
                 recentApps.DataSource = dt;
                 recentApps.DataBind();
+
+                typeLabel.Text = "Student";
 
             }
             else
@@ -61,6 +60,8 @@ namespace WebApplication1
 
                 recentApps.DataSource = dt;
                 recentApps.DataBind();
+
+                typeLabel.Text = "University";
 
 
             }

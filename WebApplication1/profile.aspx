@@ -102,7 +102,9 @@
                             </asp:Label>
                         </h4>
                         <p class="join-date grey-text">
-                            <span class="chip green z-depth-2"><%=Session["type"] %></span> 
+                            <span class="chip green z-depth-2">
+                                    <asp:Label Text="0" runat="server" ID="typeLabel" />
+                            </span> 
                             <span class="chip green z-depth-2"> 
                                 <asp:Label Text="0" ID="postCount" runat="server" /> posts 
                             </span> 
@@ -175,6 +177,40 @@
 
 
                 </ul>
+
+                <br />
+
+                <a  id="applicationLink"
+                    target="_blank"
+                    class="btn green col s12 <%# (Session["accID"].ToString() == "University") ? 
+                            "hide" : 
+                            "" %> " style="border-radius: 0.5rem;" >APPLY</a>
+
+
+                <script type="text/javascript">
+
+                    const getUrlParameter = (sParam)=> {
+                        var sPageURL = window.location.search.substring(1),
+                            sURLVariables = sPageURL.split('&'),
+                            sParameterName,
+                            i;
+
+                        for (i = 0; i < sURLVariables.length; i++) {
+                            sParameterName = sURLVariables[i].split('=');
+
+                            if (sParameterName[0] === sParam) {
+                                return typeof sParameterName[1] === undefined ? true : decodeURIComponent(sParameterName[1]);
+                            }
+                        }
+                        return false;
+                    };
+
+                    $('#applicationLink').attr('href', 'apply.aspx?id='
+                        + getUrlParameter('id'));
+
+
+                </script>
+
 
             </div>
 
