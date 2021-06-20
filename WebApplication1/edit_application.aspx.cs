@@ -63,8 +63,9 @@ namespace WebApplication1
 
 
             DAL dal = new DAL();
-
             dal.updateMajor(appID, curr_maj_val);
+
+            Response.Redirect("dashboard.aspx");
 
 
         }

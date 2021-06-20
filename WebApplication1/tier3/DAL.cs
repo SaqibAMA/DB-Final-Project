@@ -409,7 +409,7 @@ namespace WebApplication1.tier3
             }
         }
         //returns list of PromotedUniversities
-        public static List<string> getPromotedUniversities()
+        public DataTable getPromotedUniversities()
         {
             DataTable dt = new DataTable();
             using (SqlConnection sqlCon = new SqlConnection(connection_str))
@@ -421,15 +421,8 @@ namespace WebApplication1.tier3
                 sqlCMD.ExecuteScalar();
                 SqlDataAdapter da = new SqlDataAdapter(sqlCMD);
                 da.Fill(dt);
-                List<string> pmtlist = new List<string>();
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    string temp;
-                    temp = Convert.ToString(dt.Rows[i]["Name"]);
-                    pmtlist.Add(temp);
-                }
-                sqlCon.Close();
-                return pmtlist;
+
+                return dt;
             }
         }
 
@@ -852,6 +845,28 @@ namespace WebApplication1.tier3
                 sqlCMD.CommandText = "dbo.getUniMajors";
                 sqlCMD.CommandType = CommandType.StoredProcedure;
                 sqlCMD.Parameters.AddWithValue("@uniID", uniID);
+                sqlCMD.ExecuteScalar();
+                sqlCon.Close();
+                SqlDataAdapter da = new SqlDataAdapter(sqlCMD);
+                da.Fill(dt);
+
+                return dt;
+            }
+
+        }
+
+
+        public DataTable getSuggestionsForStd(int accID)
+        {
+
+            DataTable dt = new DataTable();
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.getSuggestionsForStd";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@accID", accID);
                 sqlCMD.ExecuteScalar();
                 sqlCon.Close();
                 SqlDataAdapter da = new SqlDataAdapter(sqlCMD);

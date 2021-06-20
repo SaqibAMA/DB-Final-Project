@@ -267,24 +267,31 @@
 
                     <ul class="collection">
                         
-                        <li class="collection-item avatar bg-dark">
-                            <img
-                                src="assets/simple_cyan_jamya_logo.png"
-                                alt="University Logo"
-                                class="circle" draggable="false" />
-                            <span class="title">NUST</span>
-                            <p>Similar Programs</p>
-                        </li>
-                        
-                        <li class="collection-item avatar bg-dark">
-                            <img
-                                src="assets/simple_cyan_jamya_logo.png"
-                                alt="University Logo"
-                                class="circle" draggable="false" />
-                            <span class="title">LUMS</span>
-                            <p>Similar Programs</p>
-                        </li>
+                        <asp:Repeater ID="suggList" runat="server">
+                            
+                            <ItemTemplate>
 
+                                <li class="collection-item avatar bg-dark">
+                                    <img
+                                        src="assets/simple_cyan_jamya_logo.png"
+                                        alt="University Logo"
+                                        class="circle" draggable="false" />
+                                    <a href="profile.aspx?id=<%#Eval("UniversityID")%>"
+                                        target="_blank"
+                                        class="title">
+                                        <%#Eval("Name") %>
+                                    </a>
+                                    <p class="grey-text" style="font-size: 0.8rem;">
+                                        Because you applied for <%#Eval("MajorName") %>
+                                    </p>
+                                </li>
+
+
+                            </ItemTemplate>
+                        
+                        </asp:Repeater>
+
+                        
                         
                         <!--Promotions List-->
 

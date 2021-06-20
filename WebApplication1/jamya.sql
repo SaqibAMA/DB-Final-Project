@@ -705,6 +705,50 @@ END
 
 EXEC getPostsByID @accID = 1
 
+
+-- get suggestions for account
+
+EXEC getSuggestionsForStd @accID = 1
+
+CREATE PROCEDURE getSuggestionsForStd
+@accID INT
+AS
+BEGIN
+	SELECT	University.UniversityID, 
+			University.Name,
+			Major.MajorName,
+			Major.MajorID
+	FROM University
+	JOIN Programmes
+	ON Programmes.UniversityID = University.UniversityID
+	JOIN Major
+	ON Major.MajorID = Programmes.MajorID
+	WHERE Major.MajorID != 1 AND Major.MajorID IN 
+	(
+
+		SELECT Major.MajorID
+		FROM Application
+		JOIN Major
+		ON Major.MajorID = Application.MajID
+		WHERE StudentID = @accID AND MajorID != 1
+
+	)
+
+	EXCEPT
+
+	SELECT	University.UniversityID, 
+			University.Name, 
+			Major.MajorName,
+			Application.MajID
+	FROM Application
+	JOIN University
+	ON University.UniversityID = Application.UniversityID
+	JOIN Major
+	ON Major.MajorID = Application.MajID
+
+END
+
+
 --notification/stories trigger
 --sajawal applied for fast
 CREATE TRIGGER applyNews

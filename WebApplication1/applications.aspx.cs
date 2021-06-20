@@ -25,6 +25,9 @@ namespace WebApplication1
 
             loadApplications();
 
+            // load suggestions
+            loadSuggestions();
+
 
             // Loading data
             DAL dal = new DAL();
@@ -40,6 +43,18 @@ namespace WebApplication1
 
         }
 
+        public void loadSuggestions()
+        {
+
+            int accID = Convert.ToInt32(Session["accID"]);
+
+            DAL dal = new DAL();
+
+            DataTable dt = dal.getSuggestionsForStd( accID );
+            suggList.DataSource = dt;
+            suggList.DataBind();
+
+        }
 
         public void loadApplications()
         {
