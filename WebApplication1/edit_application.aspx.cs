@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using WebApplication1.tier3;
 
 namespace WebApplication1
 {
@@ -13,52 +14,38 @@ namespace WebApplication1
         protected void Page_Load(object sender, EventArgs e)
         {
 
-            // Display error if the student is not the one in the application
-            // Display error if the application does not exist
-
-            int applicationID = -1;
-
-            if (Request.QueryString["application_id"] == null)
+            // need to be logged in
+            if (Convert.ToString(Session["email"]).Length < 1)
             {
-                applicationID = -1;
-            }
-            else
-            {
-                applicationID = Int16.Parse(Request.QueryString["application_id"]);
+                Response.Redirect("index.aspx");
             }
 
-            if (applicationID == -1)
-            {
-                isValidApplication.Text = "0";
-            }
+
+            // Fills the form data
+            loadApplicationData();
+
 
         }
 
-        public class ApplicationData
+        public void loadApplicationData()
         {
 
-            public int stdID { get; set; }
-            public int uniID { get; set; }
-            public string date_applied { get; set; }
-            public string status { get; set; }
+
+            DAL dal = new DAL();
+
+            int usrID = Convert.ToInt32(Session["accID"]);
+
+            int appID = Convert.ToInt32(Request.QueryString["application_id"]);
+
+
+            stdName.Text = dal.getName(usrID);
+            uniName.Text = dal.getAppUniName(appID);
+            appliedDate.Text = dal.getAppDate(appID);
+            appStatus.Text = dal.getAppStatus(appID);
+
 
         }
 
-        [System.Web.Services.WebMethod]
-        public static ApplicationData getApplicationData(string application_id)
-        {
-
-            var app_details = new ApplicationData
-            {
-                stdID = 1,
-                uniID = 2,
-                date_applied = "12/01/2001",
-                status = "In Progress"
-            };
-
-            return app_details;
-
-        }
 
 
     }

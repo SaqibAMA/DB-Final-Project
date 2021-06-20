@@ -81,7 +81,7 @@ namespace WebApplication1.tier3
             {
                 sqlCon.Open();
                 SqlCommand sqlCMD = sqlCon.CreateCommand();
-                sqlCMD.CommandText = "dbo.getName";
+                sqlCMD.CommandText = "dbo.getStudentName";
                 sqlCMD.CommandType = CommandType.StoredProcedure;
                 sqlCMD.Parameters.AddWithValue("@accID", accID);
                 sqlCMD.Parameters.Add("@fullname", SqlDbType.NVarChar, 50);
@@ -729,6 +729,77 @@ namespace WebApplication1.tier3
                 sqlCMD.ExecuteScalar();
                 sqlCon.Close();
             }
+        }
+
+
+        // For application data retrieval
+        public String getAppUniName(int appID)
+        {
+
+            string name = "User";
+
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.getAppUniName";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@appID", appID);
+                sqlCMD.Parameters.Add("@name", SqlDbType.NVarChar, 50);
+                sqlCMD.Parameters["@name"].Direction = ParameterDirection.Output;
+                sqlCMD.ExecuteScalar();
+                name = sqlCMD.Parameters["@name"].Value.ToString();
+                sqlCon.Close();
+            }
+
+            return name;
+
+        }
+
+        public String getAppDate(int appID)
+        {
+
+            string name = "User";
+
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.getAppDate";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@appID", appID);
+                sqlCMD.Parameters.Add("@date", SqlDbType.Date);
+                sqlCMD.Parameters["@date"].Direction = ParameterDirection.Output;
+                sqlCMD.ExecuteScalar();
+                name = sqlCMD.Parameters["@date"].Value.ToString();
+                sqlCon.Close();
+            }
+
+            return name;
+
+        }
+
+        public String getAppStatus(int appID)
+        {
+
+            string status = "User";
+
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.getAppStatus";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@appID", appID);
+                sqlCMD.Parameters.Add("@status", SqlDbType.NVarChar, 50);
+                sqlCMD.Parameters["@status"].Direction = ParameterDirection.Output;
+                sqlCMD.ExecuteScalar();
+                status = sqlCMD.Parameters["@status"].Value.ToString();
+                sqlCon.Close();
+            }
+
+            return status;
+
         }
 
 

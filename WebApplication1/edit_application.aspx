@@ -78,38 +78,41 @@
                         </div>
 
                         <div class="row col s12 input-field">
-                            <input type="text" 
-                                name="studentName" 
-                                value="Saqib Ali" 
+                            
+                            <asp:TextBox
+                                runat="server"
+                                ID="stdName"
                                 disabled="disabled"
-                                id="stdName"/>
+                                ></asp:TextBox>
+
                             <label for="stdName">STUDENT NAME</label>
+
                         </div>
 
                         <div class="row col s12  input-field">
-                            <input type="text" 
-                                name="studentName" 
-                                value="National University of Computer and Emerging Sciences" 
+                            <asp:TextBox
+                                runat="server"
+                                ID="uniName"
                                 disabled="disabled"
-                                id="uniName"/>
+                                ></asp:TextBox>
                             <label for="uniName">UNIVERSITY NAME</label>
                         </div>
 
                         <div class="row col s12 input-field">
-                            <input type="text" 
-                                name="studentName" 
-                                value="12/01/2001" 
+                            <asp:TextBox
+                                runat="server"
+                                ID="appliedDate"
                                 disabled="disabled"
-                                id="dateApplied"/>
+                                ></asp:TextBox>
                             <label for="dateApplied">DATE OF APPLICATION</label>
                         </div>
                         
                         <div class="row col s12 input-field">
-                            <input type="text" 
-                                name="studentName" 
-                                value="In Progress" 
+                            <asp:TextBox
+                                runat="server"
+                                ID="appStatus"
                                 disabled="disabled"
-                                id="appStatus"/>
+                                ></asp:TextBox>
                             <label for="appStatus">APPLICATION STATUS</label>
                         </div>
 

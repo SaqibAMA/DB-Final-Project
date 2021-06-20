@@ -181,7 +181,7 @@ BEGIN
 set @count=(SELECT COUNT(*) FROM dbo.University where UniversityID=@accID)
 END
 --getNameByID
-CREATE PROCEDURE getName
+ALTER PROCEDURE getName
 @accId INT,
 @fullname VARCHAR(50) OUTPUT
 AS
@@ -203,11 +203,80 @@ SELECT @fname = Student.fName, @lname = Student.lName FROM Student WHERE Student
 set @fullname = @fname + ' '+@lname 
 end
 
+PRINT 'isStd'
+PRINT @isStd
+
 if(@isUni > 0)
 begin
 SELECT @fname=University.Name FROM University WHERE University.UniversityID= @accId 
 set @fullname = @fname
 end
+
+
+PRINT 'isUni'
+PRINT @isStd
+
+END
+
+
+
+-- Get student name
+
+CREATE PROCEDURE getStudentName
+@accID INT,
+@fullname VARCHAR(50) OUTPUT
+AS
+BEGIN
+
+	SELECT @fullname = (fName + ' ' + lName)
+	FROM Student
+	WHERE Student.StudentID = @accID
+
+END
+
+-- Get App Uni name
+-- returns the name of the university where the application has been
+-- submitted
+CREATE PROCEDURE getAppUniName
+@appID INT,
+@name VARCHAR(100) OUTPUT
+AS
+BEGIN
+
+	
+	SELECT @name = University.Name
+	FROM Application
+	JOIN University ON
+	University.UniversityID = Application.UniversityID
+	WHERE ApplicationID = @appID
+
+END
+
+-- get application apply date
+CREATE PROCEDURE getAppDate
+@appID INT,
+@date DATE OUTPUT
+AS
+BEGIN
+
+	SELECT @date = DateApplied
+	FROM Application
+	WHERE ApplicationID = @appID
+
+END
+
+
+-- get application status
+ALTER PROCEDURE getAppStatus
+@appID INT,
+@status VARCHAR(50) OUTPUT
+AS
+BEGIN
+
+	SELECT @status = Status
+	FROM Application
+	WHERE ApplicationID = @appID
+
 END
 
 

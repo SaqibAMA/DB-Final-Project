@@ -24,6 +24,42 @@ namespace WebApplication1
         protected global::System.Web.UI.HtmlControls.HtmlForm editApplicationForm;
 
         /// <summary>
+        /// stdName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox stdName;
+
+        /// <summary>
+        /// uniName control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox uniName;
+
+        /// <summary>
+        /// appliedDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox appliedDate;
+
+        /// <summary>
+        /// appStatus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox appStatus;
+
+        /// <summary>
         /// isValidApplication control.
         /// </summary>
         /// <remarks>

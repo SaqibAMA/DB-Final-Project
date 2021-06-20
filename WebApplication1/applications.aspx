@@ -44,9 +44,10 @@
 <body class="bg-dark">
     <form id="viewApplicationForm" runat="server" method="get">
     
-        <ul id="slide-out" class="bg-dark sidenav sidenav-fixed">
+                <ul id="slide-out" class="sidenav sidenav-fixed bg-dark">
             
             <!--Replace this with Username-->
+
             <li> 
                 <div class="user-view">
                     <div class="background">
@@ -61,47 +62,98 @@
                             alt="DP" />
                     </a>
                     <a href="#">
-                        <span class="white-text name">
-                            Saqib Ali
-                        </span>
-                        <span class="white-text email">
-                            saqib@gmail.com
-                        </span>
+                        <asp:Label CssClass="white-text name" 
+                            runat="server"
+                            Text="Username"
+                            ID="username">
+                        </asp:Label>
+
+                        
+                        <asp:Label CssClass="white-text email" 
+                            runat="server"
+                            Text="user@email.com"
+                            ID="useremail">
+                        </asp:Label>
+
+                    
                     </a>
                 </div>
             </li>
-
-
             <li>
-                <a href="dashboard.aspx" class="white-text">
-                    <i class="white-text material-icons">person</i>
-                    DASHBOARD
+                <a href="profile.aspx?id=<%=Session["accID"]%>" class="white-text stdOption">
+                    <i class="material-icons white-text">person</i>
+                    PROFILE
                  </a>
             </li>
             <li>
-                <a href="search.aspx" class="white-text">
-                    <i class="white-text material-icons">search</i>
+                <a href="search.aspx" class="white-text stdOption">
+                    <i class="material-icons white-text">search</i>
                     SEARCH UNIVERSITIES
                  </a>
             </li>
             <li>
-                <a href="#" class="white-text">
-                    <i class="white-text material-icons">notifications</i>
-                    NOTIFICATIONS
+                <a href="#" class="white-text uniOption">
+                    <i class="material-icons white-text">notifications</i>
+                    SEND NOTIFICATION
                  </a>
             </li>
             <li>
-                <a href="#" class="white-text">
-                    <i class="white-text material-icons">chat</i>
+                <a href="chat.aspx" class="white-text">
+                    <i class="material-icons white-text">chat</i>
                     CHAT
                  </a>
             </li>
             <li>
+                <a href="promote.aspx" class="white-text uniOption">
+                    <i class="material-icons white-text">military_tech</i>
+                    PROMOTE
+                 </a>
+            </li>
+            <li>
                 <a href="contact.aspx" class="white-text">
-                    <i class="white-text material-icons">help</i>
+                    <i class="material-icons white-text">help</i>
                     HELP
                  </a>
             </li>
+            <li>
+                <a href="logout.aspx" class="white-text">
+                    <i class="material-icons white-text">logout</i>
+                    LOGOUT
+                 </a>
+            </li>
+
+
+
+            <script type="text/javascript">
+
+
+
+                $(document).ready(() => {
+
+                    const Student = 1;
+                    const University = 0;
+
+                    var isStudent = <%=Session["type"]%>;
+
+
+                    if (isStudent) {
+
+                        $('.uniOption').addClass('hide');
+
+                    }
+                    else {
+
+                        $('.stdOption').addClass('hide');
+
+                    }
+
+
+                });
+
+
+
+            </script>
+
 
         </ul>
 
@@ -158,7 +210,9 @@
                             </div>
 
                             <div class="col s2">
-                                <asp:LinkButton OnClick="editApplication_Click"
+                                <asp:LinkButton
+                                    OnClick="editApplication_Click"
+                                    data=<%#Eval("ApplicationID") %>
                                     runat="server">
                                     <i class="material-icons">edit</i>
                                 </asp:LinkButton>

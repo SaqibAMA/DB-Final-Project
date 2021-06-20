@@ -20,11 +20,23 @@ namespace WebApplication1
                 Response.Redirect("index.aspx");
             }
 
+
             // load applications
 
             loadApplications();
 
 
+            // Loading data
+            DAL dal = new DAL();
+
+            String uname = dal.getUsername(Convert.ToInt32(Session["accID"]));
+            String uemail = Session["email"].ToString();
+
+            Label unamelabel = (Label)FindControl("username");
+            Label uemaillabel = (Label)FindControl("useremail");
+
+            unamelabel.Text = "@" + uname;
+            uemaillabel.Text = uemail;
 
         }
 
@@ -46,6 +58,9 @@ namespace WebApplication1
         public void editApplication_Click(object sender, EventArgs e)
         {
 
+
+            int applicationID = Convert.ToInt32((sender as LinkButton).Attributes["data"]);
+            Response.Redirect("edit_application.aspx?application_id=" + applicationID);
 
 
         }
