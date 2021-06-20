@@ -46,6 +46,21 @@ namespace WebApplication1
             searchResults.DataSource = dt;
             searchResults.DataBind();
         }
+
+        protected void applyBtn_Click(object sender, EventArgs e)
+        {
+
+
+
+            DAL dal = new DAL();
+            
+            int applicantID = Convert.ToInt32(Session["accID"]);
+            int uniID = Convert.ToInt32((sender as LinkButton).Attributes["data"]);
+
+            dal.applyToUni(applicantID, uniID);
+
+
+        }
     }
 
 }

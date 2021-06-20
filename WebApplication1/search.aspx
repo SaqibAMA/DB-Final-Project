@@ -120,10 +120,13 @@
                                     </div>
                                     <div class="col s2 center-align">
                             
-                                        <a href="apply.aspx?id=<%#Eval("UniversityID")%>  " target="_blank"
-                                        class = "btn waves-effect waves-light green"
-                                        id="uni-btn-<%#Eval("UniversityID")%>  "
-                                        >APPLY</a>
+                                        <asp:LinkButton
+                                            runat="server" 
+                                            OnClick="applyBtn_Click"
+                                            CssClass="btn waves-effect waves-light green"
+                                            data=<%#Eval("UniversityID")%>>
+                                            APPLY
+                                        </asp:LinkButton>
 
                                     </div>
                                 </div>
