@@ -15,6 +15,23 @@ namespace WebApplication1
         protected void Page_Load(object sender, EventArgs e)
         {
 
+
+
+            if (Session["accID"] == null)
+                Response.Redirect("index.aspx");
+
+            int usrID = Convert.ToInt32 (Session["accID"]);
+
+            DAL dal = new DAL();
+
+
+            if ( dal.isUniversity(usrID) > 0)
+            {
+
+                applyBtn.Visible = false;
+
+            }
+
             updateInfo();
 
         }
@@ -68,6 +85,21 @@ namespace WebApplication1
 
         }
 
+        protected void applyBtn_Click(object sender, EventArgs e)
+        {
 
+
+            DAL dal = new DAL();
+
+            int applicantID = Convert.ToInt32(Session["accID"]);
+            int uniID = Convert.ToInt32(
+                Request.QueryString["id"]);
+
+
+            dal.applyToUni(applicantID, uniID);
+
+
+
+        }
     }
 }

@@ -165,7 +165,10 @@
                         
                                 <img src="assets/simple_cyan_jamya_logo.png"
                                     class="circle"/>
-                                <span class="title"> <%#Eval("Name") %></span>
+                                <span class="title"> 
+                                    <a href="profile.aspx?id=<%#Eval("ID") %>"> <%#Eval("Name") %>
+                                    </a>
+                                </span>
                                 <p class="grey-text"> Applied for <%#Eval("MajorName") %> </p>
 
                             </li>
@@ -180,11 +183,16 @@
 
                 <br />
 
-                <a  id="applicationLink"
-                    target="_blank"
-                    class="btn green col s12 <%# (Session["accID"].ToString() == "University") ? 
-                            "hide" : 
-                            "" %> " style="border-radius: 0.5rem;" >APPLY</a>
+
+                <asp:LinkButton 
+                    ID="applyBtn"
+                    OnClick="applyBtn_Click"
+                    runat="server"
+                    CssClass="btn green col s12"
+                    style="border-radius: 0.5rem"
+                    >
+                    APPLY
+                </asp:LinkButton>
 
 
                 <script type="text/javascript">
@@ -205,9 +213,16 @@
                         return false;
                     };
 
-                    $('#applicationLink').attr('href', 'apply.aspx?id='
-                        + getUrlParameter('id'));
+                    if ($('#typeLabel').html() == "University") {
 
+                        $('#applyBtn').attr('data', getUrlParameter('id'));
+
+                    }
+                    else {
+
+                        $('#applyBtn').addClass('hide');
+
+                    }
 
                 </script>
 

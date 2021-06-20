@@ -37,6 +37,8 @@ CREATE TABLE [Application](
 	DateApplied		DATE NOT NULL CONSTRAINT DATE_CONS CHECK (DateApplied<=GETDATE()),
 	[Status]		VARCHAR(10) NOT NULL check([Status] in ('Accepted', 'Rejected', 'Incomplete','Withdrawn')),
 	)
+
+
 CREATE TABLE Promotions(
 pID INT Primary KEY IDENTITY(1,1),
 UniversityID INT CONSTRAINT unii_id FOREIGN KEY REFERENCES University(UniversityID),
@@ -71,7 +73,7 @@ Content VARCHAR(200) NOT NULL,
 DROP TABLE [Messages]
 CREATE TABLE [Messages](
 	MessageID		INT PRIMARY KEY NOT NULL IDENTITY (1,1),
-	StudentID		INT NOT NULL CONSTRAINT msg_by_which_std FOREIGN KEY REFERENCES Student(StudentID) ,
+	StudentID		INT NOT NULL CONSTRAINT msg_by_which_acc FOREIGN KEY REFERENCES Account(AccountID) ,
 	SentTime		DATE,
 	MessageText		VARCHAR(1000),	
 )
@@ -302,7 +304,7 @@ CREATE PROCEDURE getApplicationsForStd
 @accID INT
 AS
 BEGIN
-SELECT [Application].ApplicationID,University.Name,Major.MajorName FROM [Application]
+SELECT [Application].ApplicationID, University.UniversityID as [ID], University.Name,Major.MajorName FROM [Application]
 JOIN
 	Student
 ON
@@ -324,13 +326,14 @@ END
 EXEC getApplicationsForStd @accID = 6
 
 --get Applications FOr University
-ALTER PROCEDURE getApplicationsForUni
+CREATE PROCEDURE getApplicationsForUni
 @accID INT
 AS
 BEGIN
 	SELECT [Application].ApplicationID,
 	Student.StudentID,
 	(Student.fName + ' ' + Student.lName) as [Name],
+	Student.StudentID as [ID],
 	Major.MajorName 
 	FROM [Application]
 	JOIN
@@ -397,7 +400,7 @@ BEGIN
 	FROM Application
 	WHERE StudentID = @accID 
 	AND UniversityID = @uniID
-	AND MajID != 1
+	AND MajID = 1
 
 	IF (@appExists = 0)
 	BEGIN
@@ -409,6 +412,7 @@ BEGIN
 	END
 
 END
+
 
 
 
