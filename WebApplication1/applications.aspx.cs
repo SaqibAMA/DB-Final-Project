@@ -28,6 +28,9 @@ namespace WebApplication1
             // load suggestions
             loadSuggestions();
 
+            // load promotions
+            loadPromoted();
+
 
             // Loading data
             DAL dal = new DAL();
@@ -40,6 +43,17 @@ namespace WebApplication1
 
             unamelabel.Text = "@" + uname;
             uemaillabel.Text = uemail;
+
+        }
+
+        public void loadPromoted()
+        {
+
+            DAL dal = new DAL();
+
+            DataTable dt = dal.getPromotedUniversities();
+            promolist.DataSource = dt;
+            promolist.DataBind();
 
         }
 

@@ -39,6 +39,8 @@ CREATE TABLE [Application](
 	)
 
 
+
+
 CREATE TABLE Promotions(
 pID INT Primary KEY IDENTITY(1,1),
 UniversityID INT CONSTRAINT unii_id FOREIGN KEY REFERENCES University(UniversityID),
@@ -392,26 +394,38 @@ END
 --will return list of universities
 CREATE PROCEDURE getPromotedUniversities 
 AS 
-SELECT University.Name 
+SELECT University.UniversityID, University.Name 
 FROM 
 	Promotions JOIN University 
 ON 
 	Promotions.UniversityID = University.UniversityID 
 WHERE 
 	endDate > GETDATE()
+
+
+EXEC getPromotedUniversities
+
+SELECT * FROM Review
+
 --getReviewsByUniID
 CREATE PROCEDURE getReviewsByUniID
 @uID INT
 AS
 BEGIN
-SELECT ReviewText from Review 
+SELECT ReviewText, Student.fName from Review 
 JOIN
 	University
 ON
 	Review.UniversityID = University.UniversityID
+JOIN 
+	Student
+ON
+	Student.StudentID = Review.StudentID
 WHERE 
 	University.UniversityID = @uID
+
 END
+
 --getApplicationsForStd
 CREATE PROCEDURE getApplicationsForStd
 @accID INT
@@ -648,6 +662,39 @@ BEGIN
 	SELECT *
 	FROM University
 	WHERE University.Name LIKE '%' + @query + '%';
+	
+END
+
+EXEC getReviewsByUniID @uID = 4
+
+-- adding review
+CREATE PROCEDURE addReview
+@uniID INT,
+@accID INT,
+@review VARCHAR(200)
+AS
+BEGIN
+	
+	DECLARE @count INT;
+	SELECT @count = COUNT (*)
+	FROM Review
+	WHERE UniversityID = @uniID
+	AND StudentID = @accID
+
+	IF (@count = 0)
+	BEGIN
+		INSERT INTO Review
+		VALUES
+		(@uniID, @accID, @review)
+	END
+	ELSE
+	BEGIN
+		UPDATE Review
+		SET
+		ReviewText = @review
+		WHERE UniversityID = @uniID
+		AND StudentID = @accID
+	END
 	
 END
 
@@ -888,3 +935,5 @@ INSERT INTO Stories
 VALUES
 (1, GETDATE(), 'FAST University has extended its deadline!'),
 (1, GETDATE(), 'NUST University has started their admissions!')
+
+

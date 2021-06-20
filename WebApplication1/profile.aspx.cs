@@ -29,10 +29,43 @@ namespace WebApplication1
             {
 
                 applyBtn.Visible = false;
+                reviewBtn.Visible = false;
 
             }
 
+            int prfID = Convert.ToInt32(Request.QueryString["id"]);
+
+            if (dal.isStudent(prfID) > 0)
+            {
+
+                applyBtn.Visible = false;
+                reviewBtn.Visible = false;
+
+            }
+            else
+            {
+
+                loadReviews();
+
+            }
+
+
+
             updateInfo();
+
+        }
+
+
+        public void loadReviews()
+        {
+
+            DAL dal = new DAL();
+
+            DataTable dt = dal.getReviewsByUniID(
+                Convert.ToInt32(Request.QueryString["id"]));
+
+            reviewlist.DataSource = dt;
+            reviewlist.DataBind();
 
         }
 
@@ -102,7 +135,22 @@ namespace WebApplication1
 
         }
 
+        protected void addReview_Click(object sender, EventArgs e)
+        {
 
+            DAL dal = new DAL();
+            int stdID = Convert.ToInt32(Session["accID"]);
+            int uniID = Convert.ToInt32(
+                Request.QueryString["id"]);
 
+            string review = reviewText.Text.Trim().ToString();
+
+            dal.addReview(
+                stdID, uniID, review
+                );
+
+            loadReviews();
+
+        }
     }
 }

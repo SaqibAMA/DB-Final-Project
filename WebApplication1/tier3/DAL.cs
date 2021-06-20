@@ -357,6 +357,25 @@ namespace WebApplication1.tier3
             }
         }
 
+
+        // adds a review
+        public void addReview(int accID, int uniID, string review)
+        {
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.addReview";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@uniID", uniID);
+                sqlCMD.Parameters.AddWithValue("@accID", accID);
+                sqlCMD.Parameters.AddWithValue("@review", review);
+                sqlCMD.ExecuteScalar();
+                sqlCon.Close();
+            }
+        }
+
+
         //
         //returns list of Programs University offers
         public static List<string> getProgramsForUniversity(int uniID)
@@ -384,7 +403,7 @@ namespace WebApplication1.tier3
             }
         }
         //returns list of ReviewsAbtUniversity
-        public static List<string> getReviewsByUniID(int uniID)
+        public DataTable getReviewsByUniID(int uniID)
         {
             DataTable dt = new DataTable();
             using (SqlConnection sqlCon = new SqlConnection(connection_str))
@@ -397,15 +416,8 @@ namespace WebApplication1.tier3
                 sqlCMD.ExecuteScalar();
                 SqlDataAdapter da = new SqlDataAdapter(sqlCMD);
                 da.Fill(dt);
-                List<string> reviews = new List<string>();
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    string temp;
-                    temp = Convert.ToString(dt.Rows[i]["ReviewText"]);
-                    reviews.Add(temp);
-                }
-                sqlCon.Close();
-                return reviews;
+
+                return dt;
             }
         }
         //returns list of PromotedUniversities

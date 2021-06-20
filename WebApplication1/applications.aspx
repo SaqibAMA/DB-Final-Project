@@ -292,27 +292,30 @@
                         </asp:Repeater>
 
                         
-                        
-                        <!--Promotions List-->
+                        <!--Promoted-->
+                        <asp:Repeater ID="promolist" runat="server">
+                            
+                            <ItemTemplate>
+
+                                <li class="collection-item avatar bg-dark">
+                                    <img
+                                        src="assets/simple_cyan_jamya_logo.png"
+                                        alt="University Logo"
+                                        class="circle" draggable="false" />
+                                    <a href="profile.aspx?id=<%#Eval("UniversityID")%>"
+                                        target="_blank"
+                                        class="title">
+                                        <%#Eval("Name") %>
+                                    </a>
+                                    <p class="grey-text" style="font-size: 0.8rem;">
+                                        Promoted
+                                    </p>
+                                </li>
 
 
-                        <li class="collection-item avatar bg-dark">
-                            <img
-                                src="assets/simple_cyan_jamya_logo.png"
-                                alt="University Logo"
-                                class="circle" draggable="false" />
-                            <span class="title">NUST</span>
-                            <p class="grey-text">Sponsored</p>
-                        </li>
+                            </ItemTemplate>
                         
-                        <li class="collection-item avatar bg-dark">
-                            <img
-                                src="assets/simple_cyan_jamya_logo.png"
-                                alt="University Logo"
-                                class="circle" draggable="false" />
-                            <span class="title">LUMS</span>
-                            <p class="grey-text">Sponsored</p>
-                        </li>
+                        </asp:Repeater>
 
 
                     </ul>

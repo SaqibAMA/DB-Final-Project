@@ -143,6 +143,40 @@
 
                     </ul>
 
+
+                  <ul class="collection with-header">
+
+                      
+
+                        <asp:Repeater
+                            runat="server"
+                            ID="reviewlist">
+
+                            <HeaderTemplate>
+                                <li class="collection-header">
+                                    <h5>Reviews</h5>
+                                </li>
+                            </HeaderTemplate>
+
+                            <ItemTemplate>
+
+                                <li class="collection-item">
+                                    <p> <%#Eval("ReviewText") %></p>
+                                    <p class="grey-text">by <%#Eval("fName") %></p>
+                                </li>
+
+                            </ItemTemplate>
+
+                        </asp:Repeater>
+
+
+                        
+
+
+                    </ul>
+
+
+
                 </div>
 
             </div>
@@ -213,16 +247,8 @@
                         return false;
                     };
 
-                    if ($('#typeLabel').html() == "University") {
 
-                        $('#applyBtn').attr('data', getUrlParameter('id'));
-
-                    }
-                    else {
-
-                        $('#applyBtn').addClass('hide');
-
-                    }
+                   
 
                 </script>
 
@@ -231,6 +257,62 @@
 
 
         </div>
+
+
+
+        <!--Floating button to add review-->
+
+        <div class="fixed-action-btn review-btn">
+            <asp:LinkButton
+                runat="server"
+                ID="reviewBtn"
+                CssClass="btn-floating btn-large green modal-trigger" 
+                data-target="reviewModal">
+                <i class="material-icons large">mode_edit</i>
+            </asp:LinkButton>
+        </div>
+
+
+          <!-- Modal Structure -->
+        <!--Modals-->
+        <div id="reviewModal" class="modal bg-dark">
+        <div class="modal-content">
+            
+            <h4>Have something to share?</h4>
+            
+            <p>University reviews are a great way to let people know 
+                about your experiences.
+            </p>
+            
+
+        <asp:TextBox
+            runat="server"
+            ID="reviewText"
+            TextMode="MultiLine"
+            placeholder="Share your experience..."
+            Rows="10"
+            class="materialize-textarea txt-field white-text"
+            maxlength="200"
+        ></asp:TextBox>
+
+        </div>
+        <div class="modal-footer bg-dark">
+            <asp:LinkButton runat="server"
+                ID="addReview"
+                OnClick="addReview_Click"
+                class="modal-close btn waves-effect white waves-green black-text">
+                POST <i class="material-icons left">send</i>
+            </asp:LinkButton>
+        </div>
+        </div>
+
+        <script type="text/javascript">
+
+            $('.fixed-action-btn').floatingActionButton();
+            $('.modal').modal();
+
+        </script>
+
 
     </form>
 </body>
