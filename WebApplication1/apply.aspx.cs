@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using WebApplication1.tier3;
 
 namespace WebApplication1
 {
@@ -12,13 +13,19 @@ namespace WebApplication1
         protected void Page_Load(object sender, EventArgs e)
         {
 
+            // Not available for logged out
+            if (Convert.ToString(Session["email"]).Length < 1)
+            {
+                Response.Redirect("index.aspx");
+            }
+
             // Handling null params
 
             int parsedID = -1;
 
             if (Request.QueryString["id"] == null)
             {
-                parsedID = -1;
+                closeWindow();
             }
             else
             {
@@ -33,17 +40,12 @@ namespace WebApplication1
         protected void applyToUniversity(int id)
         {
 
-            // Considering edge case
-            if (id == -1)
-            {
-                closeWindow();
-            }
+            int applicantID = Convert.ToInt32(Session["accID"]);
 
+            DAL dal = new DAL();
 
-            // Add the application Logic here
-            //
-
-            Response.Write("Applying to university " + id);
+            // Adding application
+            dal.applyToUni(applicantID, id);
 
             // After apply function is done
             closeWindow();

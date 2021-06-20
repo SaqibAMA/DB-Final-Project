@@ -383,6 +383,35 @@ ON
 WHERE 
 	Programmes.UniversityID = @uniID
 END
+
+-- apply to university
+CREATE PROCEDURE applyToUni
+@accID INT,
+@uniID INT
+AS
+BEGIN
+	
+	DECLARE @appExists INT
+
+	SELECT @appExists = COUNT(*)
+	FROM Application
+	WHERE StudentID = @accID 
+	AND UniversityID = @uniID
+	AND MajID != 1
+
+	IF (@appExists = 0)
+	BEGIN
+		
+		INSERT INTO Application
+		VALUES
+		( @accID, @uniID, 1, GETDATE(), 'Incomplete' )
+
+	END
+
+END
+
+
+
 --deleteApplicationByApplicationID
 CREATE PROCEDURE deleteApplication
 @applicationID INT

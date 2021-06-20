@@ -720,6 +720,25 @@ namespace WebApplication1.tier3
 
         }
 
+
+
+        // Apply to university
+        public void applyToUni(int accID, int uniID)
+        {
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.applyToUni";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@accID", accID);
+                sqlCMD.Parameters.AddWithValue("@uniID", uniID);
+                sqlCMD.ExecuteScalar();
+                sqlCon.Close();
+            }
+        }
+
+
         //for messages creating another datatype
 
         public DataTable loadMessages()
