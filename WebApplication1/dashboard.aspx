@@ -262,9 +262,13 @@
                                     <%#Eval("PostContent") %>
                                 </p>
                                 <span class="title grey-text"> @<%#Eval("Username") %> </span>
-                                <a href="delete_post.aspx?post_id=<%#Eval("PostID")%> " target="_blank">
-                                    <i class="material-icons right">delete</i>
-                                </a>
+                                    
+                                    <asp:LinkButton
+                                        runat="server"
+                                        OnClick="deletePost_Click"
+                                        data=<%#Eval("PostID")%>>
+                                            <i class="material-icons right">delete</i>
+                                    </asp:LinkButton>
 
                             </li>
 

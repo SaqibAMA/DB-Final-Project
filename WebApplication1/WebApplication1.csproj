@@ -206,7 +206,6 @@
     <Content Include="Account\VerifyPhoneNumber.aspx" />
     <Content Include="Account\Web.config" />
     <Content Include="applications.aspx" />
-    <Content Include="apply.aspx" />
     <Content Include="assets\bg.jpg" />
     <Content Include="assets\form-bg.jpg" />
     <Content Include="assets\icons\application_icon.png" />
@@ -427,13 +426,6 @@
     </Compile>
     <Compile Include="applications.aspx.designer.cs">
       <DependentUpon>applications.aspx</DependentUpon>
-    </Compile>
-    <Compile Include="apply.aspx.cs">
-      <DependentUpon>apply.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="apply.aspx.designer.cs">
-      <DependentUpon>apply.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />

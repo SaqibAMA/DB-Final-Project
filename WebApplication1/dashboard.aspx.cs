@@ -105,5 +105,17 @@ namespace WebApplication1
             loadStories();
 
         }
+
+        protected void deletePost_Click(object sender, EventArgs e)
+        {
+
+            DAL dal = new DAL();
+
+            int postID = Convert.ToInt32((sender as LinkButton).Attributes["data"]);
+            dal.deletePost(postID);
+
+            loadPosts();
+
+        }
     }
 }
