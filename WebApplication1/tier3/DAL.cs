@@ -432,15 +432,14 @@ namespace WebApplication1.tier3
                 return pmtlist;
             }
         }
-        //Student Applied Application list
-        public class stdAppstype
+
+
+
+        // get all the applications for the student
+
+        public DataTable getApplicationsForStd(int stdID)
         {
-            public int appID { get; set; }
-            public string uniName { get; set; }
-            public string Major { get; set; }
-        }
-        public static List<stdAppstype> getApplicationsForStd(int stdID)
-        {
+
             DataTable dt = new DataTable();
             using (SqlConnection sqlCon = new SqlConnection(connection_str))
             {
@@ -452,19 +451,13 @@ namespace WebApplication1.tier3
                 sqlCMD.ExecuteScalar();
                 SqlDataAdapter da = new SqlDataAdapter(sqlCMD);
                 da.Fill(dt);
-                List<stdAppstype> applist = new List<stdAppstype>();
-                for (int i = 0; i < dt.Rows.Count; i++)
-                {
-                    stdAppstype temp = new stdAppstype();
-                    temp.appID = Convert.ToInt32(dt.Rows[i]["ApplicationID"]);
-                    temp.uniName = Convert.ToString(dt.Rows[i]["Name"]);
-                    temp.Major = Convert.ToString(dt.Rows[i]["MajorName"]);
-                    applist.Add(temp);
-                }
-                sqlCon.Close();
-                return applist;
+
+                return dt;
+
             }
         }
+
+
         //returns list of Applications FOR UniID
         public class UniAppstype
         {

@@ -145,75 +145,42 @@
             <ul class="row application-tab" id="sortable">
 
 
-                <li class="col s12 row application valign-wrapper bg-dark-1">
 
-                    <div class="col s8">
-                        Lahore University of Management Sciences
-                    </div>
+                <asp:Repeater runat="server" ID="applist">
 
-                    <div class="col s2">
-                        <asp:LinkButton OnClick="editApplication_Click"
-                            runat="server">
-                            <i class="material-icons">edit</i>
-                        </asp:LinkButton>
-                    </div>
 
-                    <div class="col s2">
-                       <asp:LinkButton OnClick="deleteApplication_Click"
-                            runat="server">
-                            <i class="material-icons">delete</i>
-                        </asp:LinkButton>
-                    </div>
+                    <ItemTemplate>
 
-                </li>
+                       <li class="col s12 row application valign-wrapper bg-dark-1">
 
-               <li class="col s12 row application valign-wrapper bg-dark-1">
+                            <div class="col s8">
+                                <%#Eval("Name") %> - <span class="grey-text"><%#Eval("MajorName") %></span> 
+                            </div>
 
-                    <div class="col s8">
-                        FAST-NUCES
-                    </div>
+                            <div class="col s2">
+                                <asp:LinkButton OnClick="editApplication_Click"
+                                    runat="server">
+                                    <i class="material-icons">edit</i>
+                                </asp:LinkButton>
+                            </div>
 
-                    <div class="col s2">
-                        <i class="material-icons">edit</i>
-                    </div>
+                            <div class="col s2">
+                               <asp:LinkButton OnClick="deleteApplication_Click"
+                                    runat="server" data=<%#Eval("ApplicationID") %> >
+                                    <i class="material-icons">delete</i>
+                                </asp:LinkButton>
+                            </div>
 
-                    <div class="col s2">
-                        <i class="material-icons">delete</i>
-                    </div>
+                        </li>
 
-                </li>
+                    </ItemTemplate>
 
-               <li class="col s12 row application valign-wrapper bg-dark-1">
 
-                    <div class="col s8">
-                        NUST
-                    </div>
+                </asp:Repeater>
 
-                    <div class="col s2">
-                        <i class="material-icons">edit</i>
-                    </div>
 
-                    <div class="col s2">
-                        <i class="material-icons">delete</i>
-                    </div>
 
-                </li>
 
-               <li class="col s12 row application valign-wrapper bg-dark-1">
-
-                    <div class="col s8">
-                        Karachi University
-                    </div>
-
-                    <div class="col s2">
-                        <i class="material-icons">edit</i>
-                    </div>
-
-                    <div class="col s2">
-                        <i class="material-icons">delete</i>
-                    </div>
-
-                </li>
 
 
             </ul>
