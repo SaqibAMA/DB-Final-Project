@@ -731,6 +731,23 @@ namespace WebApplication1.tier3
             }
         }
 
+        public void updateMajor(int appID, int majID)
+        {
+
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.updateMajor";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@appID", appID);
+                sqlCMD.Parameters.AddWithValue("@majID", majID);
+                sqlCMD.ExecuteScalar();
+                sqlCon.Close();
+            }
+
+        }
+
 
         // For application data retrieval
         public String getAppUniName(int appID)
@@ -755,6 +772,27 @@ namespace WebApplication1.tier3
             return name;
 
         }
+
+        public int getAppUniID(int appID)
+        {
+            int accID = 0;
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.getAppUniID";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@appID", appID);
+                sqlCMD.Parameters.Add("@uniID", SqlDbType.Int);
+                sqlCMD.Parameters["@uniID"].Direction = ParameterDirection.Output;
+                sqlCMD.ExecuteScalar();
+                accID = Convert.ToInt32(
+                    sqlCMD.Parameters["@uniID"].Value.ToString());
+                sqlCon.Close();
+            }
+            return accID;
+        }
+
 
         public String getAppDate(int appID)
         {
@@ -799,6 +837,28 @@ namespace WebApplication1.tier3
             }
 
             return status;
+
+        }
+
+        // get all of the majors offered by the university
+        public DataTable getUniMajors(int uniID)
+        {
+
+            DataTable dt = new DataTable();
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.getUniMajors";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@uniID", uniID);
+                sqlCMD.ExecuteScalar();
+                sqlCon.Close();
+                SqlDataAdapter da = new SqlDataAdapter(sqlCMD);
+                da.Fill(dt);
+
+                return dt;
+            }
 
         }
 

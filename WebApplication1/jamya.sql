@@ -280,6 +280,50 @@ BEGIN
 END
 
 
+-- get university majors
+CREATE PROCEDURE getUniMajors
+@uniID INT
+AS
+BEGIN
+
+	SELECT * FROM Programmes
+	JOIN Major
+	ON Major.MajorID = Programmes.MajorID
+	WHERE UniversityID = @uniID
+
+END
+
+EXEC getUniMajors @uniID = 4
+
+
+-- get app uni id
+
+CREATE PROCEDURE getAppUniID
+@appID INT,
+@uniID INT OUTPUT
+AS
+BEGIN
+
+	SELECT @uniID = UniversityID
+	FROM Application
+	WHERE Application.ApplicationID  = @appID
+
+END
+
+-- updating major
+CREATE PROCEDURE updateMajor
+@appID INT,
+@majID INT
+AS
+BEGIN
+	
+	UPDATE [Application]
+	SET MajID = @majID
+	WHERE ApplicationID = @appID
+
+END
+
+
 --StdDetails
 DROP PROCEDURE stdDetails
 CREATE PROCEDURE stdDetails
@@ -696,6 +740,22 @@ END
 
 --prev trigger ended
 
+ALTER TRIGGER majorTrigger
+ON University
+AFTER INSERT
+AS
+
+	DECLARE @uniID INT;
+
+	SELECT @uniID = UniversityID 
+	FROM inserted
+
+	INSERT INTO Programmes
+	VALUES
+	(@uniID, 1)
+
+
+
 
 INSERT INTO Account
 VALUES
@@ -705,6 +765,37 @@ VALUES
 ('SaqibAli', 'saqib@ggl.com', 'shmoonisgoodfella'),
 ('SajawalAli', 'sajawal@ggl.com', 'shmoonisgoodfella')
 
+INSERT INTO Account
+VALUES
+('NUST', 'admissions@nust.com', 'shmoonisgoodfella'),
+('Harvard', 'admissions@harvard.com', 'shmoonisgoodfella'),
+('PunjabUniversity', 'admissions@pu.com', 'shmoonisgoodfella')
+
+
+SELECT * FROM Account
+SELECT * FROM University
+
+INSERT INTO University
+VALUES
+(9, 'NUST', 'Islamabad', '030123456'),
+(10, 'Harvard', 'USA', '030123456'),
+(11, 'Punjab University', 'Lahore', '030123456')
+
+
+INSERT INTO Major
+VALUES
+(4, 'Nursing'),
+(5, 'Biology'),
+(6, 'Engineering'),
+(7, 'Education'),
+(8, 'CS'),
+(9, 'Communication'),
+(10, 'Finance'),
+(11, 'Political Science'),
+(12, 'History')
+
+
+
 INSERT INTO
 Student
 VALUES
@@ -712,7 +803,7 @@ VALUES
 
 INSERT INTO Student
 VALUES	(1,'Shmoon','Ali','2001-01-01',NULL,NULL,NULL,NULL)
-INSERT INTO Major VALUES(1,'CS')
+INSERT INTO Major VALUES(1,'All Available Majors')
 INSERT INTO Major VALUES(2,'AI')
 INSERT INTO Major VALUES(3,'BBA')
 INSERT INTO Programmes Values(4,1)

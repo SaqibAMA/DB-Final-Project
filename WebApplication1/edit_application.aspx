@@ -118,33 +118,91 @@
 
                         <div class="row input-field col s12">
                             
-                            <select id="programs">
-                                <option value="" disabled selected>
-                                    Choose Program
-                                </option>
-                                <option value="">
-                                    BS(CS)
-                                </option>
-                                <option value="">
-                                    BS(AI)
-                                </option>
-                                <option value="">
-                                    BS(AF)
-                                </option>
-                            </select>
+                            <p class="black-text">SELECT MAJOR</p>
+                            <p class="green-text hide">Currently Selected: 
+                                <asp:Label 
+                                    runat="server" 
+                                    ID="selectedmajor">
+                                </asp:Label>
+                            </p>
+            
+                            
+                            <asp:Repeater ID="majorsradio" runat="server">
+                            
+                                <ItemTemplate>
 
-                            <label>CHOOSE PROGRAM</label>
+                                    <p class="row">
+                                        <label class="col s12">
+                                            <input 
+                                                type="radio"
+                                                class="with-gap majoropt"
+                                                name="majorgroup"
+                                                value=<%#Eval("MajorID") %>
+                                                checked />
+                                            <span> <%#Eval("MajorName") %> </span>
+                                        </label>
+                                    </p>
+
+                                </ItemTemplate>
+                   
+                            </asp:Repeater>
+
+
 
                             <script type="text/javascript">
-                                $('select').formSelect();
+
+                                $(document).ready(() => {
+
+                                    var maj_val = $('input[name=majorgroup]:checked').val();
+
+
+                                    $.ajax({
+                                        type: "POST",
+                                        url: "edit_application.aspx/update_maj_val",
+                                        data: '{"maj_val":"' + maj_val + '"}',
+                                        contentType: "application/json; charset=utf-8",
+                                        dataType: "json",
+                                        success: (response) => console.log(response.d),
+                                        failure: () => console.log('failed')
+                                    });
+
+
+
+                                    $('.majoropt').on('change', () => {
+
+                                        var maj_val = $('input[name=majorgroup]:checked').val();
+
+                                        $.ajax({
+                                            type: "POST",
+                                            url: "edit_application.aspx/update_maj_val",
+                                            data: '{"maj_val":"' + maj_val + '"}',
+                                            contentType: "application/json; charset=utf-8",
+                                            dataType: "json",
+                                            success: (response) => console.log(response.d),
+                                            failure: () => console.log('failed')
+                                        });
+
+
+                                    });
+
+
+                                });
+
                             </script>
 
                         </div>
 
                         <div class="input-field col s12"></div>
-                            <button type="button" class="btn col s12">SAVE
-                                <i class="material-icons right">save</i>
-                            </button>
+
+                            <asp:LinkButton 
+                                runat="server"
+                                ID="saveBtn"
+                                OnClick="saveBtn_Click"
+                                CssClass="btn col s12">
+                                SAVE
+                                    <i class="material-icons right">save</i>                        
+                            </asp:LinkButton>
+
                         </div>
 
                     </div>
@@ -167,64 +225,6 @@
                 class="btn btn-flat">BACK TO DASHBOARD 
                 <i class="material-icons left">west</i></a>
         </div>
-
-
-        <script type="text/javascript">
-
-
-            const fetchID = () => {
-
-                return parseInt(getUrlParameter('application_id'));
-
-            }
-
-            const is_valid_application = () => {
-
-                return parseInt(
-                    $('#isValidApplication').html()
-                );
-
-            }
-
-            $(document).ready(()=>{
-
-                var application_id = fetchID();
-                if (!is_valid_application()) {
-
-
-                    $('body').append(
-                        `<div class="container center-align">
-                            <h3>You're trying to edit an invalid application.</h3>
-                        </div>`
-                    );
-
-
-                }
-                else {
-
-                    var request = $.ajax({
-                        type: "POST",
-                        url: "edit_application.aspx/getApplicationData",
-                        data: '{"application_id":"' + application_id + '"}',
-                        contentType: "application/json; charset=utf-8",
-                        dataType: "json",
-                        success: (response) => console.log(response.d),
-                        failure: () => console.log('failed')
-                    });
-
-                }
-
-                
-
-
-            });
-
-
-
-
-        </script>
-
-        <asp:Label runat="server" ID="isValidApplication" CssClass="hide">1</asp:Label>
 
     </form>
 </body>
