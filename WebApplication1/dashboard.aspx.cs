@@ -26,6 +26,8 @@ namespace WebApplication1
 
             loadPosts();
 
+            loadMarks();
+
             // Loading data
             DAL dal = new DAL();
 
@@ -115,6 +117,48 @@ namespace WebApplication1
             dal.deletePost(postID);
 
             loadPosts();
+
+        }
+
+        public void loadMarks()
+        {
+
+            DAL dal = new DAL();
+
+            int accID = Convert.ToInt32(Session["accID"]);
+
+
+            int matMarks = dal.getMarks(accID, "matric");
+            int intMarks = dal.getMarks(accID, "inter");
+            int uMarks = dal.getMarks(accID, "ug");
+
+            matricMarks.Text = matMarks.ToString();
+            interMarks.Text = intMarks.ToString();
+            ugMarks.Text = uMarks.ToString();
+
+            matricInput.Text = matMarks.ToString();
+            interInput.Text = intMarks.ToString();
+            ugInput.Text = uMarks.ToString();
+
+        }
+
+        protected void updateMarks_Click(object sender, EventArgs e)
+        {
+
+
+
+            DAL dal = new DAL();
+
+            int matMarks =  Convert.ToInt32 (matricInput.Text.Trim());
+            int intMarks = Convert.ToInt32(interInput.Text.Trim());
+            int uMarks = Convert.ToInt32(ugInput.Text.Trim());
+
+            int accID = Convert.ToInt32(Session["accID"]);
+
+            dal.updateMatricMarks(accID, matMarks);
+            dal.updateInterMarks(accID, intMarks);
+            dal.updateUnderGradMarks(accID, uMarks);
+
 
         }
     }

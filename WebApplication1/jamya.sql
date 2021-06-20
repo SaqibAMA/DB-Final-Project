@@ -700,7 +700,7 @@ END
 
 -- story review trigger
 
-CREATE TRIGGER leftReview
+ALTER TRIGGER leftReview
 ON Review
 AFTER INSERT
 AS
@@ -825,6 +825,65 @@ BEGIN
 	ON University.UniversityID = Application.UniversityID
 	JOIN Major
 	ON Major.MajorID = Application.MajID
+
+END
+
+
+-- get marks
+CREATE PROCEDURE getMatric
+@accID INT,
+@marks INT OUTPUT
+AS
+BEGIN
+		
+
+
+		SELECT @marks = Matric
+		FROM Student
+
+		IF (@marks = NULL)
+		BEGIN
+			SET @marks = 0;
+		END
+
+
+END
+
+CREATE PROCEDURE getInter
+@accID INT,
+@marks INT OUTPUT
+AS
+BEGIN
+		
+
+
+		SELECT @marks = Intermediate
+		FROM Student
+
+		IF (@marks = NULL)
+		BEGIN
+			SET @marks = 0;
+		END
+
+
+END
+
+CREATE PROCEDURE getUG
+@accID INT,
+@marks DECIMAL(3,1) OUTPUT
+AS
+BEGIN
+		
+
+
+		SELECT @marks = Undergraduate
+		FROM Student
+
+		IF (@marks = NULL)
+		BEGIN
+			SET @marks = 0;
+		END
+
 
 END
 
@@ -968,5 +1027,4 @@ INSERT INTO Stories
 VALUES
 (1, GETDATE(), 'FAST University has extended its deadline!'),
 (1, GETDATE(), 'NUST University has started their admissions!')
-
 

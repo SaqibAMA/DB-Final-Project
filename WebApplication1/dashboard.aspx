@@ -115,6 +115,13 @@
                  </a>
             </li>
             <li>
+                <a href="#" class="white-text stdOption modal-trigger"
+                    data-target="marksUpdateModal">
+                    <i class="material-icons white-text">info</i>
+                    UPDATE INFORMATION
+                 </a>
+            </li>
+            <li>
                 <a href="applications.aspx" class="white-text uniOption">
                     <i class="material-icons white-text">linear_scale</i>
                     REVIEW APPLICATIONS
@@ -138,8 +145,6 @@
                     LOGOUT
                  </a>
             </li>
-
-
 
             <script type="text/javascript">
 
@@ -339,6 +344,94 @@
                 onclick="addPost_Click"/>
         </div>
         </div>
+
+
+
+
+
+        <!--marks update modal-->
+        <div id="marksUpdateModal" class="modal bg-dark">
+        <div class="modal-content">
+            <h4>Update your marks.</h4>
+            <p>Put your best foot forward by keeping
+                your information up to date!
+            </p>
+            
+            <div class="grey-text">
+
+                <p class="chip">Matric: <asp:Label Text="1" runat="server" ID="matricMarks" /> </p>
+                <p class="chip">Intermediate: <asp:Label Text="1" runat="server" ID="interMarks" /> </p>
+                <p class="chip">Undegraduate: <asp:Label Text="1" runat="server" ID="ugMarks" /> </p>
+                
+            </div>
+
+
+            <table>
+                <tr>
+                    <td>
+                        Matric (%)
+                    </td>
+                    <td>
+                        <asp:TextBox 
+                            runat="server" 
+                            ID="matricInput" 
+                            Text="1" 
+                            type="number"
+                            class="validate white-text"
+                            max="100"
+                            min="1"
+                         />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Intermediate (%)
+                    </td>
+                    <td>
+                        <asp:TextBox 
+                            runat="server" 
+                            ID="interInput" 
+                            Text="1" 
+                            type="number"
+                            class="validate white-text"
+                            max="100"
+                            min="1"
+                         />
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Undergraduate (CGPA)
+                    </td>
+                    <td>
+                        <asp:TextBox 
+                            runat="server" 
+                            ID="ugInput" 
+                            Text="0" 
+                            type="number"
+                            class="validate white-text"
+                            max="4"
+                            step="0.1"
+                            min="1"
+                         />
+                    </td>
+                </tr>
+            </table>
+
+
+        </div>
+        <div class="modal-footer bg-dark">
+            <asp:LinkButton runat="server"
+                ID="updateMarks"
+                OnClick="updateMarks_Click"
+                class="modal-close btn waves-effect white waves-green black-text">
+                SUBMIT <i class="material-icons left">send</i>
+            </asp:LinkButton>
+        </div>
+        </div>
+
+
+
 
     </form>
 

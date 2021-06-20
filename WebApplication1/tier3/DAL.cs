@@ -890,6 +890,55 @@ namespace WebApplication1.tier3
         }
 
 
+        // get marks
+        public int getMarks(int accID, string level)
+        {
+
+            int marks = 0;
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+
+                if (level == "matric")
+                {
+                    sqlCMD.CommandText = "dbo.getMatric";
+                }
+                else if (level == "inter")
+                {
+                    sqlCMD.CommandText = "dbo.getInter";
+                }
+                else
+                {
+                    sqlCMD.CommandText = "dbo.getUG";
+                }
+
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@accID", accID);
+                sqlCMD.Parameters.Add("@marks", SqlDbType.Decimal);
+                sqlCMD.Parameters["@marks"].Direction = ParameterDirection.Output;
+                sqlCMD.ExecuteScalar();
+
+                if (!DBNull.Value.Equals(sqlCMD.Parameters["@marks"].Value))
+                {
+
+                    marks = Convert.ToInt32(
+                        sqlCMD.Parameters["@marks"].Value.ToString()
+                    );
+
+                }
+                else
+                {
+                    marks = 1;
+                }
+
+                sqlCon.Close();
+            }
+
+            return marks;
+
+        }
+
         //for messages creating another datatype
 
         public DataTable loadMessages()
