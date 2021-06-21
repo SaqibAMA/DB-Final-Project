@@ -270,7 +270,7 @@ namespace WebApplication1.tier3
             }
         }
         //update marks sheet of student
-        public void updateInterMarks(int stdID, int marks)
+        public void updateInterMarks(int stdID, decimal marks)
         {
             using (SqlConnection sqlCon = new SqlConnection(connection_str))
             {
@@ -284,7 +284,7 @@ namespace WebApplication1.tier3
                 sqlCon.Close();
             }
         }
-        public void updateMatricMarks(int stdID, int marks)
+        public void updateMatricMarks(int stdID, decimal marks)
         {
             using (SqlConnection sqlCon = new SqlConnection(connection_str))
             {
@@ -298,7 +298,7 @@ namespace WebApplication1.tier3
                 sqlCon.Close();
             }
         }
-        public void updateUnderGradMarks(int stdID, int cgpa)
+        public void updateUnderGradMarks(int stdID, decimal cgpa)
         {
             using (SqlConnection sqlCon = new SqlConnection(connection_str))
             {
@@ -312,7 +312,7 @@ namespace WebApplication1.tier3
                 sqlCon.Close();
             }
         }
-        public void updateGradMarks(int stdID, int cgpa)
+        public void updateGradMarks(int stdID, float cgpa)
         {
             using (SqlConnection sqlCon = new SqlConnection(connection_str))
             {
@@ -891,10 +891,10 @@ namespace WebApplication1.tier3
 
 
         // get marks
-        public int getMarks(int accID, string level)
+        public decimal getMarks(int accID, string level)
         {
 
-            int marks = 0;
+            decimal marks = 0;
             using (SqlConnection sqlCon = new SqlConnection(connection_str))
             {
                 sqlCon.Open();
@@ -916,21 +916,18 @@ namespace WebApplication1.tier3
                 sqlCMD.CommandType = CommandType.StoredProcedure;
                 sqlCMD.Parameters.AddWithValue("@accID", accID);
                 sqlCMD.Parameters.Add("@marks", SqlDbType.Decimal);
+
                 sqlCMD.Parameters["@marks"].Direction = ParameterDirection.Output;
+                sqlCMD.Parameters["@marks"].SqlDbType = SqlDbType.Decimal;
+                sqlCMD.Parameters["@marks"].Precision = 4;
+                sqlCMD.Parameters["@marks"].Scale = 2;
+
                 sqlCMD.ExecuteScalar();
 
-                if (!DBNull.Value.Equals(sqlCMD.Parameters["@marks"].Value))
-                {
 
-                    marks = Convert.ToInt32(
-                        sqlCMD.Parameters["@marks"].Value.ToString()
-                    );
-
-                }
-                else
-                {
-                    marks = 1;
-                }
+                marks = Convert.ToDecimal(
+                    sqlCMD.Parameters["@marks"].Value
+                );
 
                 sqlCon.Close();
             }

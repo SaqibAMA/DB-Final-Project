@@ -124,7 +124,10 @@
                                             runat="server" 
                                             OnClick="applyBtn_Click"
                                             CssClass="btn waves-effect waves-light green"
-                                            data=<%#Eval("UniversityID")%>>
+                                            data=<%#Eval("UniversityID")%> 
+                                            OnClientClick=
+                                            "M.toast({html: 'Applied! Make sure to update your details!'}); 
+                                            ;this.form.submit() this.disabled=true;">
                                             APPLY
                                         </asp:LinkButton>
 

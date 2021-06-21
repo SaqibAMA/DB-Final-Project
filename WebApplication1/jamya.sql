@@ -565,31 +565,31 @@ BEGIN
 UPDATE [Application] SET [Application].Status = 'Rejected'
 END
 --updateInterMarks
-CREATE PROCEDURE updateInterMarks
+ALTER PROCEDURE updateInterMarks
 @stdID INT,
-@marks INT
+@marks DECIMAL(4,2)
 AS
 BEGIN
-if(@marks < 1100)
+if(@marks < 100)
 begin
 UPDATE Student SET Student.Intermediate=@marks where @stdID = Student.StudentID
 end
 END
 --updateMatricMarks
-CREATE PROCEDURE updateMatricMarks
+ALTER PROCEDURE updateMatricMarks
 @stdID INT,
-@marks INT
+@marks DECIMAL(4,2)
 AS
 BEGIN
-if(@marks < 1100)
+if(@marks < 100)
 begin
 UPDATE Student SET Student.Matric=@marks where @stdID = Student.StudentID
 end
 END
 --updateUnderGradMarks
-CREATE PROCEDURE updateUnderGradMarks
+ALTER PROCEDURE updateUnderGradMarks
 @stdID INT,
-@cgpa INT
+@cgpa DECIMAL(4,2)
 AS
 BEGIN
 if(@cgpa < 4.0)
@@ -828,30 +828,32 @@ BEGIN
 
 END
 
-
 -- get marks
-CREATE PROCEDURE getMatric
-@accID INT,
-@marks INT OUTPUT
+ALTER PROCEDURE getMatric (
+	@accID INT,
+	@marks DECIMAL(4, 2) OUTPUT
+)
 AS
 BEGIN
 		
 
-
 		SELECT @marks = Matric
 		FROM Student
+		WHERE StudentID = @accID
+
 
 		IF (@marks = NULL)
 		BEGIN
-			SET @marks = 0;
+			SET @marks = 1;
 		END
 
 
 END
 
-CREATE PROCEDURE getInter
+
+ALTER PROCEDURE getInter
 @accID INT,
-@marks INT OUTPUT
+@marks DECIMAL(4, 2) OUTPUT
 AS
 BEGIN
 		
@@ -859,16 +861,17 @@ BEGIN
 
 		SELECT @marks = Intermediate
 		FROM Student
+	WHERE StudentID = @accID
 
 		IF (@marks = NULL)
 		BEGIN
-			SET @marks = 0;
+			SET @marks = 1;
 		END
 
 
 END
 
-CREATE PROCEDURE getUG
+ALTER PROCEDURE getUG
 @accID INT,
 @marks DECIMAL(3,1) OUTPUT
 AS
@@ -878,10 +881,11 @@ BEGIN
 
 		SELECT @marks = Undergraduate
 		FROM Student
+		WHERE StudentID = @accID
 
 		IF (@marks = NULL)
 		BEGIN
-			SET @marks = 0;
+			SET @marks = 1;
 		END
 
 

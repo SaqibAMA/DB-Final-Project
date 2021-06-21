@@ -34,7 +34,7 @@
   <!--favicon-->
   <link rel="shortcut icon" href="assets/simple_cyan_jamya_logo.png" type="image/x-icon" />
 
-  <title>Profile | Jamya</title>
+  <title><%=Session["fName"]%> <%=Session["lName"]%> <%=Session["uName"]%> | Jamya</title>
 
   <!--Css-->
   <link href="css/profile.css" rel="stylesheet" runat="server" />
@@ -120,7 +120,6 @@
                         <li class="collection-header">
                             <h5>Posts</h5>
                         </li>
-
 
                         <asp:Repeater
                             runat="server"

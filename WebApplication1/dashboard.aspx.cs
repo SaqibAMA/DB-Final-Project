@@ -11,6 +11,11 @@ namespace WebApplication1
 {
     public partial class dashboard : System.Web.UI.Page
     {
+
+        public decimal currMatric;
+        public decimal currInter;
+        public decimal currUG;
+
         public void Page_Load(object sender, EventArgs e)
         {
 
@@ -19,6 +24,7 @@ namespace WebApplication1
                 Response.Redirect("index.aspx");
             }
 
+
             // Loading Stories
             loadStories();
 
@@ -26,7 +32,8 @@ namespace WebApplication1
 
             loadPosts();
 
-            loadMarks();
+            if (Session["type"].ToString() == "Student")
+                loadMarks();
 
             // Loading data
             DAL dal = new DAL();
@@ -40,6 +47,8 @@ namespace WebApplication1
             unamelabel.Text = "@" + uname;
             uemaillabel.Text = uemail;
 
+
+
         }
 
         public void loadStories()
@@ -50,6 +59,15 @@ namespace WebApplication1
             DataTable dt = dal.getStories();
             stories.DataSource = dt;
             stories.DataBind();
+
+            if (dt.Rows.Count > 0)
+            {
+                noStoriesLabel.Visible = false;
+            }
+            else
+            {
+                noStoriesLabel.Visible = true;
+            }
 
 
         }
@@ -64,6 +82,15 @@ namespace WebApplication1
             notifs.DataSource = dt;
             notifs.DataBind();
 
+            if (dt.Rows.Count > 0)
+            {
+                noNotifsLabel.Visible = false;
+            }
+            else
+            {
+                noNotifsLabel.Visible = true;
+            }
+
 
         }
 
@@ -75,6 +102,15 @@ namespace WebApplication1
 
             posts.DataSource = dt;
             posts.DataBind();
+
+            if (dt.Rows.Count > 0)
+            {
+                noPostsLabel.Visible = false;
+            }
+            else
+            {
+                noPostsLabel.Visible = true;
+            }
 
         }
 
@@ -123,22 +159,35 @@ namespace WebApplication1
         public void loadMarks()
         {
 
-            DAL dal = new DAL();
+            if (Page.IsPostBack)
+            {
 
-            int accID = Convert.ToInt32(Session["accID"]);
+                currMatric = Convert.ToDecimal(matricInput.Text.Trim());
+                currInter = Convert.ToDecimal(interInput.Text.Trim());
+                currUG = Convert.ToDecimal(ugInput.Text.Trim());
+
+            }
+            else
+            {
+
+                DAL dal = new DAL();
+
+                int accID = Convert.ToInt32(Session["accID"]);
 
 
-            int matMarks = dal.getMarks(accID, "matric");
-            int intMarks = dal.getMarks(accID, "inter");
-            int uMarks = dal.getMarks(accID, "ug");
+                decimal matMarks = dal.getMarks(accID, "matric");
+                decimal intMarks = dal.getMarks(accID, "inter");
+                decimal uMarks = dal.getMarks(accID, "ug");
 
-            matricMarks.Text = matMarks.ToString();
-            interMarks.Text = intMarks.ToString();
-            ugMarks.Text = uMarks.ToString();
+                matricMarks.Text = matMarks.ToString() + " %";
+                interMarks.Text = intMarks.ToString() + " %";
+                ugMarks.Text = uMarks.ToString() + " CGPA";
 
-            matricInput.Text = matMarks.ToString();
-            interInput.Text = intMarks.ToString();
-            ugInput.Text = uMarks.ToString();
+                matricInput.Text = matMarks.ToString();
+                interInput.Text = intMarks.ToString();
+                ugInput.Text = uMarks.ToString();
+
+            }
 
         }
 
@@ -149,15 +198,11 @@ namespace WebApplication1
 
             DAL dal = new DAL();
 
-            int matMarks =  Convert.ToInt32 (matricInput.Text.Trim());
-            int intMarks = Convert.ToInt32(interInput.Text.Trim());
-            int uMarks = Convert.ToInt32(ugInput.Text.Trim());
-
             int accID = Convert.ToInt32(Session["accID"]);
 
-            dal.updateMatricMarks(accID, matMarks);
-            dal.updateInterMarks(accID, intMarks);
-            dal.updateUnderGradMarks(accID, uMarks);
+            dal.updateMatricMarks(accID, currMatric);
+            dal.updateInterMarks(accID, currInter);
+            dal.updateUnderGradMarks(accID, currUG);
 
 
         }

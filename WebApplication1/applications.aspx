@@ -33,7 +33,7 @@
   <!--favicon-->
   <link rel="shortcut icon" href="assets/simple_cyan_jamya_logo.png" type="image/x-icon" />
 
-  <title>Your Applications | Jamya</title>
+  <title><%=Session["fName"] %>'s Applications | Jamya</title>
 
   <!--Css-->
   <link href="css/applications.css" rel="stylesheet" runat="server" />
@@ -101,6 +101,12 @@
                 <a href="chat.aspx" class="white-text">
                     <i class="material-icons white-text">chat</i>
                     CHAT
+                 </a>
+            </li>
+            <li>
+                <a href="dashboard.aspx" class="white-text">
+                    <i class="material-icons white-text">dashboard</i>
+                    DASHBOARD
                  </a>
             </li>
             <li>
@@ -190,13 +196,16 @@
 
             <div class="row">
 
-                <h3 class="col s12">Your Applications</h3>
+                <h3 class="col s12"><%=Session["fName"] %>'s Applications</h3>
 
             </div>
 
             <ul class="row application-tab" id="sortable">
 
 
+                <asp:Label Text="No applications yet. Start by searching some universities." 
+                    ID="noAppsLabel" 
+                    runat="server" />
 
                 <asp:Repeater runat="server" ID="applist">
 

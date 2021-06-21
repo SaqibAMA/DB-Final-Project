@@ -88,7 +88,6 @@ namespace WebApplication1
             posts.DataSource = dt;
             posts.DataBind();
 
-
             int isStudent = dal.isStudent(ID);
 
 

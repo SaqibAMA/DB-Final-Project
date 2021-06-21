@@ -22,7 +22,6 @@ namespace WebApplication1
 
 
             // load applications
-
             loadApplications();
 
             // load suggestions
@@ -81,6 +80,15 @@ namespace WebApplication1
             DataTable dt = dal.getAppsForStd(stdID);
             applist.DataSource = dt;
             applist.DataBind();
+
+            if (dt.Rows.Count > 0)
+            {
+                noAppsLabel.Visible = false;
+            }
+            else
+            {
+                noAppsLabel.Visible = true;
+            }
 
         }
 

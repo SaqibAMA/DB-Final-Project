@@ -42,6 +42,15 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Label useremail;
 
         /// <summary>
+        /// noStoriesLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label noStoriesLabel;
+
+        /// <summary>
         /// stories control.
         /// </summary>
         /// <remarks>
@@ -51,6 +60,15 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Repeater stories;
 
         /// <summary>
+        /// noNotifsLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label noNotifsLabel;
+
+        /// <summary>
         /// notifs control.
         /// </summary>
         /// <remarks>
@@ -58,6 +76,15 @@ namespace WebApplication1
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Repeater notifs;
+
+        /// <summary>
+        /// noPostsLabel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label noPostsLabel;
 
         /// <summary>
         /// posts control.

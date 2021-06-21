@@ -85,7 +85,7 @@
                 </div>
             </li>
             <li>
-                <a href="profile.aspx?id=<%=Session["accID"]%>" class="white-text stdOption">
+                <a href="profile.aspx?id=<%=Session["accID"]%>" class="white-text">
                     <i class="material-icons white-text">person</i>
                     PROFILE
                  </a>
@@ -192,6 +192,10 @@
                 <div class="col m12 hide-on-small-only">
                       <div class="carousel">
 
+                          <asp:Label Text="No stories yet. Check again later." 
+                              ID="noStoriesLabel" 
+                              runat="server" />
+
                           <asp:Repeater runat="server" ID="stories">
 
 
@@ -213,6 +217,8 @@
                 <h4 class="col s12">Notifications</h4>
 
                 <ul class="collection">
+
+                    <asp:Label Text="No notifications yet." ID="noNotifsLabel" runat="server" />
 
                     <asp:Repeater runat="server" ID="notifs">
 
@@ -257,6 +263,8 @@
 
                 <ul class="collection">
 
+                    <asp:Label Text="You haven't posted anything yet. Try it out by clicking on the icon below!"
+                        ID="noPostsLabel" runat="server" />
 
                     <asp:Repeater runat="server" ID="posts">
 
@@ -375,10 +383,10 @@
                         <asp:TextBox 
                             runat="server" 
                             ID="matricInput" 
-                            Text="1" 
-                            type="number"
+                            TextMode="Number"
                             class="validate white-text"
                             max="100"
+                            step="0.5"
                             min="1"
                          />
                     </td>
@@ -391,10 +399,10 @@
                         <asp:TextBox 
                             runat="server" 
                             ID="interInput" 
-                            Text="1" 
-                            type="number"
+                            TextMode="Number"
                             class="validate white-text"
                             max="100"
+                            step="0.5"
                             min="1"
                          />
                     </td>
@@ -408,7 +416,7 @@
                             runat="server" 
                             ID="ugInput" 
                             Text="0" 
-                            type="number"
+                            TextMode="Number"
                             class="validate white-text"
                             max="4"
                             step="0.1"
