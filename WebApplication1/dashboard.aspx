@@ -123,7 +123,7 @@
                  </a>
             </li>
             <li>
-                <a href="applications.aspx" class="white-text uniOption">
+                <a href="review_applications.aspx" class="white-text uniOption">
                     <i class="material-icons white-text">linear_scale</i>
                     REVIEW APPLICATIONS
                  </a>
@@ -480,9 +480,18 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            $('.carousel').carousel({
-                numVisible: 10
-            });
+
+
+            try {
+                $('.carousel').carousel({
+                    numVisible: 10
+                });
+            }
+            catch {
+                console.log('no stories');
+            }
+
+
             $('.fixed-action-btn').floatingActionButton();
             $('.modal').modal();
         });

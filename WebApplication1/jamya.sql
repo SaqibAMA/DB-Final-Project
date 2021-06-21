@@ -939,7 +939,32 @@ BEGIN
 END
 
 
-SELECT * FROM Notification
+ALTER PROCEDURE getUnderReviewApps
+@uniID INT
+AS
+BEGIN
+
+	SELECT Application.ApplicationID,
+	(Student.fName + ' ' + Student.lName) as [StdName],
+	Student.Matric, Student.Intermediate, Student.Undergraduate,
+	Major.MajorName
+	FROM Application
+	JOIN Student
+	ON Student.StudentID = Application.StudentID
+	JOIN Major
+	ON Major.MajorID = Application.MajID
+	WHERE Status = 'Incomplete'
+	AND UniversityID = @uniID
+	
+END
+
+
+EXEC getUnderReviewApps @uniID = 4
+
+
+
+
+
 
 --notification/stories trigger
 --sajawal applied for fast

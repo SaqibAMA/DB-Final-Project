@@ -236,6 +236,7 @@
     <Content Include="css\index.css" />
     <Content Include="css\login.css" />
     <Content Include="css\profile.css" />
+    <Content Include="css\review_apps.css" />
     <Content Include="css\search.css" />
     <Content Include="css\signup-choice.css" />
     <Content Include="css\signup.css" />
@@ -255,6 +256,7 @@
     <Content Include="login.aspx" />
     <Content Include="logout.aspx" />
     <Content Include="profile.aspx" />
+    <Content Include="review_applications.aspx" />
     <Content Include="search.aspx" />
     <Content Include="signup.aspx" />
     <Content Include="studentProfile.aspx" />
@@ -505,6 +507,13 @@
       <DependentUpon>profile.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="review_applications.aspx.cs">
+      <DependentUpon>review_applications.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="review_applications.aspx.designer.cs">
+      <DependentUpon>review_applications.aspx</DependentUpon>
+    </Compile>
     <Compile Include="search.aspx.cs">
       <DependentUpon>search.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

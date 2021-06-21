@@ -940,10 +940,18 @@ namespace WebApplication1.tier3
 
                 sqlCMD.ExecuteScalar();
 
+                if ( DBNull.Value.Equals(sqlCMD.Parameters["@marks"].Value) )
+                {
+                    marks = 1;
+                }
+                else
+                {
+                    marks = Convert.ToDecimal(
+                        sqlCMD.Parameters["@marks"].Value
+                    );
+                }
 
-                marks = Convert.ToDecimal(
-                    sqlCMD.Parameters["@marks"].Value
-                );
+
 
                 sqlCon.Close();
             }
@@ -952,7 +960,35 @@ namespace WebApplication1.tier3
 
         }
 
-        //for messages creating another datatype
+
+
+
+
+
+        // review application stuff
+        public DataTable getUnderReviewApps(int uniID) {
+
+            DataTable dt = new DataTable();
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.getUnderReviewApps";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@uniID", uniID);
+                sqlCMD.ExecuteScalar();
+                sqlCon.Close();
+                SqlDataAdapter da = new SqlDataAdapter(sqlCMD);
+                da.Fill(dt);
+
+                return dt;
+            }
+
+        }
+
+
+
+
 
         public DataTable loadMessages()
         {
