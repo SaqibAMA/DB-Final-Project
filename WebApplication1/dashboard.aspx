@@ -129,7 +129,8 @@
                  </a>
             </li>
             <li>
-                <a href="promote.aspx" class="white-text uniOption">
+                <a class="white-text uniOption modal-trigger" 
+                    data-target="promoteModal">
                     <i class="material-icons white-text">military_tech</i>
                     PROMOTE
                  </a>
@@ -469,6 +470,68 @@
             </asp:LinkButton>
         </div>
         </div>
+
+
+
+
+        <!--Send Notification-->
+        <div id="promoteModal" class="modal bg-dark">
+        <div class="modal-content">
+            <h4>Promotion Panel</h4>
+            <p>Jamya is home to thousands of students.
+                Want them to apply to your university?
+                Run a promotion and get hundreds of applicants.
+            </p>
+
+            <br />
+
+            <p>Pick a promotion ending date.</p>
+
+            <asp:TextBox
+                ID="endDate"
+                TextMode="Date"
+                runat="server" />
+
+            <asp:Label 
+                ID="dateErr"
+                Text="You cannot enter date in the past" 
+                runat="server"
+                CssClass="red-text"/>
+
+
+            <p>Inactive Promotions</p>
+
+            <table>
+                <asp:Repeater runat="server" ID="prevPromos">
+                    <HeaderTemplate>
+                        <tr>
+                            <td>Promotion ID</td>
+                            <td>Ending Date</td>
+                        </tr>
+                    </HeaderTemplate>
+                    <ItemTemplate>
+                        <tr class="grey-text">
+                            <td><%#Eval("pID") %></td>
+                            <td><%#Eval("endDate") %></td>
+                        </tr>
+                    </ItemTemplate>
+                </asp:Repeater>
+            </table>
+
+            <p class="grey-text">To activate promotions, contact us at <span class="green-text">promotions@jamya.com.</span> </p>
+
+
+        </div>
+        <div class="modal-footer bg-dark">
+            <asp:LinkButton runat="server"
+                ID="addPromotion"
+                OnClick="addPromotion_Click"
+                class="modal-close btn waves-effect white waves-green black-text">
+                SEND <i class="material-icons left">send</i>
+            </asp:LinkButton>
+        </div>
+        </div>
+
 
 
 

@@ -42,6 +42,15 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Label useremail;
 
         /// <summary>
+        /// underReviewApps control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater underReviewApps;
+
+        /// <summary>
         /// noURAppsLabel control.
         /// </summary>
         /// <remarks>
@@ -51,12 +60,39 @@ namespace WebApplication1
         protected global::System.Web.UI.WebControls.Label noURAppsLabel;
 
         /// <summary>
-        /// underReviewApps control.
+        /// acceptedApps control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Repeater underReviewApps;
+        protected global::System.Web.UI.WebControls.Repeater acceptedApps;
+
+        /// <summary>
+        /// noAcceptedApps control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label noAcceptedApps;
+
+        /// <summary>
+        /// rejectedApps control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Repeater rejectedApps;
+
+        /// <summary>
+        /// noReject control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label noReject;
     }
 }

@@ -55,7 +55,7 @@
 
         </div>
 
-        <div class="row container">
+        <div class="row container" style="width: 95%">
 
             <!--Left Panel-->
             <div class="col m6 s12 left-panel">
@@ -124,7 +124,12 @@
                             runat="server"
                             placeholder="John Doe"
                          ></asp:TextBox>
-                        <asp:Label Text="" runat="server" for="name" />
+                        <asp:Label 
+                            ID="nameErr"
+                            Text="Name cannot be empty"
+                            CssClass="red-text"
+                            runat="server" 
+                             />
                     </div>
                     
                     <div class="col l12 m12">
@@ -138,7 +143,12 @@
                             type="email"
                             placeholder="johndoe@gmail.com"
                          ></asp:TextBox>
-                        <asp:Label Text="" runat="server" for="email" />
+                        <asp:Label 
+                            CssClass="red-text"
+                            ID="emailErr"
+                            Text="Invalid email." 
+                            runat="server" 
+                            for="email" />
                     </div>
 
                     <div class="col s12">
@@ -160,6 +170,13 @@
                             Characters remaining: 
                             <span class="chars-remaining">200</span>
                         </label>
+
+                                                <asp:Label 
+                            CssClass="red-text"
+                            ID="messageErr"
+                            Text="Message cannot be empty." 
+                            runat="server" 
+                            for="" />
 
 
                         <script type="text/javascript">
@@ -200,35 +217,22 @@
                         <br />
 
 
-                        <script runat="server">
-
-                            void sendMessage_Click(object sender, EventArgs e)
-                            {
-
-                                Response.Write("Message Sent!");
-
-                                // Take data from the fields
-                                // and insert it inot the Queries table.
-
-                                // Queries table structure
-                                // Query_ID, Name, Email, Date, Text
-
-                            }
-
-                        </script>
-
-
                         <asp:LinkButton
                             type="submit"
                             runat="server" 
-                            ID="sendMessage"
+                            ID="submitQuery"
                             class="btn green waves-effect waves-light"
                             width="100%"
-                            OnClick="sendMessage_Click"
+                            OnClick="submitQuery_Click"
                             >
                         <i class="material-icons left">mail</i>
                              SEND MESSAGE
                         </asp:LinkButton>
+
+                        <asp:Label Text="Your query has been submitted!" 
+                            runat="server"
+                            CssClass="green-text"
+                            ID="submittedQuery"/>
 
 
                     </div>

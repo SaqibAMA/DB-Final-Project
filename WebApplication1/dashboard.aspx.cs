@@ -47,6 +47,12 @@ namespace WebApplication1
             unamelabel.Text = "@" + uname;
             uemaillabel.Text = uemail;
 
+            dateErr.Visible = false;
+
+
+
+            if (Session["type"].ToString() == "University")
+                loadPromos();
 
 
         }
@@ -221,5 +227,48 @@ namespace WebApplication1
 
 
         }
+
+        protected void addPromotion_Click(object sender, EventArgs e)
+        {
+
+            DateTime dt = Convert.ToDateTime(endDate.Text);
+
+            if (dt < DateTime.Now)
+            {
+
+                Response.Write(" <script> alert('Unfortunately, we cannot run promotions in the past! :(') </script> ");
+
+            }
+            else
+            {
+
+
+                DAL dal = new DAL();
+
+                int uniID = Convert.ToInt32(Session["accID"].ToString());
+
+                dal.addPromotion(uniID, dt);
+
+
+            }
+
+
+
+        }
+
+
+        public void loadPromos()
+        {
+
+            DAL dal = new DAL();
+
+            int uniID = Convert.ToInt32(Session["accID"].ToString());
+
+            DataTable dt = dal.getInactivePromos(uniID);
+            prevPromos.DataSource = dt;
+            prevPromos.DataBind();
+
+        }
+
     }
 }

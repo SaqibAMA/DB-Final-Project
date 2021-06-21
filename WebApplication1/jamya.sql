@@ -44,8 +44,12 @@ CREATE TABLE [Application](
 CREATE TABLE Promotions(
 pID INT Primary KEY IDENTITY(1,1),
 UniversityID INT CONSTRAINT unii_id FOREIGN KEY REFERENCES University(UniversityID),
-endDate DATE NOT NULL
+endDate DATE NOT NULL,
+PromotionStatus INT
 )
+
+DROP TABLE Promotions
+
 --Notification (Id, sender, receiver, Text)
 CREATE TABLE Notification(
 	nID INT PRIMARY KEY IDENTITY(1,1),
@@ -99,6 +103,30 @@ CREATE TABLE Programmes(
 	MajorID			INT CONSTRAINT FK_MAJORS_id FOREIGN KEY REFERENCES Major(MajorID) ,
 	PRIMARY KEY(UniversityID,MajorID)
 )
+
+
+CREATE TABLE Queries (
+	
+	QueryID		INT PRIMARY KEY IDENTITY(1,1),
+	Name		VARCHAR(100) NOT NULL,
+	Email		VARCHAR(100) NOT NULL,
+	Text		VARCHAR(200) NOT NULL
+	
+)
+
+CREATE PROCEDURE submitQuery
+@name VARCHAR(100),
+@email VARCHAR(100),
+@msg VARCHAR(200)
+AS
+BEGIN
+	
+	INSERT INTO Queries
+	VALUES
+	(@name, @email, @msg)
+
+END
+
 INSERT INTO Account(AccountID,Username,Email,[Password]) 
 VALUES 
 (1,'sajawalali546','saju123@gmail.com','redmi1122'),
@@ -392,7 +420,7 @@ INSERT INTO dbo.Student VALUES(@id,@fName,@lName,@defaultdate,NULL,NULL,NULL,NUL
 END
 --get those Universities that are open for admissions
 --will return list of universities
-CREATE PROCEDURE getPromotedUniversities 
+ALTER PROCEDURE getPromotedUniversities 
 AS 
 SELECT University.UniversityID, University.Name 
 FROM 
@@ -401,6 +429,35 @@ ON
 	Promotions.UniversityID = University.UniversityID 
 WHERE 
 	endDate > GETDATE()
+AND PromotionStatus = 1
+
+
+CREATE PROCEDURE addPromotion
+@uniID INT,
+@endDate DATETIME
+AS
+BEGIN
+
+	INSERT INTO Promotions
+	VALUES
+	(@uniID, @endDate, 0)
+
+END
+
+
+CREATE PROCEDURE getInactivePromos
+@uniID INT
+AS
+BEGIN
+	
+	SELECT *
+	FROM Promotions
+	WHERE endDate > GETDATE()
+	AND UniversityID = @uniID
+	AND PromotionStatus = 0
+	
+END
+
 
 
 EXEC getPromotedUniversities
@@ -551,18 +608,20 @@ BEGIN
 DELETE FROM [Application] WHERE ApplicationID = @applicationID
 END
 --acceptApplication
-CREATE PROCEDURE acceptApplication
+ALTER PROCEDURE acceptApplication
 @applicationID INT
 AS
 BEGIN
 UPDATE [Application] SET [Application].Status = 'Accepted'
+WHERE Application.ApplicationID = @applicationID
 END
 --rejectApplication
-CREATE PROCEDURE rejectApplication
+ALTER PROCEDURE rejectApplication
 @applicationID INT
 AS
 BEGIN
 UPDATE [Application] SET [Application].Status = 'Rejected'
+WHERE Application.ApplicationID = @applicationID
 END
 --updateInterMarks
 ALTER PROCEDURE updateInterMarks
@@ -939,8 +998,9 @@ BEGIN
 END
 
 
-ALTER PROCEDURE getUnderReviewApps
-@uniID INT
+CREATE PROCEDURE getAppsByStatus
+@uniID INT,
+@status VARCHAR(50)
 AS
 BEGIN
 
@@ -953,19 +1013,107 @@ BEGIN
 	ON Student.StudentID = Application.StudentID
 	JOIN Major
 	ON Major.MajorID = Application.MajID
-	WHERE Status = 'Incomplete'
+	WHERE Status = @status
 	AND UniversityID = @uniID
 	
 END
 
 
-EXEC getUnderReviewApps @uniID = 4
+EXEC getAppsByStatus @uniID = 4, @status = 'Incomplete'
+
+
+-- Mark application as incomplete
+CREATE PROCEDURE setAppIncomplete
+@appID INT
+AS
+BEGIN
+	
+	UPDATE Application
+	SET Status = 'Incomplete'
+	WHERE Application.ApplicationID = @appID
+
+END
+
+SELECT * FROM Application
 
 
 
+-- trigger to send student the notification
+ALTER TRIGGER sendAcceptanceNews
+ON [Application]
+AFTER UPDATE
+AS
+	DECLARE @appID INT;
+	SELECT @appID = ( SELECT ApplicationID FROM inserted );
+
+	DECLARE @uniID INT
+	DECLARE @stdID INT
+	DECLARE @majID INT
+
+	DECLARE @appStatus VARCHAR(100)
+
+	SELECT @uniID = UniversityID, 
+			@stdID = StudentID, 
+			@majID = MajID,
+			@appStatus = Status
+	FROM Application
+	WHERE ApplicationID = @appID
+
+	DECLARE @uniName VARCHAR(100);
+	SELECT @uniName = University.Name
+	FROM University
+	WHERE University.UniversityID = @uniID
+
+	DECLARE @majName VARCHAR(100);
+	SELECT @majName = Major.MajorName
+	FROM Major
+	WHERE MajorID = @majID
+
+	DECLARE @msg VARCHAR(300);
+
+	DECLARE @fp INT		-- false positive
+	SET @fp = 0
+
+	IF (@appStatus = 'Accepted')
+	BEGIN
+		SET @msg = 'Congratulations! You have been accepted to ';
+	END
+	ELSE IF (@appStatus = 'Rejected')
+	BEGIN
+		SET @msg = 'Sorry! You have been rejected from ';
+	END
+	ELSE
+	BEGIN
+		SET @fp = 1
+	END
 
 
+	SET @msg = @msg + @uniName
+	SET @msg = @msg + ' for '
+	SET @msg = @msg + @majName
 
+	IF (@fp = 0)
+	BEGIN
+
+		DECLARE @notifExists INT
+		SELECT @notifExists = COUNT(*)
+		FROM Notification
+		WHERE senderID = @uniID AND receiverID = @stdID
+		AND textContent = @msg
+
+
+		IF (@notifExists = 0)
+		BEGIN
+
+			INSERT INTO Notification
+			VALUES
+			(@uniID, @stdID, @msg)
+	
+		END
+	
+	END
+
+SELECT * FROM Notification
 --notification/stories trigger
 --sajawal applied for fast
 CREATE TRIGGER applyNews
@@ -1094,6 +1242,7 @@ SELECT * FROM Application
 SELECT * FROM Major
 SELECT * FROM Messages
 SELECT * FROM Notification
+
 
 
 INSERT INTO Notification

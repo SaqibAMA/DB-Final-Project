@@ -36,19 +36,19 @@ namespace WebApplication1
 
 
 
-            loadUnderReviewApps();
+            loadApps();
 
 
         }
 
-        public void loadUnderReviewApps()
+        public void loadApps()
         {
 
             DAL dal = new DAL();
 
             int uniID = Convert.ToInt32(Session["accID"].ToString());
 
-            DataTable dt = dal.getUnderReviewApps(uniID);
+            DataTable dt = dal.getAppsByStatus(uniID, "Incomplete");
             underReviewApps.DataSource = dt;
             underReviewApps.DataBind();
 
@@ -61,16 +61,80 @@ namespace WebApplication1
                 noURAppsLabel.Visible = true;
             }
 
+
+            dt = dal.getAppsByStatus(uniID, "Accepted");
+
+            acceptedApps.DataSource = dt;
+            acceptedApps.DataBind();
+
+            if (dt.Rows.Count > 0)
+            {
+                noAcceptedApps.Visible = false;
+            }
+            else
+            {
+                noAcceptedApps.Visible = true;
+            }
+
+
+            dt = dal.getAppsByStatus(uniID, "Rejected");
+
+            rejectedApps.DataSource = dt;
+            rejectedApps.DataBind();
+
+            if (dt.Rows.Count > 0)
+            {
+                noReject.Visible = false;
+            }
+            else
+            {
+                noReject.Visible = true;
+            }
+
         }
 
         protected void acceptBtn_Click(object sender, EventArgs e)
         {
-            Response.Write("Clicked");
+
+            int appID = Convert.ToInt32((sender as LinkButton).Attributes["data"]);
+
+            DAL dal = new DAL();
+
+            dal.acceptApplication(appID);
+
+            loadApps();
+
         }
 
         protected void rejectBtn_Click(object sender, EventArgs e)
         {
-            Response.Write("Clicked");
+
+            int appID = Convert.ToInt32((sender as LinkButton).Attributes["data"]);
+
+            DAL dal = new DAL();
+
+            dal.rejectApplication(appID);
+
+
+            loadApps();
+
+
+        }
+
+        protected void incompleteBtn_Click(object sender, EventArgs e)
+        {
+
+
+            int appID = Convert.ToInt32((sender as LinkButton).Attributes["data"]);
+
+
+            DAL dal = new DAL();
+
+            dal.setAppIncomplete(appID);
+
+            loadApps();
+
+
         }
 
 

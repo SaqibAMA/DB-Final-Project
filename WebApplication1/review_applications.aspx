@@ -95,12 +95,6 @@
                  </a>
             </li>
             <li>
-                <a href="promote.aspx" class="white-text">
-                    <i class="material-icons white-text">military_tech</i>
-                    PROMOTE
-                 </a>
-            </li>
-            <li>
                 <a href="contact.aspx" class="white-text">
                     <i class="material-icons white-text">help</i>
                     HELP
@@ -129,17 +123,14 @@
 
                 <table>
 
-
-                    <asp:Label Text="No applications under review." 
-                        runat="server"
-                        ID="noURAppsLabel"/>
-
-
                     <asp:Repeater runat="server" ID="underReviewApps">
 
                         <HeaderTemplate>
 
                             <thead>
+
+                                
+
                                 <tr class="white-text">
                                     <td>Name</td>
                                     <td>Major</td>
@@ -166,7 +157,8 @@
                                     <asp:LinkButton
                                         runat="server"
                                         CssClass="btn green white-text"
-                                        OnClick="acceptBtn_Click">
+                                        OnClick="acceptBtn_Click"
+                                        data=<%#Eval("ApplicationID") %>>
                             
                                         <i class="material-icons center">
                                             done
@@ -177,7 +169,8 @@
                                     <asp:LinkButton
                                         runat="server"
                                         CssClass="btn red white-text"
-                                        OnClick="rejectBtn_Click">
+                                        OnClick="rejectBtn_Click"
+                                        data=<%#Eval("ApplicationID") %>>
                             
                                         <i class="material-icons center">
                                             clear
@@ -195,10 +188,140 @@
 
 
 
+                </table>
+
+                    <asp:Label Text="No applications under review." 
+                        runat="server" CssClass="green-text"
+                        ID="noURAppsLabel"/>
+                
+                <h3>Accepted</h3>
+                
+
+                <table>
+
+                    
+
+                    <asp:Repeater runat="server" ID="acceptedApps">
+
+                        <HeaderTemplate>
+
+                            <thead>
+
+
+                                <tr class="white-text">
+                                    <td>Name</td>
+                                    <td>Major</td>
+                                    <td>Matric</td>
+                                    <td>Intermediate</td>
+                                    <td>Undergraduate</td>
+                                    <td>Decision</td>
+                                </tr>
+                            </thead>
+
+                        </HeaderTemplate>
+                    
+                        <ItemTemplate>
+
+
+                            <tr class="grey-text">
+                                <td><%#Eval("StdName") %></td>
+                                <td><%#Eval("MajorName") %></td>
+                                <td><%#Eval("Matric") %>%</td>
+                                <td><%#Eval("Intermediate") %>%</td>
+                                <td>-</td>
+                                <td>
+
+                                    <asp:LinkButton
+                                        runat="server"
+                                        CssClass="btn yellow black-text"
+                                        OnClick="incompleteBtn_Click"
+                                        data=<%#Eval("ApplicationID") %>>
+                            
+                                        <i class="material-icons center">
+                                            rule
+                                        </i>
+
+                                    </asp:LinkButton>
+                                </td>
+                            </tr>
+
+
+                        </ItemTemplate>
+                    
+                    
+                    </asp:Repeater>
 
 
 
                 </table>
+
+                    <asp:Label Text="No accepted applications." 
+                        runat="server" CssClass="red-text"
+                        ID="noAcceptedApps"/>
+
+
+                <h3>Rejected</h3>
+                
+
+                <table>
+
+
+                    <asp:Repeater runat="server" ID="rejectedApps">
+
+                        <HeaderTemplate>
+
+                            <thead>
+
+
+                                <tr class="white-text">
+                                    <td>Name</td>
+                                    <td>Major</td>
+                                    <td>Matric</td>
+                                    <td>Intermediate</td>
+                                    <td>Undergraduate</td>
+                                    <td>Decision</td>
+                                </tr>
+                            </thead>
+
+                        </HeaderTemplate>
+                    
+                        <ItemTemplate>
+
+
+                            <tr class="grey-text">
+                                <td><%#Eval("StdName") %></td>
+                                <td><%#Eval("MajorName") %></td>
+                                <td><%#Eval("Matric") %>%</td>
+                                <td><%#Eval("Intermediate") %>%</td>
+                                <td>-</td>
+                                <td>
+
+                                    <asp:LinkButton
+                                        runat="server"
+                                        CssClass="btn yellow black-text"
+                                        OnClick="incompleteBtn_Click"
+                                        data=<%#Eval("ApplicationID") %>>
+                            
+                                        <i class="material-icons center">
+                                            rule
+                                        </i>
+
+                                    </asp:LinkButton>
+                                </td>
+                            </tr>
+
+
+                        </ItemTemplate>
+                    
+                    
+                    </asp:Repeater>
+
+                </table>
+
+                <asp:Label Text="No rejected applications."
+                    CssClass="green-text"
+                runat="server"
+                ID="noReject"/>
 
 
             </div>

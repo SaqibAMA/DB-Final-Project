@@ -966,16 +966,17 @@ namespace WebApplication1.tier3
 
 
         // review application stuff
-        public DataTable getUnderReviewApps(int uniID) {
+        public DataTable getAppsByStatus(int uniID, string status) {
 
             DataTable dt = new DataTable();
             using (SqlConnection sqlCon = new SqlConnection(connection_str))
             {
                 sqlCon.Open();
                 SqlCommand sqlCMD = sqlCon.CreateCommand();
-                sqlCMD.CommandText = "dbo.getUnderReviewApps";
+                sqlCMD.CommandText = "dbo.getAppsByStatus";
                 sqlCMD.CommandType = CommandType.StoredProcedure;
                 sqlCMD.Parameters.AddWithValue("@uniID", uniID);
+                sqlCMD.Parameters.AddWithValue("@status", status);
                 sqlCMD.ExecuteScalar();
                 sqlCon.Close();
                 SqlDataAdapter da = new SqlDataAdapter(sqlCMD);
@@ -987,7 +988,82 @@ namespace WebApplication1.tier3
         }
 
 
+        public void setAppIncomplete(int appID)
+        {
 
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.setAppIncomplete";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@appID", appID);
+                sqlCMD.ExecuteScalar();
+                sqlCon.Close();
+            }
+
+        }
+
+
+
+
+        // promotions
+        public void addPromotion(int uniID, DateTime dt)
+        {
+
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.addPromotion";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@uniID", uniID);
+                sqlCMD.Parameters.AddWithValue("@endDate", dt);
+                sqlCMD.Parameters["@endDate"].SqlDbType = SqlDbType.DateTime;
+                sqlCMD.ExecuteScalar();
+                sqlCon.Close();
+            }
+
+        }
+
+
+        public DataTable getInactivePromos(int uniID)
+        {
+            DataTable dt = new DataTable();
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.getInactivePromos";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@uniID", uniID);
+                sqlCMD.ExecuteNonQuery();
+                SqlDataAdapter da = new SqlDataAdapter(sqlCMD);
+                da.Fill(dt);
+                sqlCon.Close();
+                return dt;
+            }
+        }
+
+
+        // query
+        public void submitQuery(string name, string email, string msg)
+        {
+
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.submitQuery";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@name", name);
+                sqlCMD.Parameters.AddWithValue("@email", email);
+                sqlCMD.Parameters.AddWithValue("@msg", msg);
+                sqlCMD.ExecuteScalar();
+                sqlCon.Close();
+            }
+
+        }
 
 
         public DataTable loadMessages()
