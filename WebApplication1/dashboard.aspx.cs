@@ -206,5 +206,20 @@ namespace WebApplication1
 
 
         }
+
+        protected void sendNotification_Click(object sender, EventArgs e)
+        {
+
+
+            DAL dal = new DAL();
+
+            int uniID = Convert.ToInt32(Session["accID"].ToString());
+            string notif = notifText.Text.Trim().ToString();
+
+
+            dal.sendNotificationToApps(uniID, notif);
+
+
+        }
     }
 }

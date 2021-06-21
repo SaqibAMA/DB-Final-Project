@@ -97,7 +97,8 @@
                  </a>
             </li>
             <li>
-                <a href="#" class="white-text uniOption">
+                <a href="#" class="white-text uniOption modal-trigger"
+                    data-target="notificationModal">
                     <i class="material-icons white-text">notifications</i>
                     SEND NOTIFICATION
                  </a>
@@ -434,6 +435,37 @@
                 OnClick="updateMarks_Click"
                 class="modal-close btn waves-effect white waves-green black-text">
                 SUBMIT <i class="material-icons left">send</i>
+            </asp:LinkButton>
+        </div>
+        </div>
+
+
+
+        <!--Send Notification-->
+        <div id="notificationModal" class="modal bg-dark">
+        <div class="modal-content">
+            <h4>Want to send a notification to all applicants?</h4>
+            <p>Type in what you have on your mind and we'll make sure to share it
+                with the applicants.
+            </p>
+
+        <asp:TextBox
+            runat="server"
+            ID="notifText"
+            TextMode="MultiLine"
+            placeholder="Write away..."
+            Rows="10"
+            class="materialize-textarea txt-field white-text"
+            maxlength="200"
+        ></asp:TextBox>
+
+        </div>
+        <div class="modal-footer bg-dark">
+            <asp:LinkButton runat="server"
+                ID="sendNotification"
+                OnClick="sendNotification_Click"
+                class="modal-close btn waves-effect white waves-green black-text">
+                SEND <i class="material-icons left">send</i>
             </asp:LinkButton>
         </div>
         </div>

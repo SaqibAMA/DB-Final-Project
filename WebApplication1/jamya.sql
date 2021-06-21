@@ -732,7 +732,7 @@ AS
 
 
 -- load notifications
-CREATE PROCEDURE getNotifications
+ALTER PROCEDURE getNotifications
 @accID INT
 AS
 BEGIN
@@ -891,6 +891,55 @@ BEGIN
 
 END
 
+
+-- uni stuff
+
+-- send notifs to applicants
+ALTER PROCEDURE sendNotificationToApplicants
+@uniID INT,
+@text VARCHAR(200)
+AS
+BEGIN
+
+	DECLARE @StdID INT = 0
+
+	WHILE (1 = 1)
+	BEGIN
+
+		SELECT TOP 1 @StdID = StudentID
+		FROM Student
+		WHERE StudentID IN (
+			SELECT DISTINCT StudentID
+			FROM Application
+			WHERE UniversityID = @uniID
+		) AND StudentID > @StdID
+		ORDER BY StudentID
+
+		IF @@ROWCOUNT = 0 BREAK;
+
+		EXEC sendNotifToStd @uniID = @uniID, @stdID = @stdID, @text = @text
+
+	END
+
+
+END
+
+
+CREATE PROCEDURE sendNotifToStd
+@uniID INT,
+@stdID INT,
+@text VARCHAR(200)
+AS
+BEGIN
+	
+	INSERT INTO Notification
+	VALUES
+	(@uniID, @stdID, @text)
+
+END
+
+
+SELECT * FROM Notification
 
 --notification/stories trigger
 --sajawal applied for fast

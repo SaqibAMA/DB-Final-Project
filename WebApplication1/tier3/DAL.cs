@@ -358,6 +358,22 @@ namespace WebApplication1.tier3
         }
 
 
+        public void sendNotificationToApps(int uniID, string notif)
+        {
+            using (SqlConnection sqlCon = new SqlConnection(connection_str))
+            {
+                sqlCon.Open();
+                SqlCommand sqlCMD = sqlCon.CreateCommand();
+                sqlCMD.CommandText = "dbo.sendNotificationToApplicants";
+                sqlCMD.CommandType = CommandType.StoredProcedure;
+                sqlCMD.Parameters.AddWithValue("@uniID", uniID);
+                sqlCMD.Parameters.AddWithValue("@text", notif);
+                sqlCMD.ExecuteScalar();
+                sqlCon.Close();
+            }
+        }
+
+
         // adds a review
         public void addReview(int accID, int uniID, string review)
         {
