@@ -1,4 +1,4 @@
-﻿DROP DATABASE Jamya;
+DROP DATABASE Jamya;
 CREATE DATABASE Jamya;
 USE Jamya
 DROP TABLE Account
@@ -127,43 +127,7 @@ BEGIN
 
 END
 
-INSERT INTO Account(AccountID,Username,Email,[Password]) 
-VALUES 
-(1,'sajawalali546','saju123@gmail.com','redmi1122'),
-(2,'farhan','@gmail.com','redmi1122');
-INSERT INTO Student
-VALUES (1,'Sajawal','Ali','03-03-2001',90.11,91.9,3.1,1),
-(2,'farhan','Ali','03-03-2001',92,90.2,3.8,1);
-Select * from Student
-INSERT INTO Account(AccountID,Username,Email,[Password]) 
-VALUES 
-(3,'sajawaluniversity','saju123@gmmail.com','redmi1122');
-INSERT INTO University
-VALUES(3,'CHiggi Chiggi','Fasial Town','0323-5106349');
-INSERT INTO Major
-VALUES(1,'BS(CS)'),
-(2,'BS(EE)');
-INSERT INTO Programmes
-VALUES (3,1),
-(3,2);
-INSERT INTO Application
-VALUES
-(1,2,3,'4-7-2021','Rejected')
-INSERT INTO Review
-VALUES
-(1,3,1,'SELECT
-CustomerId,
-ProductId,
-UnitsOrdered
-FROM
-Orders
-WHERE
-(UnitsOrdered > 2)
-ORDER BY
-UnitsOrdered DESC');
-INSERT INTO [Messages]
-VALUES
-(1000,1,3,'hello my name is sajawal ali jutt tpodaay i khlkjbsdvbasdljhlas i,.ajd sakd vaksjdvjkashd va.m jdv')
+
 --UserExists?
 DROP PROCEDURE isUsrExists
 CREATE PROCEDURE isUsrExists
@@ -211,7 +175,7 @@ BEGIN
 set @count=(SELECT COUNT(*) FROM dbo.University where UniversityID=@accID)
 END
 --getNameByID
-ALTER PROCEDURE getName
+CREATE PROCEDURE getName
 @accId INT,
 @fullname VARCHAR(50) OUTPUT
 AS
@@ -297,7 +261,7 @@ END
 
 
 -- get application status
-ALTER PROCEDURE getAppStatus
+CREATE PROCEDURE getAppStatus
 @appID INT,
 @status VARCHAR(50) OUTPUT
 AS
@@ -420,7 +384,7 @@ INSERT INTO dbo.Student VALUES(@id,@fName,@lName,@defaultdate,NULL,NULL,NULL,NUL
 END
 --get those Universities that are open for admissions
 --will return list of universities
-ALTER PROCEDURE getPromotedUniversities 
+CREATE PROCEDURE getPromotedUniversities 
 AS 
 SELECT University.UniversityID, University.Name 
 FROM 
@@ -608,7 +572,7 @@ BEGIN
 DELETE FROM [Application] WHERE ApplicationID = @applicationID
 END
 --acceptApplication
-ALTER PROCEDURE acceptApplication
+CREATE PROCEDURE acceptApplication
 @applicationID INT
 AS
 BEGIN
@@ -616,7 +580,7 @@ UPDATE [Application] SET [Application].Status = 'Accepted'
 WHERE Application.ApplicationID = @applicationID
 END
 --rejectApplication
-ALTER PROCEDURE rejectApplication
+CREATE PROCEDURE rejectApplication
 @applicationID INT
 AS
 BEGIN
@@ -624,7 +588,7 @@ UPDATE [Application] SET [Application].Status = 'Rejected'
 WHERE Application.ApplicationID = @applicationID
 END
 --updateInterMarks
-ALTER PROCEDURE updateInterMarks
+CREATE PROCEDURE updateInterMarks
 @stdID INT,
 @marks DECIMAL(4,2)
 AS
@@ -635,7 +599,7 @@ UPDATE Student SET Student.Intermediate=@marks where @stdID = Student.StudentID
 end
 END
 --updateMatricMarks
-ALTER PROCEDURE updateMatricMarks
+CREATE PROCEDURE updateMatricMarks
 @stdID INT,
 @marks DECIMAL(4,2)
 AS
@@ -646,7 +610,7 @@ UPDATE Student SET Student.Matric=@marks where @stdID = Student.StudentID
 end
 END
 --updateUnderGradMarks
-ALTER PROCEDURE updateUnderGradMarks
+CREATE PROCEDURE updateUnderGradMarks
 @stdID INT,
 @cgpa DECIMAL(4,2)
 AS
@@ -759,7 +723,7 @@ END
 
 -- story review trigger
 
-ALTER TRIGGER leftReview
+CREATE TRIGGER leftReview
 ON Review
 AFTER INSERT
 AS
@@ -791,7 +755,7 @@ AS
 
 
 -- load notifications
-ALTER PROCEDURE getNotifications
+CREATE PROCEDURE getNotifications
 @accID INT
 AS
 BEGIN
@@ -888,7 +852,7 @@ BEGIN
 END
 
 -- get marks
-ALTER PROCEDURE getMatric (
+CREATE PROCEDURE getMatric (
 	@accID INT,
 	@marks DECIMAL(4, 2) OUTPUT
 )
@@ -910,7 +874,7 @@ BEGIN
 END
 
 
-ALTER PROCEDURE getInter
+CREATE PROCEDURE getInter
 @accID INT,
 @marks DECIMAL(4, 2) OUTPUT
 AS
@@ -930,7 +894,7 @@ BEGIN
 
 END
 
-ALTER PROCEDURE getUG
+CREATE PROCEDURE getUG
 @accID INT,
 @marks DECIMAL(3,1) OUTPUT
 AS
@@ -954,7 +918,7 @@ END
 -- uni stuff
 
 -- send notifs to applicants
-ALTER PROCEDURE sendNotificationToApplicants
+CREATE PROCEDURE sendNotificationToApplicants
 @uniID INT,
 @text VARCHAR(200)
 AS
@@ -1039,7 +1003,7 @@ SELECT * FROM Application
 
 
 -- trigger to send student the notification
-ALTER TRIGGER sendAcceptanceNews
+CREATE TRIGGER sendAcceptanceNews
 ON [Application]
 AFTER UPDATE
 AS
@@ -1149,7 +1113,7 @@ END
 
 --prev trigger ended
 
-ALTER TRIGGER majorTrigger
+CREATE TRIGGER majorTrigger
 ON University
 AFTER INSERT
 AS
@@ -1168,15 +1132,12 @@ AS
 
 INSERT INTO Account
 VALUES
-('FAST','fast@ggl.com','shmoonisgoodfella'),
-('LUMS','lums@ggl.com','shmoonisgoodfella'),
-('FarhanAli', 'larhan@ggl.com', 'shmoonisgoodfella'),
-('SaqibAli', 'saqib@ggl.com', 'shmoonisgoodfella'),
-('SajawalAli', 'sajawal@ggl.com', 'shmoonisgoodfella')
-
-INSERT INTO Account
-VALUES
-('NUST', 'admissions@nust.com', 'shmoonisgoodfella'),
+('FAST','admissions@nu.edu.pk','shmoonisgoodfella'),
+('LUMS','admissions@lums.edu.pk','shmoonisgoodfella'),
+('FarhanAli', 'farhanali@gmail.com', 'shmoonisgoodfella'),
+('SaqibAli', 'saqib@gmail.com', 'shmoonisgoodfella'),
+('SajawalAli', 'sajawal@gmail.com', 'shmoonisgoodfella'),
+('NUST', 'admissions@nust.com.pk', 'shmoonisgoodfella'),
 ('Harvard', 'admissions@harvard.com', 'shmoonisgoodfella'),
 ('PunjabUniversity', 'admissions@pu.com', 'shmoonisgoodfella')
 
@@ -1184,15 +1145,65 @@ VALUES
 SELECT * FROM Account
 SELECT * FROM University
 
+
 INSERT INTO University
+VALUES (13, 'FAST', 'Lahore', '030123456')
+
+INSERT INTO University
+VALUES (14, 'LUMS', 'Lahore', '030123456')
+
+INSERT INTO University
+VALUES (18, 'NUST', 'Islamabad', '030123456')
+
+INSERT INTO University
+VALUES (19, 'Harvard', 'USA', '030123456')
+
+INSERT INTO University
+VALUES (20, 'Punjab University', 'Lahore', '030123456')
+
+
+SELECT * FROM University
+
+INSERT INTO Programmes
 VALUES
-(9, 'NUST', 'Islamabad', '030123456'),
-(10, 'Harvard', 'USA', '030123456'),
-(11, 'Punjab University', 'Lahore', '030123456')
+(13, 8),
+(13, 10),
+(13, 9),
+(13, 6),
+(13, 3),
+(14, 2),
+(14, 3),
+(14, 5),
+(14, 6),
+(14, 7),
+(14, 8),
+(14, 9),
+(14, 10),
+(14, 11),
+(14, 12),
+(18, 6),
+(18, 8),
+(18, 3),
+(19, 2),
+(19, 3),
+(19, 4),
+(19, 5),
+(19, 6),
+(19, 7),
+(19, 8),
+(19, 9),
+(19, 10),
+(19, 11),
+(19, 12),
+(20, 2),
+(20, 6)
 
 
 INSERT INTO Major
 VALUES
+(1, 'Any Major'),
+(2, 'Health Sciences'),
+(3, 'Data Science'),
 (4, 'Nursing'),
 (5, 'Biology'),
 (6, 'Engineering'),
@@ -1205,53 +1216,27 @@ VALUES
 
 
 
+SELECT * FROM Account
+
 INSERT INTO
 Student
 VALUES
-(6, 'Farhan', 'Ali', '2001-01-01', NULL, NULL, NULL, NULL)
-
-INSERT INTO Student
-VALUES	(1,'Shmoon','Ali','2001-01-01',NULL,NULL,NULL,NULL)
-INSERT INTO Major VALUES(1,'All Available Majors')
-INSERT INTO Major VALUES(2,'AI')
-INSERT INTO Major VALUES(3,'BBA')
-INSERT INTO Programmes Values(4,1)
-INSERT INTO Programmes Values(4,2)
-INSERT INTO Programmes Values(4,3)
-INSERT INTO Programmes Values(5,1)
-INSERT INTO Programmes Values(5,3)
-INSERT INTO Application VALUES(12,13,1,getDate(),'Incomplete')
-INSERT INTO Application VALUES(12,13,2,getDate(),'Incomplete')
-INSERT INTO Application VALUES(17,14,3,getDate(),'Incomplete')
-INSERT INTO Application VALUES(17,14,1,getDate(),'Incomplete')
-INSERT INTO Review VALUES(13,18,'Fast was brilliant')
-INSERT INTO Review VALUES(14,18,'NUST was not brilliant')
-INSERT INTO University
-VALUES
-(4, 'FAST', 'Lahore', '030123456'),
-(5, 'LUMS', 'Islamabad', '030123456')
-Select * from Messages
-Select * from Account
-Select * from Programmes
-Select * from Stories
-Select * from Student
-Select * from Promotions
-Select * from University
-SELECT * FROM Review
-SELECT * FROM Application
-SELECT * FROM Major
-SELECT * FROM Messages
-SELECT * FROM Notification
+(15, 'Farhan', 'Ali', '1999-01-01', NULL, NULL, NULL, NULL),
+(16, 'Saqib', 'Ali', '1999-01-01', NULL, NULL, NULL, NULL),
+(17, 'Sajawal', 'Ali', '1999-01-01', NULL, NULL, NULL, NULL)
 
 
-
-INSERT INTO Notification
-VALUES
-(-1, -1, 'FAST-NUCES has started admissions for Fall 2021'),
-(-1, 1, 'Congratulations! You have been accepted to LUMS!')
-
-INSERT INTO Stories
-VALUES
-(1, GETDATE(), 'FAST University has extended its deadline!'),
-(1, GETDATE(), 'NUST University has started their admissions!')
-
+DELETE FROM Posts
+DELETE FROM Programmes
+DELETE FROM Application
+DELETE FROM Major
+DELETE FROM Stories
+DELETE FROM Queries
+DELETE FROM Review
+DELETE FROM Messages
+DELETE FROM Notification
+DELETE FROM Posts
+DELETE FROM Promotions
+DELETE FROM Student
+DELETE FROM University
+DELETE FROM Account

@@ -1,0 +1,83 @@
+﻿a {
+    color: inherit !important;
+}
+
+.bg-dark {
+    background-color: #2c3e50 !important;
+    color: white !important;
+}
+
+.bg-dark-1 {
+    background-color: #34495e !important;
+    color: white !important;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+}
+
+.discover-tab {
+    background-image: url('../assets/application-header.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    padding: 5rem 3rem;
+    border-radius: 1rem;
+    background-size: cover;
+}
+
+.discover-tab mark {
+    font-weight: bolder;
+    line-height: 1.5;
+}
+
+.application {
+    padding: 2rem 0.5rem !important;
+}
+
+.application:hover {
+    box-shadow: 2px 2px 15px -5px rgba(0, 0, 0, 0.3);
+    border-left: solid 5px white;
+}
+
+.application .material-icons {
+    cursor: pointer;
+}
+
+.application .material-icons:hover {
+    animation: jiggle 0.5s ease-in-out infinite;
+}
+
+.collection {
+    border: solid 1px transparent !important;
+}
+
+.collection-item {
+    border: solid 1px transparent !important;
+}
+
+@keyframes jiggle {
+    25% {
+        transform: rotate(15deg);
+    }
+    75% {
+        transform: rotate(-15deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+
+}
+
+/*
+    Media
+*/
+
+.main-content {
+    padding-left: 300px;
+}
+
+@media only screen and (max-width : 992px) {
+    .main-content {
+        padding-left: 0;
+    }
+}
